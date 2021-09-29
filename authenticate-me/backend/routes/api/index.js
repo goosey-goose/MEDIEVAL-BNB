@@ -13,9 +13,9 @@ router.use('/session', sessionRouter);
 
 router.use('/users', usersRouter);
 
-router.post('/test', function(req, res) {
-    res.json({ requestBody: req.body });
-  });
+// router.post('/test', function(req, res) {
+//     res.json({ requestBody: req.body });
+//   });
 
 
 // THE FOLLOWING 3 ROUTES ARE FOR TESTING OUR AUTH MIDDLEWARE FUNCTIONS; THEY HAVE BEEN COMMENTED OUT SINCE WE HAVE CONFIRMED THAT THEY DO IN FACT WORK.
