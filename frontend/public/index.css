@@ -1,0 +1,27 @@
+html {
+    width: 100vw;
+    height: 100vh;
+    /* margin: 0.5rem; */
+    overflow-y: hidden;
+    /* background-color: blue;
+    background-size: 500px; */
+}
+
+body {
+    margin: 0.5rem;
+}
+
+#root {
+    /* background-image: url("./images/rome-6207755_1920.jpg"); */
+    /* width: 99vw;
+    height: 99vh; */
+    /* width: 90%;
+    height: 90%; */
+    /* background-color: blue;
+    background-size: 500px; */
+}
+
+/* body image {
+    width: 99%;
+    height: 99%;
+} */
