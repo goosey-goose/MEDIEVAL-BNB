@@ -6,6 +6,7 @@ import LoginFormPage from "./components/LoginFormPage";
 import SignupFormPage from "./components/SignupFormPage";
 import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
+import './App.css';
 
 function App() {
   const dispatch = useDispatch();
@@ -16,7 +17,7 @@ function App() {
 
   return (
     <>
-      <Navigation isLoaded={isLoaded} />
+      {/* <Navigation isLoaded={isLoaded} /> */}
       {isLoaded && (
         <Switch>
           <Route path="/login">
@@ -27,6 +28,11 @@ function App() {
           </Route>
         </Switch>
       )}
+      <div id="login_or_signup">
+        <div><LoginFormPage /></div>
+        <div id="logo">MEDIEVAL BNB</div>
+        <div><SignupFormPage /></div>
+      </div>
     </>
   );
 }
