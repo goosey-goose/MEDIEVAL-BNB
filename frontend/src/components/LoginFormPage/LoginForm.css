@@ -6,3 +6,26 @@ form#login_form {
     display: flex;
     flex-direction: column;
 }
+
+form#login_form input {
+    margin-bottom: .5rem;
+    font-size: 2rem;
+}
+
+#outer_div_for_login {
+    border-radius: 10px;
+}
+
+form#login_form button {
+    height: 3rem;
+    font-size: 2rem;
+}
+
+form#login_form p {
+    text-align: center;
+    color: #848181;
+    font-weight: bold;
+    font-size: 3rem;
+    margin: 0;
+    padding-bottom: .8rem;
+}

@@ -13,7 +13,9 @@ function LoginFormPage() {
   const [errors, setErrors] = useState([]);
 
   if (sessionUser) return (
-    <Redirect to="/" />
+    // <Redirect to="/home" />
+    <>
+    </>
   );
 
   const handleSubmit = (e) => {
@@ -31,6 +33,7 @@ function LoginFormPage() {
       <ul>
         {errors.map((error, idx) => <li key={idx}>{error}</li>)}
       </ul>
+      <p>Login</p>
       <label className="login_form_labels">
         {/* Username or Email */}
         <input

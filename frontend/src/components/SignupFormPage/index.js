@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 import * as sessionActions from "../../store/session";
+import { BsCheckCircleFill } from 'react-icons/bs';
 import './SignupForm.css';
 
 function SignupFormPage() {
@@ -34,15 +35,19 @@ function SignupFormPage() {
       <ul>
         {errors.map((error, idx) => <li key={idx}>{error}</li>)}
       </ul>
+      <p>Sign Up</p>
       <label className="signup_form_labels">
         {/* Email */}
+        {/* <span className="signup_icons"><BsCheckCircleFill color='green' size='1.5rem' /></span> */}
         <input
+          className="signup_inputs"
           type="text"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
           placeholder="Email"
         />
+
       </label>
       <label className="signup_form_labels">
         {/* Username */}

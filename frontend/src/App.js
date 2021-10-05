@@ -1,7 +1,7 @@
 // frontend/src/App.js
 import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { Route, Switch } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { Route, Switch, Redirect } from "react-router-dom";
 import LoginFormPage from "./components/LoginFormPage";
 import SignupFormPage from "./components/SignupFormPage";
 import * as sessionActions from "./store/session";
@@ -11,28 +11,80 @@ import './App.css';
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
+  const sessionUser = useSelector(state => state.session.user);
+
+  const test = 5;
+  console.log(1);
+
   useEffect(() => {
+    console.log(3);
     dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
   }, [dispatch]);
+
+  // debugger
+  // if (sessionUser) return (
+  //   <>
+  //   {console.log(4)}
+  //   {console.log("from conditional check", isLoaded)}
+  //   <Redirect to="/home" from="/" />
+  //   </>
+  // );
+
+
 
   return (
     <>
       {/* <Navigation isLoaded={isLoaded} /> */}
+      {console.log(2)}
+      {console.log(isLoaded)}
       {isLoaded && (
         <Switch>
-          <Route path="/login">
+          <Route exact path="/">
+            {sessionUser ? <Redirect to="/home" /> : <Redirect to="/" />}
+            {console.log("very tired")}
+            {/* <div>tired</div> */}
+          </Route>
+          {sessionUser && <Route exact path="/home">
+            <div>tired</div>
+          </Route>}
+          <Route exact path="/login">
             <LoginFormPage />
+            {console.log("login page")}
           </Route>
-          <Route path="/signup">
+          <Route exact path="/signup">
             <SignupFormPage />
+            {console.log("signup page")}
           </Route>
+
         </Switch>
       )}
-      <div id="login_or_signup">
-        <div><LoginFormPage /></div>
-        <div id="logo">MEDIEVAL BNB</div>
-        <div><SignupFormPage /></div>
-      </div>
+
+      {isLoaded && !sessionUser && <div id="login_or_signup">
+
+      <div id="logo">MEDIEVAL BNB</div>
+
+        <div id="div_containing_both_forms">
+
+          <div id="outer_div_for_login">
+            <div><LoginFormPage /></div>
+          </div>
+
+          {/* <div id="or">LOGIN OR SIGNUP</div> */}
+
+          <div id="outer_div_for_signup">
+            <div><SignupFormPage /></div>
+          </div>
+
+        </div>
+
+
+
+      </div>}
+
+
+
+
+
     </>
   );
 }
