@@ -34,9 +34,7 @@ function App() {
 
   return (
     <>
-      {/* <Navigation isLoaded={isLoaded} /> */}
-      {console.log(2)}
-      {console.log(isLoaded)}
+      <Navigation isLoaded={isLoaded} />
       {isLoaded && (
         <Switch>
           <Route exact path="/">
@@ -59,9 +57,9 @@ function App() {
         </Switch>
       )}
 
-      {isLoaded && !sessionUser && <div id="login_or_signup">
+      {/* {isLoaded && !sessionUser && <div id="login_or_signup">
 
-      {/* <div id="logo">MEDIEVAL BNB</div> */}
+      <div id="logo">MEDIEVAL BNB</div>
       <nav id="homepage_nav">
         <div id="homepage_div_grid">
           <div id="logo">Medieval BNB</div>
@@ -69,7 +67,7 @@ function App() {
         </div>
       </nav>
 
-        {/* <div id="div_containing_both_forms">
+        <div id="div_containing_both_forms">
 
           <div id="outer_div_for_login">
             <div><LoginFormPage /></div>
@@ -81,11 +79,11 @@ function App() {
             <div><SignupFormPage /></div>
           </div>
 
-        </div> */}
+        </div>
 
 
 
-      </div>}
+      </div>} */}
 
 
 

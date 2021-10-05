@@ -15,7 +15,7 @@
     ;
 }
 
-#logo {
+#logo-test-eben {
     color: white;
     font-size: 2.5rem;
     /* border: solid 1px white; */
@@ -28,15 +28,16 @@
     /* justify-content: center; */
     /* grid-area: title; */
     margin-left: 4rem;
+    min-width: 16rem;
 }
 
-nav#homepage_nav {
+nav#homepage_nav-test-eben {
     grid-area: title;
     max-height: 6rem;
     background-color: #212154;
 }
 
-#homepage_div_grid {
+#homepage_div_grid-test-eben {
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr;
@@ -44,7 +45,7 @@ nav#homepage_nav {
     height: 100%;
 }
 
-#nav_login {
+#nav_login-test-eben {
     height: 100%;
     display: flex;
     justify-content: flex-end;
