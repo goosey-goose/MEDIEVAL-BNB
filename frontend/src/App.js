@@ -61,21 +61,27 @@ function App() {
 
       {isLoaded && !sessionUser && <div id="login_or_signup">
 
-      <div id="logo">MEDIEVAL BNB</div>
+      {/* <div id="logo">MEDIEVAL BNB</div> */}
+      <nav id="homepage_nav">
+        <div id="homepage_div_grid">
+          <div id="logo">Medieval BNB</div>
+          <div id="nav_login"><LoginFormPage /></div>
+        </div>
+      </nav>
 
-        <div id="div_containing_both_forms">
+        {/* <div id="div_containing_both_forms">
 
           <div id="outer_div_for_login">
             <div><LoginFormPage /></div>
           </div>
 
-          {/* <div id="or">LOGIN OR SIGNUP</div> */}
+
 
           <div id="outer_div_for_signup">
             <div><SignupFormPage /></div>
           </div>
 
-        </div>
+        </div> */}
 
 
 

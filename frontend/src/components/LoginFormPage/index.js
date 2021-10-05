@@ -33,9 +33,9 @@ function LoginFormPage() {
       <ul>
         {errors.map((error, idx) => <li key={idx}>{error}</li>)}
       </ul>
-      <p>Login</p>
+      {/* <p>Login</p> */}
       <label className="login_form_labels">
-        {/* Username or Email */}
+        Username or Email
         <input
           type="text"
           value={credential}
@@ -45,7 +45,7 @@ function LoginFormPage() {
         />
       </label>
       <label className="login_form_labels">
-        {/* Password */}
+        Password
         <input
           type="password"
           value={password}
@@ -54,7 +54,9 @@ function LoginFormPage() {
           placeholder="Password"
         />
       </label>
-      <button type="submit">Log In</button>
+      <div id="login_submit_button">
+        <button type="submit">Log In</button>
+      </div>
     </form>
   );
 }
