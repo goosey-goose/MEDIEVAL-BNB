@@ -36,7 +36,10 @@ function SignupFormPage() {
         {errors.map((error, idx) => <li key={idx}>{error}</li>)}
       </ul>
       <p>Sign Up</p>
-      <label className="signup_form_labels">
+
+
+      <div>
+      <label className="signup_form_labels signup_email">
         {/* Email */}
         {/* <span className="signup_icons"><BsCheckCircleFill color='green' size='1.5rem' /></span> */}
         <input
@@ -49,7 +52,7 @@ function SignupFormPage() {
         />
 
       </label>
-      <label className="signup_form_labels">
+      <label className="signup_form_labels signup_username">
         {/* Username */}
         <input
           type="text"
@@ -59,6 +62,11 @@ function SignupFormPage() {
           placeholder="Username"
         />
       </label>
+      </div>
+
+
+
+      <div>
       <label className="signup_form_labels">
         {/* Password */}
         <input
@@ -79,7 +87,13 @@ function SignupFormPage() {
           placeholder="Confirm Password"
         />
       </label>
-      <button type="submit">Sign Up</button>
+      </div>
+
+
+      <div>
+        <button type="submit">Sign Up</button>
+      </div>
+
     </form>
   );
 }

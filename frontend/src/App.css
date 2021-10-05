@@ -1,86 +1,47 @@
-#login_or_signup {
-    /* display: flex;
-    justify-content: space-around;
-    align-items: center; */
-    width: 100%;
-    height: 100%;
-    /* original is above */
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    /* grid-template-rows: 1fr 1fr 1fr; */
-    grid-template-rows: 1fr .1fr 1fr;
-    grid-template-areas:
-        "title title title"
-        "middle middle middle"
-    ;
-}
-
-#logo-test-eben {
-    color: white;
-    font-size: 2.5rem;
-    /* border: solid 1px white; */
-    /* background-color: rgba(128, 128, 128, 0.6); */
-    /* border-radius: 10px; */
-    font-family: sans-serif;
-    /* original is above */
-    display: flex;
-    align-items: center;
-    /* justify-content: center; */
-    /* grid-area: title; */
-    margin-left: 4rem;
-    min-width: 16rem;
-}
-
-nav#homepage_nav-test-eben {
-    grid-area: title;
-    max-height: 6rem;
-    background-color: #212154;
-}
-
-#homepage_div_grid-test-eben {
+#logged_out_page_grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr;
+    min-height: calc(100vh - 6rem);
+}
+
+#homepage_app_description {
     color: white;
-    height: 100%;
+    /* font-size: 2rem; */
 }
 
-#nav_login-test-eben {
-    height: 100%;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    margin-right: 4rem;
+#description_level_1 {
+    padding: 7rem;
 }
 
-#outer_div_for_login {
-    background-color: white;
-    padding: 10px;
-    /* original is above */
-    /* grid-area: login; */
-    display: inline-block;
-    margin-right: 1rem;
-}
-
-#outer_div_for_signup {
-    background-color: white;
-    padding: 10px;
-    /* original is above */
-    /* grid-area: signup; */
-    display: inline-block;
-    margin-left: 1rem;
-}
-
-#div_containing_both_forms {
-    grid-area: middle;
-    display: flex;
-    justify-content: center;
-}
-
-#or {
-    display: inline-block;
-    display: flex;
-    align-items: center;
+#description_level_2 {
+    width: 61rem;
     font-size: 2rem;
-    color: white;
+    /* font-weight: bold; */
+    background-color: rgba(33, 33, 84, 0.8);
+    padding: 2rem;
+    border-radius: 10px;
+    backdrop-filter: blur(5px);
 }
+
+#description_subpoints {
+    height: 50rem;
+    width: 50rem;
+    background-color: rgba(33, 33, 84, 0.8);
+    border-radius: 10px;
+    backdrop-filter: blur(5px);
+}
+
+#description_subpoints_parent {
+    padding-left: 7rem;
+}
+
+@media all and (max-width: 80rem) {
+    #description_level_2 {
+        width: 30rem;
+    }
+
+    body {
+        min-width: 70rem;
+    }
+  }

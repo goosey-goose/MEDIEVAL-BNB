@@ -52,17 +52,27 @@ function App() {
       {isLoaded && (
         <Switch>
 
-          <Route exact path="/">
-            {/* {sessionUser ? <Redirect to="/home" /> : <Redirect to="/" />} */}
-            {/* {sessionUser && <Redirect to="/home" />}
-            {!sessionUser && <Redirect to="/" />} */}
-            {console.log("very tired")}
-            {/* <div>tired</div> */}
-          </Route>
-
           {sessionUser && <Route exact path="/home">
             {/* {!sessionUser && <Redirect to="/" />} */}
             <div>tired</div>
+          </Route>}
+
+          {!sessionUser && <Route to="/">
+            <div id="logged_out_page_grid">
+              <div id="homepage_app_description">
+                <div id="description_level_1">
+                  <div id="description_level_2">
+                    Discover your next journey through time with family and friends on Medieval BNB.
+                  </div>
+                </div>
+                <div id="description_subpoints_parent">
+                  <div id="description_subpoints">
+                    {/* test */}
+                  </div>
+                </div>
+              </div>
+              <div id="signup_form_page_div"><SignupFormPage /></div>
+            </div>
           </Route>}
 
           <Route exact path="/login">
@@ -77,37 +87,6 @@ function App() {
 
         </Switch>
       )}
-
-      {/* {isLoaded && !sessionUser && <div id="login_or_signup">
-
-      <div id="logo">MEDIEVAL BNB</div>
-      <nav id="homepage_nav">
-        <div id="homepage_div_grid">
-          <div id="logo">Medieval BNB</div>
-          <div id="nav_login"><LoginFormPage /></div>
-        </div>
-      </nav>
-
-        <div id="div_containing_both_forms">
-
-          <div id="outer_div_for_login">
-            <div><LoginFormPage /></div>
-          </div>
-
-
-
-          <div id="outer_div_for_signup">
-            <div><SignupFormPage /></div>
-          </div>
-
-        </div>
-
-
-
-      </div>} */}
-
-
-
 
 
     </>
