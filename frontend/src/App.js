@@ -1,7 +1,7 @@
 // frontend/src/App.js
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Route, Switch, Redirect } from "react-router-dom";
+import { Route, Switch, Redirect, useHistory } from "react-router-dom";
 import LoginFormPage from "./components/LoginFormPage";
 import SignupFormPage from "./components/SignupFormPage";
 import * as sessionActions from "./store/session";
@@ -15,6 +15,8 @@ function App() {
 
   const test = 5;
   console.log(1);
+
+  let history = useHistory();
 
   useEffect(() => {
     console.log(3);
@@ -30,6 +32,18 @@ function App() {
   //   </>
   // );
 
+  useEffect(() => {
+    if (!sessionUser) {
+      // window.alert("hello");
+      // return (
+      //   <Redirect to="/" />
+      // );
+      history.push("/");
+    } else {
+      history.push("/home");
+    }
+  })
+
 
 
   return (
@@ -37,18 +51,25 @@ function App() {
       <Navigation isLoaded={isLoaded} />
       {isLoaded && (
         <Switch>
+
           <Route exact path="/">
-            {sessionUser ? <Redirect to="/home" /> : <Redirect to="/" />}
+            {/* {sessionUser ? <Redirect to="/home" /> : <Redirect to="/" />} */}
+            {/* {sessionUser && <Redirect to="/home" />}
+            {!sessionUser && <Redirect to="/" />} */}
             {console.log("very tired")}
             {/* <div>tired</div> */}
           </Route>
+
           {sessionUser && <Route exact path="/home">
+            {/* {!sessionUser && <Redirect to="/" />} */}
             <div>tired</div>
           </Route>}
+
           <Route exact path="/login">
             <LoginFormPage />
             {console.log("login page")}
           </Route>
+
           <Route exact path="/signup">
             <SignupFormPage />
             {console.log("signup page")}
