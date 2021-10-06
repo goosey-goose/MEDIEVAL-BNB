@@ -6,6 +6,9 @@ import LoginFormPage from "./components/LoginFormPage";
 import SignupFormPage from "./components/SignupFormPage";
 import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
+import { RiBook3Line } from 'react-icons/ri';
+import { HiPencilAlt } from 'react-icons/hi';
+import { HiOutlineSearch } from 'react-icons/hi';
 import './App.css';
 
 function App() {
@@ -67,7 +70,44 @@ function App() {
                 </div>
                 <div id="description_subpoints_parent">
                   <div id="description_subpoints">
-                    {/* test */}
+                    <div>
+                      <div className="subpoint">
+                        <RiBook3Line size='5rem' />
+
+                        <div className="subpoints_text">
+                          Book spots at amazing castles all over the United Kindom.
+                        </div>
+
+                      </div>
+
+                      <div className="subpoint">
+                        <HiPencilAlt size='5rem' />
+
+                        <div className="subpoints_text">
+                          Write reviews to let everyone know how awesome your stay was.
+                        </div>
+
+                      </div>
+
+
+
+
+
+                      <div className="subpoint">
+                        <HiOutlineSearch size='5rem' />
+
+                        <div className="subpoints_text">
+                          Search for castles based on the features you're looking for.
+                        </div>
+
+                      </div>
+
+
+
+
+
+
+                  </div>
                   </div>
                 </div>
               </div>

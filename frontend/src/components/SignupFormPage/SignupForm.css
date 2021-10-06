@@ -1,5 +1,6 @@
 .signup_form_labels {
     color: white;
+    display: block;
 }
 
 /* .signup_username, .signup_email {

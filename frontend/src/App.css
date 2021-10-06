@@ -26,7 +26,7 @@
 
 #description_subpoints {
     height: 50rem;
-    width: 50rem;
+    width: 65rem;
     background-color: rgba(33, 33, 84, 0.8);
     border-radius: 10px;
     backdrop-filter: blur(5px);
@@ -36,12 +36,68 @@
     padding-left: 7rem;
 }
 
+/* #description_subpoints div {
+    display: inline-block;
+} */
+
+#description_subpoints svg {
+    padding-left: 1rem;
+    padding-top: 1rem;
+}
+
+.subpoints_text {
+    display: inline-block;
+    padding-top: 1rem;
+}
+
+.subpoint {
+    display: flex;
+    align-items: center;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 @media all and (max-width: 80rem) {
     #description_level_2 {
         width: 30rem;
     }
 
-    body {
-        min-width: 70rem;
+    #homepage_app_description {
+        width: 48rem;
+    }
+
+    #signup_form_page_div {
+        margin: 0;
+    }
+
+    .signup_form_labels {
+        display: block;
+
+    }
+
+    #description_level_1 {
+        padding-left: 4rem;
+    }
+
+    form#signup_form input {
+        margin-right: 4rem;
+    }
+
+    #description_subpoints {
+        width: 33.5rem;
+    }
+
+    #description_subpoints_parent {
+        padding-left: 4.5rem;
     }
   }
