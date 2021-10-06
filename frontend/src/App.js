@@ -57,7 +57,7 @@ function App() {
 
           {sessionUser && <Route exact path="/home">
             {/* {!sessionUser && <Redirect to="/" />} */}
-            <div>tired</div>
+            {sessionUser && <div id="eben-test-div">tired</div>}
           </Route>}
 
           {!sessionUser && <Route to="/">
