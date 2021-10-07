@@ -1,0 +1,122 @@
+#logged_out_page_grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+    min-height: calc(100vh - 6rem);
+}
+
+#homepage_app_description {
+    color: white;
+    /* font-size: 2rem; */
+}
+
+#description_level_1 {
+    padding: 7rem;
+    padding-bottom: 4rem;
+}
+
+#description_level_2 {
+    width: 61rem;
+    font-size: 2rem;
+    /* font-weight: bold; */
+    background-color: rgba(33, 33, 84, 0.8);
+    padding: 2rem;
+    border-radius: 10px;
+    backdrop-filter: blur(5px);
+}
+
+#description_subpoints {
+    height: 23rem;
+    width: 65rem;
+    background-color: rgba(33, 33, 84, 0.8);
+    border-radius: 10px;
+    backdrop-filter: blur(5px);
+}
+
+#description_subpoints_parent {
+    padding-left: 7rem;
+    margin-bottom: 2rem;
+}
+
+/* #description_subpoints div {
+    display: inline-block;
+} */
+
+#description_subpoints svg {
+    padding-left: 1rem;
+    padding-top: 1rem;
+}
+
+.subpoints_text {
+    display: inline-block;
+    padding-top: 1rem;
+    font-size: 2rem;
+}
+
+.subpoint {
+    display: flex;
+    align-items: center;
+}
+
+.subpoint + .subpoint {
+    margin-top: 2rem;
+}
+
+
+
+#eben-test-div {
+    background-color: red;
+    width: 50%;
+    height: calc(100vh - 6rem);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media all and (max-width: 80rem) {
+    #description_level_2 {
+        width: 30rem;
+    }
+
+    #homepage_app_description {
+        width: 48rem;
+    }
+
+    #signup_form_page_div {
+        margin: 0;
+    }
+
+    .signup_form_labels {
+        display: block;
+
+    }
+
+    #description_level_1 {
+        padding-left: 4rem;
+    }
+
+    form#signup_form input {
+        /* margin-right: 4rem; */
+    }
+
+    #description_subpoints {
+        width: 33.5rem;
+    }
+
+    #description_subpoints_parent {
+        padding-left: 4.5rem;
+    }
+
+    #description_subpoints {
+        width: 62.5rem;
+    }
+  }

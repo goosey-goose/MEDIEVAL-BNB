@@ -1,8 +1,10 @@
 // frontend/src/components/Navigation/index.js
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
+import LoginFormPage from "../../components/LoginFormPage";
+import LogoutButton from '../LogoutButton';
 import './Navigation.css';
 
 function Navigation({ isLoaded }){
@@ -23,12 +25,19 @@ function Navigation({ isLoaded }){
   }
 
   return (
-    <ul>
-      <li>
-        <NavLink exact to="/">Home</NavLink>
-        {isLoaded && sessionLinks}
-      </li>
-    </ul>
+    <nav id="homepage_nav">
+      <div id="homepage_div_grid">
+        <div id="logo">Medieval BNB</div>
+        {sessionUser ? <div id="logout_button_div"><LogoutButton /></div> : <div id="nav_login"><LoginFormPage /></div>}
+      </div>
+    </nav>
+
+    // <ul>
+    //   <li>
+    //     <NavLink exact to="/">Home</NavLink>
+    //     {isLoaded && sessionLinks}
+    //   </li>
+    // </ul>
   );
 }
 

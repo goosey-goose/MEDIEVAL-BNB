@@ -1,3 +1,65 @@
-label {
-    /* color: red; */
+.signup_form_labels {
+    color: white;
+    display: block;
+}
+
+/* .signup_username, .signup_email {
+    display: inline-block;
+} */
+
+form#signup_form {
+    /* display: flex;
+    flex-direction: column; */
+}
+
+form#signup_form input {
+    margin-bottom: 1rem;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.5rem;
+    margin-right: 1rem;
+    padding-left: .5rem;
+}
+
+#outer_div_for_signup {
+    border-radius: 10px;
+    /* box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); */
+}
+
+form#signup_form button {
+    height: 1.5rem;
+    width: 5.5rem;
+    font-size: 1rem;
+    color: white;
+    background-color: mediumseagreen;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+}
+
+span.signup_icons {
+    position: absolute;
+    padding-top: .6rem;
+    padding-left: .4rem;
+}
+
+.signup_inputs {
+    /* padding-left: 2rem; */
+}
+
+form#signup_form p {
+    text-align: left;
+    /* color: #848181; */
+    color: white;
+    font-weight: bold;
+    font-size: 3rem;
+    margin: 0;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+
+#signup_form_page_div {
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 3rem;
 }

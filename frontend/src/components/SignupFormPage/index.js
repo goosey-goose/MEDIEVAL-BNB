@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 import * as sessionActions from "../../store/session";
+import { BsCheckCircleFill } from 'react-icons/bs';
 import './SignupForm.css';
 
 function SignupFormPage() {
@@ -30,47 +31,69 @@ function SignupFormPage() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form id="signup_form" onSubmit={handleSubmit}>
       <ul>
         {errors.map((error, idx) => <li key={idx}>{error}</li>)}
       </ul>
-      <label>
-        Email
+      <p>Sign Up</p>
+
+
+      <div>
+      <label className="signup_form_labels signup_email">
+        {/* Email */}
+        {/* <span className="signup_icons"><BsCheckCircleFill color='green' size='1.5rem' /></span> */}
         <input
+          className="signup_inputs"
           type="text"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
+          placeholder="Email"
         />
+
       </label>
-      <label>
-        Username
+      <label className="signup_form_labels signup_username">
+        {/* Username */}
         <input
           type="text"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
           required
+          placeholder="Username"
         />
       </label>
-      <label>
-        Password
+      </div>
+
+
+
+      <div>
+      <label className="signup_form_labels">
+        {/* Password */}
         <input
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
+          placeholder="Password"
         />
       </label>
-      <label>
-        Confirm Password
+      <label className="signup_form_labels">
+        {/* Confirm Password */}
         <input
           type="password"
           value={confirmPassword}
           onChange={(e) => setConfirmPassword(e.target.value)}
           required
+          placeholder="Confirm Password"
         />
       </label>
-      <button type="submit">Sign Up</button>
+      </div>
+
+
+      <div>
+        <button type="submit">Sign Up</button>
+      </div>
+
     </form>
   );
 }
