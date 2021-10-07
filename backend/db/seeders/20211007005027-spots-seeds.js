@@ -141,8 +141,8 @@ module.exports = {
         },
         {
           fullAddress: "Castle Hill, Rochester ME1 1SW, United Kingdom",
-          lat: 51.61543611398578,
-          lng: 0.5128219340525402,
+          lat: 51.389957744199506,
+          lng: 0.5014518121866981,
           spotName: "Rochester Castle",
           price: 475.00,
           imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Rochester_Castle_Keep_and_Bailey_0038stcp.JPG/600px-Rochester_Castle_Keep_and_Bailey_0038stcp.JPG",
@@ -161,8 +161,8 @@ module.exports = {
         },
         {
           fullAddress: "Bodiam, Robertsbridge TN32 5UA, United Kingdom",
-          lat: 51.253011272112474,
-          lng: 0.5128219340525402,
+          lat: 51.00241451331841,
+          lng: 0.543484625674327,
           spotName: "Bodiam Castle",
           price: 700.00,
           imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Bodiam-castle-10My8-1197.jpg/375px-Bodiam-castle-10My8-1197.jpg",
