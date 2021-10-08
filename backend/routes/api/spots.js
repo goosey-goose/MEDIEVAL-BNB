@@ -8,9 +8,9 @@ const { requireAuth } = require('../../utils/auth');
 router.get('/', requireAuth,
      asyncHandler (async (req, res) => {
 
-    const spots = await Spot.findAll();
+        const spots = await Spot.findAll();
 
-    return res.json(spots);
+        return res.json(spots);
     }));
 
 
