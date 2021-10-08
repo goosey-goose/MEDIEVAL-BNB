@@ -17,7 +17,12 @@ router.get('/', async (req, res) => {
     // res.json({
     //     "hello": "ebenezer"
     // });
-    return res.send(user);
+    console.log(user);
+    return res.json(
+        {
+            spotId: user.Bookings[0]["spotId"]
+        }
+    );
 });
 
 

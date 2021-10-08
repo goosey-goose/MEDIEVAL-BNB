@@ -8,11 +8,14 @@ const { requireAuth } = require('../../utils/auth.js');
 
 const sessionRouter = require('./session.js');
 const usersRouter = require('./users.js');
+const spotsRouter = require('./spots.js');
 const testEbenRoute = require('./test.js');
 
 router.use('/session', sessionRouter);
 
 router.use('/users', usersRouter);
+
+router.use('/spots', spotsRouter);
 
 // EBEN, DELETE BELOW
 router.use('/eben', testEbenRoute);
