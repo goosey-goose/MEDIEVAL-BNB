@@ -21,4 +21,24 @@ router.get('/', requireAuth,
 
 
 
+
+// CREATE A BOOKING
+router.post('/new', requireAuth,
+    asyncHandler(async (req, res) => {
+
+        const { spotId, userId, startDate, endDate } = req.body;
+
+        const newBooking = await Booking.create({
+            spotId,
+            userId,
+            startDate,
+            endDate
+        });
+
+        res.json(newBooking);
+    })
+);
+
+
+
 module.exports = router;
