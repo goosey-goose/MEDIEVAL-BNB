@@ -128,6 +128,10 @@ function App() {
         </Switch>
       )}
 
+      {isLoaded && <div id="tommy-test">
+        TOMMY AND TAMMY
+      </div>}
+
 
     </>
   );
