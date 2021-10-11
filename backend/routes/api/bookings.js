@@ -5,7 +5,7 @@ const asyncHandler = require('express-async-handler');
 const { requireAuth } = require('../../utils/auth');
 
 
-// RETURN A SINGLE USER'S BOOKINGS
+// READ A SINGLE USER'S BOOKINGS
 router.get('/', requireAuth,
      asyncHandler (async (req, res) => {
 
