@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getUserBookings } from '../../store/booking';
 import './LoggedInHomePage.css';
 
 function LoggedInHomePage() {
@@ -9,11 +8,21 @@ function LoggedInHomePage() {
   const [errors, setErrors] = useState([]);
 
   if (sessionUser) {
-    //   dispatch(getUserBookings());
+    //
   }
 
   return (
-    <div id="logged_in_main_div">Hello from LoggedInHomePage.</div>
+    <div id="logged_in_main_div">
+      <div id="limd_div_1">
+        Trips
+      </div>
+      <div id="limd_div_2">
+        Upcoming     Past
+      </div>
+      <div id="limd_div_3">
+
+      </div>
+    </div>
   );
 }
 

@@ -3,5 +3,25 @@
     background-image: url("../../images/rome-6207755_1920.jpg");
     background-size: cover;
     width: 100%;
-    height: calc(100vh - 6rem);
+    min-height: calc(100vh - 6rem);
+    display: grid;
+    grid-template-rows: auto auto 2fr;
+}
+
+#limd_div_1 {
+    background-color: red;
+    width: 5rem;
+    height: 5rem;
+}
+
+#limd_div_2 {
+    background-color: yellow;
+    /* width: 5rem; */
+    height: 5rem;
+}
+
+#limd_div_3 {
+    background-color: green;
+    width: 5rem;
+    height: 5rem;
 }
