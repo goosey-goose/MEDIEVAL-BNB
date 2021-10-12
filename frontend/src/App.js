@@ -12,6 +12,7 @@ import { HiOutlineSearch } from 'react-icons/hi';
 import { getAllSpots } from "./store/spot";
 import './App.css';
 import { getUserBookings } from './store/booking';
+import { getAllReviews } from "./store/review";
 import LoggedInHomePage from "./components/LoggedInHomePage/LoggedInHomePage";
 
 function App() {
@@ -48,6 +49,7 @@ function App() {
       history.push("/");
     } else {
       dispatch(getUserBookings());
+      dispatch(getAllReviews());
       history.push("/home");
     }
   })
