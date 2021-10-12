@@ -41,4 +41,91 @@ router.post('/new', requireAuth,
 
 
 
+
+// UPDATE A BOOKING
+router.patch('/edit', requireAuth,
+    asyncHandler(async (req, res) => {
+
+
+        const { spotId, userId, startDate, endDate, newStart, newEnd } = req.body;
+
+        const newBookingInfo = {
+            startDate: newStart,
+            endDate: newEnd
+        }
+
+        const bookingToUpdate = await Booking.findOne({
+            where: {
+                userId,
+                spotId,
+                startDate,
+                endDate
+            }
+        });
+
+        // console.log(bookingToUpdate);
+
+        // const data = bookingToUpdate.json();
+
+        const originalBooking = {
+            "userId": bookingToUpdate.userId,
+            "spotId": bookingToUpdate.spotId,
+            "startDate": bookingToUpdate.startDate,
+            "endDate": bookingToUpdate.endDate
+        };
+
+        // USING THE .update() METHOD
+        await bookingToUpdate.update(newBookingInfo);
+
+
+        // USING THE .save() METHOD
+        // bookingToUpdate.spotId = newSpot;
+        // bookingToUpdate.startDate = newStart;
+        // bookingToUpdate.endDate = newEnd;
+
+        // await bookingToUpdate.save({ fields: ['spotId', 'startDate', 'endDate'] });
+
+        res.json(
+            [
+                {
+                    "ORIGINAL BOOKING:": originalBooking,
+                    "UPDATED BOOKING": bookingToUpdate
+                }
+            ]
+            );
+    }));
+
+
+
+
+// DELETE A BOOKING
+router.delete('/delete', requireAuth,
+    asyncHandler(async (req, res) => {
+
+        const { spotId, userId, startDate, endDate } = req.body;
+
+        const bookingToDelete = await Booking.findOne({
+            where: {
+                userId,
+                spotId,
+                startDate,
+                endDate
+            }
+        });
+
+        await bookingToDelete.destroy();
+
+        res.json([
+            [
+                "DELETED BOOKING",
+                bookingToDelete
+            ]
+        ]);
+
+    }));
+
+
+
+
+
 module.exports = router;
