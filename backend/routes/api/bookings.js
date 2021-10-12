@@ -35,7 +35,7 @@ router.post('/new', requireAuth,
             endDate
         });
 
-        res.json(newBooking);
+        res.json({"NEW BOOKING": newBooking});
     })
 );
 
@@ -86,12 +86,10 @@ router.patch('/edit', requireAuth,
         // await bookingToUpdate.save({ fields: ['spotId', 'startDate', 'endDate'] });
 
         res.json(
-            [
                 {
                     "ORIGINAL BOOKING:": originalBooking,
                     "UPDATED BOOKING": bookingToUpdate
                 }
-            ]
             );
     }));
 
@@ -115,12 +113,11 @@ router.delete('/delete', requireAuth,
 
         await bookingToDelete.destroy();
 
-        res.json([
-            [
-                "DELETED BOOKING",
-                bookingToDelete
-            ]
-        ]);
+        res.json(
+            {
+                "DELETED BOOKING": bookingToDelete
+            }
+        );
 
     }));
 
