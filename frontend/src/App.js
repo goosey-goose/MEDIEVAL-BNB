@@ -9,7 +9,10 @@ import Navigation from "./components/Navigation";
 import { RiBook3Line } from 'react-icons/ri';
 import { HiPencilAlt } from 'react-icons/hi';
 import { HiOutlineSearch } from 'react-icons/hi';
+import { getAllSpots } from "./store/spot";
 import './App.css';
+import { getUserBookings } from './store/booking';
+import LoggedInHomePage from "./components/LoggedInHomePage/LoggedInHomePage";
 
 function App() {
   const dispatch = useDispatch();
@@ -22,7 +25,8 @@ function App() {
   let history = useHistory();
 
   useEffect(() => {
-    console.log(3);
+    // console.log("McFly");
+    dispatch(getAllSpots());
     dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
   }, [dispatch]);
 
@@ -43,6 +47,7 @@ function App() {
       // );
       history.push("/");
     } else {
+      dispatch(getUserBookings());
       history.push("/home");
     }
   })
@@ -57,7 +62,7 @@ function App() {
 
           {sessionUser && <Route exact path="/home">
             {/* {!sessionUser && <Redirect to="/" />} */}
-            {sessionUser && <div id="eben-test-div">tired</div>}
+            {sessionUser && <LoggedInHomePage />}
           </Route>}
 
           {!sessionUser && <Route to="/">

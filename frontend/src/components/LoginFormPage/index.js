@@ -1,8 +1,9 @@
 // frontend/src/components/LoginFormPage/index.js
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import * as sessionActions from '../../store/session';
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
+import { getUserBookings } from '../../store/booking';
 import './LoginForm.css';
 
 function LoginFormPage() {
@@ -12,11 +13,12 @@ function LoginFormPage() {
   const [password, setPassword] = useState('');
   const [errors, setErrors] = useState([]);
 
-  if (sessionUser) return (
-    // <Redirect to="/home" />
-    <>
-    </>
-  );
+  // console.log("Bad Guy");
+
+  if (sessionUser) {
+    // console.log("Biff");
+    // dispatch(getUserBookings());
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -27,6 +29,13 @@ function LoginFormPage() {
         if (data && data.errors) setErrors(data.errors);
       });
   }
+
+  // useEffect(() => {
+  //   if (sessionUser) {
+  //     console.log("Biff");
+  //     dispatch(getUserBookings());
+  //   }
+  // }, [sessionUser]);
 
   return (
     <form id="login_form" onSubmit={handleSubmit}>
