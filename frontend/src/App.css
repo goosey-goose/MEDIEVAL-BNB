@@ -64,6 +64,27 @@
     margin-top: 2rem;
 }
 
+#spots_grid {
+    background-color: lightgreen;
+    padding: 5rem;
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    min-height: 47rem;
+}
+
+.spot_divs {
+    display: inline-block;
+    width: 15rem;
+    height: 15rem;
+    margin: auto;
+}
+
+.spot_divs img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
 
 
 /* #eben-test-div {
