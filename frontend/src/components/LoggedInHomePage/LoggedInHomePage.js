@@ -5,11 +5,20 @@ import './LoggedInHomePage.css';
 function LoggedInHomePage() {
   const dispatch = useDispatch();
   const sessionUser = useSelector(state => state.session.user);
+  // const userBookings = useSelector(state => state.bookings.bookings.Bookings);
+  const userBookings = useSelector(state => state.bookings?.bookings?.Bookings);
+  // const userBookings = [];
   const [errors, setErrors] = useState([]);
 
-  if (sessionUser) {
-    //
-  }
+
+
+  // useEffect(() => {
+  //   userBookings = useSelector(state => state.bookings.bookings.Bookings);
+  //   console.log("Ray Barone", userBookings);
+  // }, []);
+
+  // console.log("Ray Barone", userBookings);
+
 
   return (
     <div id="logged_in_main_div">
@@ -20,39 +29,7 @@ function LoggedInHomePage() {
         Upcoming     Past
       </div>
       <div id="limd_div_3">
-        <div className="test-divs">
 
-        </div>
-        <div className="test-divs">
-
-        </div>
-        <div className="test-divs">
-
-        </div>
-        <div className="test-divs">
-
-        </div>
-        <div className="test-divs">
-
-        </div>
-        <div className="test-divs">
-
-        </div>
-        <div className="test-divs">
-
-        </div>
-        <div className="test-divs">
-
-        </div>
-        <div className="test-divs">
-
-        </div>
-        <div className="test-divs">
-
-        </div>
-        <div className="test-divs">
-
-        </div>
       </div>
     </div>
   );

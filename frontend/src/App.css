@@ -65,7 +65,7 @@
 }
 
 #spots_grid {
-    background-color: lightgreen;
+    /* background-color: lightgreen; */
     padding: 5rem;
     display: grid;
     grid-template-rows: 1fr 1fr 1fr;

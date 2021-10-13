@@ -28,14 +28,17 @@ function LoginFormPage() {
         const data = await res.json();
         if (data && data.errors) setErrors(data.errors);
       });
+      // return dispatch(getUserBookings()).catch(async (res) => {
+      //   const data = await res.json();
+      //   if (data && data.errors) console.log("there are errors...");
+      // });
   }
 
   // useEffect(() => {
   //   if (sessionUser) {
-  //     console.log("Biff");
   //     dispatch(getUserBookings());
   //   }
-  // }, [sessionUser]);
+  // }, []);
 
   return (
     <form id="login_form" onSubmit={handleSubmit}>

@@ -20,33 +20,21 @@ function App() {
   const [isLoaded, setIsLoaded] = useState(false);
   const sessionUser = useSelector(state => state.session.user);
   const allSpots = useSelector(state => state.spots.spots);
+  // const userBookings = useSelector(state => state.bookings.bookings.Bookings);
 
-  const test = 5;
-  console.log(1);
+
 
   let history = useHistory();
 
+
   useEffect(() => {
-    // console.log("McFly");
     dispatch(getAllSpots());
     dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
   }, [dispatch]);
 
-  // debugger
-  // if (sessionUser) return (
-  //   <>
-  //   {console.log(4)}
-  //   {console.log("from conditional check", isLoaded)}
-  //   <Redirect to="/home" from="/" />
-  //   </>
-  // );
 
   useEffect(() => {
     if (!sessionUser) {
-      // window.alert("hello");
-      // return (
-      //   <Redirect to="/" />
-      // );
       history.push("/");
     } else {
       dispatch(getUserBookings());
