@@ -26,7 +26,12 @@ router.get('/', requireAuth,
 router.post('/new', requireAuth,
     asyncHandler(async (req, res) => {
 
-        const { spotId, userId, startDate, endDate } = req.body;
+        const { userId, startDate, endDate } = req.body;
+        let { spotId } = req.body;
+
+        spotId = parseInt(spotId);
+        spotId = spotId - 1;
+        spotId.toString();
 
         const newBooking = await Booking.create({
             spotId,

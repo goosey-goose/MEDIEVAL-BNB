@@ -20,7 +20,6 @@ function App() {
   const [isLoaded, setIsLoaded] = useState(false);
   const sessionUser = useSelector(state => state.session.user);
   const allSpots = useSelector(state => state.spots.spots);
-  // const userBookings = useSelector(state => state.bookings.bookings.Bookings);
 
 
 
