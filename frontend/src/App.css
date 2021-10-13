@@ -4,7 +4,7 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr;
-    min-height: calc(100vh - 6rem);
+    min-height: calc(100vh - 32rem);
 }
 
 #homepage_app_description {
@@ -74,15 +74,21 @@
 }
 
 .spot_divs {
-    display: inline-block;
+    /* display: inline-block;
     width: 15rem;
     height: 15rem;
+    margin: auto; */
+    display: flex;
+    width: 15rem;
+    height: 12rem;
     margin: auto;
+    margin-bottom: 1rem;
 }
 
 .spot_divs img {
     max-width: 100%;
     max-height: 100%;
+    border-radius: 10px;
 }
 
 

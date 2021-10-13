@@ -3,7 +3,7 @@
     background-image: url("../../images/rome-6207755_1920.jpg");
     background-size: cover;
     width: 100%;
-    min-height: calc(100vh - 6rem);
+    min-height: calc(100vh - 32rem);
     display: grid;
     grid-template-rows: auto auto 1fr;
 }
@@ -24,9 +24,16 @@
     background-color: green;
     padding: 5rem;
     display: grid;
-    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr auto;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-    min-height: 47rem;
+    /* min-height: 47rem; */
+    max-height: 21rem;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+
+#limd_div_3::-webkit-scrollbar {
+    display: none;
 }
 
 .test-divs {
@@ -35,4 +42,5 @@
     width: 15rem;
     height: 15rem;
     margin: auto;
+    margin-bottom: 1rem;
 }
