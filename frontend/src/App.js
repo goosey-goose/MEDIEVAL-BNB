@@ -19,6 +19,7 @@ function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
   const sessionUser = useSelector(state => state.session.user);
+  const allSpots = useSelector(state => state.spots.spots);
 
   const test = 5;
   console.log(1);
@@ -136,7 +137,15 @@ function App() {
       )}
 
       {isLoaded && <div id="tommy-test">
-        TOMMY AND TAMMY
+        <div id="spots_grid">
+          {allSpots && allSpots.map((spot) => {
+            return (<div className="spot_divs">
+              <img src={spot.imageUrl}></img>
+            </div>)
+          })}
+        </div>
+
+
       </div>}
 
 

@@ -20,7 +20,39 @@ function LoggedInHomePage() {
         Upcoming     Past
       </div>
       <div id="limd_div_3">
+        <div className="test-divs">
 
+        </div>
+        <div className="test-divs">
+
+        </div>
+        <div className="test-divs">
+
+        </div>
+        <div className="test-divs">
+
+        </div>
+        <div className="test-divs">
+
+        </div>
+        <div className="test-divs">
+
+        </div>
+        <div className="test-divs">
+
+        </div>
+        <div className="test-divs">
+
+        </div>
+        <div className="test-divs">
+
+        </div>
+        <div className="test-divs">
+
+        </div>
+        <div className="test-divs">
+
+        </div>
       </div>
     </div>
   );

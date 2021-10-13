@@ -5,7 +5,7 @@
     width: 100%;
     min-height: calc(100vh - 6rem);
     display: grid;
-    grid-template-rows: auto auto 2fr;
+    grid-template-rows: auto auto 1fr;
 }
 
 #limd_div_1 {
@@ -22,6 +22,17 @@
 
 #limd_div_3 {
     background-color: green;
-    width: 5rem;
-    height: 5rem;
+    padding: 5rem;
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    min-height: 47rem;
+}
+
+.test-divs {
+    background-color: lightblue;
+    display: inline-block;
+    width: 15rem;
+    height: 15rem;
+    margin: auto;
 }
