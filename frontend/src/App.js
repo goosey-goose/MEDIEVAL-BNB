@@ -141,6 +141,8 @@ function App() {
           {allSpots && allSpots.map((spot, index) => {
             return (<div className="spot_divs" key={index}>
               <img src={spot.imageUrl}></img>
+              <div style={{display: "flex", justifyContent: "space-between", marginTop: ".3rem"}}><div>{spot.spotName}</div><div>${spot.price}</div></div>
+              {/* <div>${spot.price}</div> */}
             </div>)
           })}
         </div>
