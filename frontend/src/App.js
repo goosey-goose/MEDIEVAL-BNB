@@ -21,32 +21,19 @@ function App() {
   const sessionUser = useSelector(state => state.session.user);
   const allSpots = useSelector(state => state.spots.spots);
 
-  const test = 5;
-  console.log(1);
+
 
   let history = useHistory();
 
+
   useEffect(() => {
-    // console.log("McFly");
     dispatch(getAllSpots());
     dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
   }, [dispatch]);
 
-  // debugger
-  // if (sessionUser) return (
-  //   <>
-  //   {console.log(4)}
-  //   {console.log("from conditional check", isLoaded)}
-  //   <Redirect to="/home" from="/" />
-  //   </>
-  // );
 
   useEffect(() => {
     if (!sessionUser) {
-      // window.alert("hello");
-      // return (
-      //   <Redirect to="/" />
-      // );
       history.push("/");
     } else {
       dispatch(getUserBookings());
@@ -141,6 +128,8 @@ function App() {
           {allSpots && allSpots.map((spot, index) => {
             return (<div className="spot_divs" key={index}>
               <img src={spot.imageUrl}></img>
+              <div style={{display: "flex", justifyContent: "space-between", marginTop: ".3rem"}}><div>{spot.spotName}</div><div>${spot.price}</div></div>
+              {/* <div>${spot.price}</div> */}
             </div>)
           })}
         </div>

@@ -3,30 +3,44 @@
     background-image: url("../../images/rome-6207755_1920.jpg");
     background-size: cover;
     width: 100%;
-    min-height: calc(100vh - 6rem);
+    min-height: calc(100vh - 26rem);
     display: grid;
     grid-template-rows: auto auto 1fr;
+    border-radius: 0 0 10px 10px;
 }
 
 #limd_div_1 {
-    background-color: red;
+    /* background-color: red; */
+    color: white;
     width: 5rem;
     height: 5rem;
 }
 
 #limd_div_2 {
-    background-color: yellow;
+    /* background-color: yellow; */
     /* width: 5rem; */
+    color: white;
     height: 5rem;
 }
 
 #limd_div_3 {
-    background-color: green;
-    padding: 5rem;
+    background-color: rgba(33, 33, 84, 0.8);
+    backdrop-filter: blur(5px);
+    font-size: 1rem;
+    padding: 4rem;
     display: grid;
-    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr auto;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-    min-height: 47rem;
+    /* min-height: 47rem; */
+    /* max-height: 21rem; */
+    height: 37rem;
+    border-radius: 10px;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+
+#limd_div_3::-webkit-scrollbar {
+    display: none;
 }
 
 .test-divs {
@@ -35,4 +49,28 @@
     width: 15rem;
     height: 15rem;
     margin: auto;
+    margin-bottom: 1rem;
+}
+
+.confirmed_bookings {
+    display: flex;
+    flex-direction: column;
+    width: 15rem;
+    height: 12rem;
+    margin: auto;
+    margin-bottom: 5rem;
+    border-radius: 10px;
+    box-shadow: 0px -1px 5px 12px rgb(255 255 255 / 55%);
+    color: white;
+}
+
+.confirmed_bookings img {
+    height: 100%;
+    border-radius: 10px;
+    transition: 0.5s ease;
+}
+
+.confirmed_bookings img:hover {
+    transform: scale(1.25,1.25);
+    z-index: 5;
 }
