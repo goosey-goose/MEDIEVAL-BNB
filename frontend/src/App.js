@@ -138,8 +138,8 @@ function App() {
 
       {isLoaded && <div id="tommy-test">
         <div id="spots_grid">
-          {allSpots && allSpots.map((spot) => {
-            return (<div className="spot_divs">
+          {allSpots && allSpots.map((spot, index) => {
+            return (<div className="spot_divs" key={index}>
               <img src={spot.imageUrl}></img>
             </div>)
           })}
