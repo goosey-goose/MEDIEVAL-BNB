@@ -32,7 +32,8 @@
     grid-template-rows: 1fr 1fr auto;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     /* min-height: 47rem; */
-    max-height: 21rem;
+    /* max-height: 21rem; */
+    height: 37rem;
     border-radius: 10px;
     overflow: hidden;
     overflow-y: scroll;
