@@ -12,8 +12,8 @@ import { RiBook3Line } from 'react-icons/ri';
 import { HiPencilAlt } from 'react-icons/hi';
 import { HiOutlineSearch } from 'react-icons/hi';
 import { getAllSpots } from "./store/spot";
-import './App.css';
 import 'react-datepicker/dist/react-datepicker.css'
+import './App.css';
 import { getUserBookings } from './store/booking';
 import { getAllReviews } from "./store/review";
 import LoggedInHomePage from "./components/LoggedInHomePage/LoggedInHomePage";
@@ -28,7 +28,8 @@ function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
   const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [selectedDate, setSelectedDate] = useState(null);
+  const [selectedStartDate, setSelectedStartDate] = useState(null);
+  const [selectedEndDate, setSelectedEndDate] = useState(null);
   const sessionUser = useSelector(state => state.session.user);
   const allSpots = useSelector(state => state.spots.spots);
 
@@ -54,15 +55,15 @@ function App() {
   })
 
 
-  let myDatePicker = (
-    <div>
-      <DatePicker
-        selected={selectedDate}
-        onChange={date => setSelectedDate(date)} />
-    </div>
-  );
+  // let myDatePicker = (
+  //   <div>
+  //     <DatePicker
+  //       selected={selectedDate}
+  //       onChange={date => setSelectedDate(date)} />
+  //   </div>
+  // );
 
-  let dateTest = ReactDOMServer.renderToString(myDatePicker);
+  // let dateTest = ReactDOMServer.renderToString(myDatePicker);
 
 
   useEffect(() => {
@@ -83,11 +84,6 @@ function App() {
             if (actualLoggedInModal) {
               let imageForLoggedInBooking = document.getElementById('image_for_logged_in_booking');
               imageForLoggedInBooking.setAttribute('src', `${event.target.currentSrc}`)
-              // actualLoggedInModal.innerHTML = `<div id="div_inside_inner_modal"><img src=${event.target.currentSrc}></img>${dateTest}</div>`;
-              // actualLoggedInModal.innerHTML = `<div id="div_inside_inner_modal"><img src=${event.target.currentSrc}></img></div>`;
-              // actualLoggedInModal.innerHTML = `<div id="div_inside_inner_modal"></div>`;
-              // actualLoggedInModal.innerHTML = `<div id="div_inside_inner_modal"><img src=${event.target.currentSrc}></img></div>`;
-              // actualLoggedInModal.appendChild(myDatePicker);
             }
           }
         })
@@ -100,12 +96,11 @@ function App() {
   return (
     <>
       <Navigation isLoaded={isLoaded} />
-      {/* {myDatePicker} */}
       {isLoaded && (
         <Switch>
 
           {sessionUser && <Route exact path="/home">
-            {/* {!sessionUser && <Redirect to="/" />} */}
+
             {sessionUser && <LoggedInHomePage />}
           </Route>}
 
@@ -265,13 +260,34 @@ function App() {
 
           <div id="div_inside_inner_modal">
             <img id="image_for_logged_in_booking"></img>
+            {selectedStartDate && selectedEndDate && <div id="book_it_button_div"><button>Book It</button></div>}
           </div>
 
 
-          <div>
+          <div id="date_picker_container_div">
             <DatePicker
-              selected={selectedDate}
-              onChange={date => setSelectedDate(date)} />
+              selected={selectedStartDate}
+              onChange={date => setSelectedStartDate(date)}
+              dateFormat='yyyy-MM-dd'
+              minDate={new Date()}
+              placeholderText={'Start Date'}
+              isClearable
+              showYearDropdown
+              scrollableMonthYearDropdown
+              />
+
+
+
+            <DatePicker
+              selected={selectedEndDate}
+              onChange={date => setSelectedEndDate(date)}
+              dateFormat='yyyy-MM-dd'
+              minDate={new Date()}
+              placeholderText={'End Date'}
+              isClearable
+              showYearDropdown
+              scrollableMonthYearDropdown
+              />
           </div>
         </Modal>}
 

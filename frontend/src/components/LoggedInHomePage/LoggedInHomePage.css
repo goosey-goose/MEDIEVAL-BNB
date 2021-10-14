@@ -25,6 +25,7 @@
 
 #limd_div_3 {
     background-color: rgba(33, 33, 84, 0.8);
+    box-shadow: 0px 0px 5px 6px rgb(255 255 255 / 55%);
     backdrop-filter: blur(5px);
     font-size: 1rem;
     padding: 4rem;
@@ -60,13 +61,15 @@
     margin: auto;
     margin-bottom: 5rem;
     border-radius: 10px;
-    box-shadow: 0px -1px 5px 12px rgb(255 255 255 / 55%);
+    /* box-shadow: 0px -1px 5px 12px rgb(255 255 255 / 55%); */
+    box-shadow: 16px 15px 5px -4px rgb(255 255 255 / 55%);
     color: white;
 }
 
 .confirmed_bookings img {
     height: 100%;
     border-radius: 10px;
+    cursor: pointer;
     transition: 0.5s ease;
 }
 
