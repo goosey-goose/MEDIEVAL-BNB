@@ -1,6 +1,7 @@
 // frontend/src/App.js
 import React, { useState, useEffect } from "react";
 import Modal from 'react-modal';
+import DatePicker from 'react-datepicker';
 import { useDispatch, useSelector } from "react-redux";
 import { Route, Switch, Redirect, useHistory } from "react-router-dom";
 import LoginFormPage from "./components/LoginFormPage";
@@ -12,9 +13,14 @@ import { HiPencilAlt } from 'react-icons/hi';
 import { HiOutlineSearch } from 'react-icons/hi';
 import { getAllSpots } from "./store/spot";
 import './App.css';
+import 'react-datepicker/dist/react-datepicker.css'
 import { getUserBookings } from './store/booking';
 import { getAllReviews } from "./store/review";
 import LoggedInHomePage from "./components/LoggedInHomePage/LoggedInHomePage";
+
+/////////////////////////////////////////////////////////////////////////////////
+import ReactDOMServer from 'react-dom/server'
+/////////////////////////////////////////////////////////////////////////////////
 
 Modal.setAppElement('#root');
 
@@ -22,6 +28,7 @@ function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [selectedDate, setSelectedDate] = useState(null);
   const sessionUser = useSelector(state => state.session.user);
   const allSpots = useSelector(state => state.spots.spots);
 
@@ -47,6 +54,17 @@ function App() {
   })
 
 
+  let myDatePicker = (
+    <div>
+      <DatePicker
+        selected={selectedDate}
+        onChange={date => setSelectedDate(date)} />
+    </div>
+  );
+
+  let dateTest = ReactDOMServer.renderToString(myDatePicker);
+
+
   useEffect(() => {
     if (allSpots?.length) {
       let spotDivs = document.querySelectorAll(".spot_divs");
@@ -55,16 +73,26 @@ function App() {
           setModalIsOpen(true);
           spot.classList.add('no_effects');
           console.log(event.target.currentSrc);
-          let actualLoggedOutModal = document.getElementById('actual_logged_out_modal');
-          actualLoggedOutModal.innerHTML = `<div id="div_inside_outer_modal"><img src=${event.target.currentSrc}></img></div>`;
+          if (!sessionUser) {
+            let actualLoggedOutModal = document?.getElementById('actual_logged_out_modal');
+            if (actualLoggedOutModal) {
+              actualLoggedOutModal.innerHTML = `<div id="div_inside_outer_modal"><img src=${event.target.currentSrc}></img></div>`;
+            }
+          } else if (sessionUser) {
+            let actualLoggedInModal = document?.getElementById('actual_logged_in_modal');
+            if (actualLoggedInModal) {
+              let imageForLoggedInBooking = document.getElementById('image_for_logged_in_booking');
+              imageForLoggedInBooking.setAttribute('src', `${event.target.currentSrc}`)
+              // actualLoggedInModal.innerHTML = `<div id="div_inside_inner_modal"><img src=${event.target.currentSrc}></img>${dateTest}</div>`;
+              // actualLoggedInModal.innerHTML = `<div id="div_inside_inner_modal"><img src=${event.target.currentSrc}></img></div>`;
+              // actualLoggedInModal.innerHTML = `<div id="div_inside_inner_modal"></div>`;
+              // actualLoggedInModal.innerHTML = `<div id="div_inside_inner_modal"><img src=${event.target.currentSrc}></img></div>`;
+              // actualLoggedInModal.appendChild(myDatePicker);
+            }
+          }
         })
       });
     }
-
-    let bodyElement = document.getElementsByTagName('body')[0];
-    bodyElement.addEventListener('click', () => {
-      // setModalIsOpen(false);
-    })
   });
 
 
@@ -72,6 +100,7 @@ function App() {
   return (
     <>
       <Navigation isLoaded={isLoaded} />
+      {/* {myDatePicker} */}
       {isLoaded && (
         <Switch>
 
@@ -161,7 +190,10 @@ function App() {
 
       </div>}
 
-      {isLoaded && <Modal
+
+
+      {/* MODAL FOR LOGGED OUT */}
+      {isLoaded && !sessionUser && <Modal
         id="actual_logged_out_modal"
         isOpen={modalIsOpen}
         onRequestClose={() => {
@@ -191,8 +223,56 @@ function App() {
           }
         }
         >
-          {/* <h2>Modal Title</h2>
-          <p>Modal Body</p> */}
+        </Modal>}
+
+
+        {/* -------------------------------------------------------------------------------------- */}
+
+
+        {/* MODAL FOR LOGGED IN */}
+        {isLoaded && sessionUser && <Modal
+        id="actual_logged_in_modal"
+        isOpen={modalIsOpen}
+        onRequestClose={() => {
+          let actualLoggedInModal = document.getElementById('actual_logged_in_modal');
+          actualLoggedInModal.innerHTML = '';
+          setModalIsOpen(false);
+          let spotDivs = document.querySelectorAll(".spot_divs");
+          spotDivs.forEach((spot) => {
+            spot.classList.remove('no_effects');
+          })
+        }}
+        style={
+          {
+            overlay: {
+              backgroundColor: 'transparent',
+              // margin: '10rem'
+            },
+            content: {
+              position: 'absolute',
+              borderRadius: '10px',
+              height: 'fit-content',
+              margin: 'auto',
+              width: 'fit-content',
+              backgroundColor: 'rgb(134, 134, 225)',
+              border: 'none'
+            }
+          }
+        }
+        >
+          {/* {myDatePicker} */}
+
+
+          <div id="div_inside_inner_modal">
+            <img id="image_for_logged_in_booking"></img>
+          </div>
+
+
+          <div>
+            <DatePicker
+              selected={selectedDate}
+              onChange={date => setSelectedDate(date)} />
+          </div>
         </Modal>}
 
 
