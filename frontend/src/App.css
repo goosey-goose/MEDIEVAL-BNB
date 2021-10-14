@@ -113,7 +113,10 @@
 
 
 
-
+.spot_divs.no_effects img {
+    transform: none;
+    z-index: 0;
+}
 
 
 

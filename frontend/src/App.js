@@ -1,5 +1,6 @@
 // frontend/src/App.js
 import React, { useState, useEffect } from "react";
+import Modal from 'react-modal';
 import { useDispatch, useSelector } from "react-redux";
 import { Route, Switch, Redirect, useHistory } from "react-router-dom";
 import LoginFormPage from "./components/LoginFormPage";
@@ -15,9 +16,12 @@ import { getUserBookings } from './store/booking';
 import { getAllReviews } from "./store/review";
 import LoggedInHomePage from "./components/LoggedInHomePage/LoggedInHomePage";
 
+Modal.setAppElement('#root');
+
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
   const sessionUser = useSelector(state => state.session.user);
   const allSpots = useSelector(state => state.spots.spots);
 
@@ -41,6 +45,19 @@ function App() {
       history.push("/home");
     }
   })
+
+
+  useEffect(() => {
+    if (allSpots?.length) {
+      let spotDivs = document.querySelectorAll(".spot_divs");
+      spotDivs.forEach((spot) => {
+        spot.addEventListener('click', (event) => {
+          setModalIsOpen(true);
+          spot.classList.add('no_effects');
+        })
+      });
+    }
+  });
 
 
 
@@ -129,13 +146,36 @@ function App() {
             return (<div className="spot_divs" key={index}>
               <img src={spot.imageUrl}></img>
               <div style={{display: "flex", justifyContent: "space-between", marginTop: ".3rem"}}><div>{spot.spotName}</div><div>${spot.price}</div></div>
-              {/* <div>${spot.price}</div> */}
             </div>)
           })}
         </div>
 
 
       </div>}
+
+      {isLoaded && <Modal
+        isOpen={modalIsOpen}
+        onRequestClose={() => {
+          setModalIsOpen(false);
+          let spotDivs = document.querySelectorAll(".spot_divs");
+          spotDivs.forEach((spot) => {
+            spot.classList.remove('no_effects');
+          })
+        }}
+        style={
+          {
+            overlay: {
+              backgroundColor: 'grey'
+            },
+            content: {
+              color: 'orange'
+            }
+          }
+        }
+        >
+          <h2>Modal Title</h2>
+          <p>Modal Body</p>
+        </Modal>}
 
 
     </>
