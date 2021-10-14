@@ -54,9 +54,17 @@ function App() {
         spot.addEventListener('click', (event) => {
           setModalIsOpen(true);
           spot.classList.add('no_effects');
+          console.log(event.target.currentSrc);
+          let actualLoggedOutModal = document.getElementById('actual_logged_out_modal');
+          actualLoggedOutModal.innerHTML = `<div id="div_inside_outer_modal"><img src=${event.target.currentSrc}></img></div>`;
         })
       });
     }
+
+    let bodyElement = document.getElementsByTagName('body')[0];
+    bodyElement.addEventListener('click', () => {
+      // setModalIsOpen(false);
+    })
   });
 
 
@@ -154,8 +162,11 @@ function App() {
       </div>}
 
       {isLoaded && <Modal
+        id="actual_logged_out_modal"
         isOpen={modalIsOpen}
         onRequestClose={() => {
+          let actualLoggedOutModal = document.getElementById('actual_logged_out_modal');
+          actualLoggedOutModal.innerHTML = '';
           setModalIsOpen(false);
           let spotDivs = document.querySelectorAll(".spot_divs");
           spotDivs.forEach((spot) => {
@@ -165,16 +176,23 @@ function App() {
         style={
           {
             overlay: {
-              backgroundColor: 'grey'
+              backgroundColor: 'transparent',
+              // margin: '10rem'
             },
             content: {
-              color: 'orange'
+              position: 'absolute',
+              borderRadius: '10px',
+              height: 'fit-content',
+              margin: 'auto',
+              width: 'fit-content',
+              backgroundColor: 'rgb(134, 134, 225)',
+              border: 'none'
             }
           }
         }
         >
-          <h2>Modal Title</h2>
-          <p>Modal Body</p>
+          {/* <h2>Modal Title</h2>
+          <p>Modal Body</p> */}
         </Modal>}
 
 

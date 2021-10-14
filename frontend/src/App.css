@@ -120,6 +120,25 @@
 
 
 
+#div_inside_outer_modal {
+    display: flex;
+    justify-content: center;
+    height: 25rem;
+}
+
+#div_inside_outer_modal img {
+    border-radius: 10px;
+}
+
+
+.ReactModal__Overlay.ReactModal__Overlay--after-open {
+
+}
+
+#actual_logged_out_modal {
+    position: static;
+    margin: 17rem;
+}
 
 
 
