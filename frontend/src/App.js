@@ -14,7 +14,7 @@ import { HiOutlineSearch } from 'react-icons/hi';
 import { getAllSpots } from "./store/spot";
 import 'react-datepicker/dist/react-datepicker.css'
 import './App.css';
-import { getUserBookings } from './store/booking';
+import { getUserBookings, createUserBooking } from './store/booking';
 import { getAllReviews } from "./store/review";
 import LoggedInHomePage from "./components/LoggedInHomePage/LoggedInHomePage";
 
@@ -55,15 +55,10 @@ function App() {
   })
 
 
-  // let myDatePicker = (
-  //   <div>
-  //     <DatePicker
-  //       selected={selectedDate}
-  //       onChange={date => setSelectedDate(date)} />
-  //   </div>
-  // );
-
-  // let dateTest = ReactDOMServer.renderToString(myDatePicker);
+  const submitBooking = () => {
+    dispatch(createUserBooking('15', '1', '2021-11-10', '2021-11-17'));
+    setModalIsOpen(false);
+  }
 
 
   useEffect(() => {
@@ -260,7 +255,7 @@ function App() {
 
           <div id="div_inside_inner_modal">
             <img id="image_for_logged_in_booking"></img>
-            {selectedStartDate && selectedEndDate && <div id="book_it_button_div"><button>Book It</button></div>}
+            {selectedStartDate && selectedEndDate && <div id="book_it_button_div"><button onClick={submitBooking}>Book It</button></div>}
           </div>
 
 
