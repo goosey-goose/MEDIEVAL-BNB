@@ -14,13 +14,11 @@ import { HiOutlineSearch } from 'react-icons/hi';
 import { getAllSpots } from "./store/spot";
 import 'react-datepicker/dist/react-datepicker.css'
 import './App.css';
-import { getUserBookings, createUserBooking } from './store/booking';
+import { getUserBookings, getAllUserBookings, createUserBooking } from './store/booking';
 import { getAllReviews } from "./store/review";
 import LoggedInHomePage from "./components/LoggedInHomePage/LoggedInHomePage";
 
-/////////////////////////////////////////////////////////////////////////////////
-import ReactDOMServer from 'react-dom/server'
-/////////////////////////////////////////////////////////////////////////////////
+
 
 Modal.setAppElement('#root');
 
@@ -33,7 +31,7 @@ function App() {
   const sessionUser = useSelector(state => state.session.user);
   const allSpots = useSelector(state => state.spots.spots);
 
-
+  console.log('#####################################  APP COMPONENT RENDERED  ##################################');
 
   let history = useHistory();
 
@@ -49,14 +47,16 @@ function App() {
       history.push("/");
     } else {
       dispatch(getUserBookings());
+      dispatch(getAllUserBookings());
       dispatch(getAllReviews());
       history.push("/home");
     }
   })
 
 
-  const submitBooking = () => {
-    dispatch(createUserBooking('15', '1', '2021-11-10', '2021-11-17'));
+  const submitBooking = async () => {
+    const temp = await dispatch(createUserBooking('3', '1', '2021-11-10', '2021-11-17'));
+    console.log(temp);
     setModalIsOpen(false);
   }
 
@@ -86,7 +86,12 @@ function App() {
     }
   });
 
-
+  const holidays = [
+    new Date('2021-10-24'),
+    new Date('2021-10-25'),
+    new Date('2021-10-26'),
+    new Date('2021-10-27')
+  ];
 
   return (
     <>
@@ -263,12 +268,16 @@ function App() {
             <DatePicker
               selected={selectedStartDate}
               onChange={date => setSelectedStartDate(date)}
+              selectsStart
+              startDate={selectedStartDate}
+              endDate={selectedEndDate}
               dateFormat='yyyy-MM-dd'
               minDate={new Date()}
               placeholderText={'Start Date'}
               isClearable
               showYearDropdown
               scrollableMonthYearDropdown
+              excludeDates={holidays}
               />
 
 
@@ -276,6 +285,9 @@ function App() {
             <DatePicker
               selected={selectedEndDate}
               onChange={date => setSelectedEndDate(date)}
+              selectsEnd
+              startDate={selectedStartDate}
+              endDate={selectedEndDate}
               dateFormat='yyyy-MM-dd'
               minDate={new Date()}
               placeholderText={'End Date'}

@@ -9,15 +9,30 @@ const { requireAuth } = require('../../utils/auth');
 router.get('/', requireAuth,
      asyncHandler (async (req, res) => {
 
-        // console.log(req.user.id);
-
         const userBookings = await User.findByPk(req.user.id, {
             include: Booking
         });
 
+        // console.log("**********************************************", userBookings);
+
         return res.json(userBookings);
-        // res.send("hello");
     }));
+
+
+
+
+// READ ALL BOOKINGS
+router.get('/all', requireAuth,
+    asyncHandler (async (req, res) => {
+
+    const allBookings = await Booking.findAll();
+
+    return res.json(allBookings);
+}));
+
+
+
+
 
 
 
@@ -33,14 +48,29 @@ router.post('/new', requireAuth,
         spotId = spotId - 1;
         spotId.toString();
 
-        const newBooking = await Booking.create({
-            spotId,
-            userId,
-            startDate,
-            endDate
+        // CHECK IF DUPLICATE BOOKING / RECORD EXISTS
+        const temp = await Booking.findOne({
+            where: {
+                spotId,
+                startDate,
+                endDate
+            }
         });
 
-        res.json({"NEW BOOKING": newBooking});
+        // IF NO DUPLICATE EXISTS, CREATE BOOKING
+        if (temp === null) {
+            const newBooking = await Booking.create({
+                spotId,
+                userId,
+                startDate,
+                endDate
+            });
+
+            res.json({"NEW BOOKING": newBooking});
+        } else {
+            res.json({"Error": "Booking already exists."});
+        }
+
     })
 );
 
