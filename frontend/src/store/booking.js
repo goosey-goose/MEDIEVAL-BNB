@@ -131,8 +131,17 @@ const bookingReducer = (state = initialState, action) => {
 
 
     case CREATE_BOOKING:
-      newState = {...state, bookings: { ...state.bookings }, allUserBookings: { ...state.allUserBookings }};
-      newState.bookings[Object.keys(newState.bookings).length] = action.payload["NEW BOOKING"];
+      console.log("UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU", state);
+      // newState = {...state, bookings: {...state, ...state.bookings }, allUserBookings: [ ...state.allUserBookings ]};
+      newState = {...state, bookings: {Bookings: [...state.bookings.Bookings]}, allUserBookings: {...state.allUserBookings}};
+      console.log("VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV", newState);
+      // console.log("OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO", newState);
+      console.log("OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO", action.payload["NEW BOOKING"]);
+      // newState.bookings.Bookings[Object.keys(newState.bookings.Bookings).length] = action.payload["NEW BOOKING"];
+      // newState.bookings.Bookings.push(action.payload["NEW BOOKING"]);
+      newState.bookings.Bookings.push(action.payload["NEW BOOKING"]);
+
+
       newState.allUserBookings[Object.keys(newState.allUserBookings).length] = action.payload["NEW BOOKING"];
       return newState;
 

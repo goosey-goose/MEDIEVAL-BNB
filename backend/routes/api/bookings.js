@@ -44,9 +44,9 @@ router.post('/new', requireAuth,
         const { userId, startDate, endDate } = req.body;
         let { spotId } = req.body;
 
-        spotId = parseInt(spotId);
-        spotId = spotId - 1;
-        spotId.toString();
+        // spotId = parseInt(spotId);
+        // spotId = spotId + 1;
+        // spotId.toString();
 
         // CHECK IF DUPLICATE BOOKING / RECORD EXISTS
         const temp = await Booking.findOne({
@@ -56,6 +56,8 @@ router.post('/new', requireAuth,
                 endDate
             }
         });
+
+        console.log("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX", temp);
 
         // IF NO DUPLICATE EXISTS, CREATE BOOKING
         if (temp === null) {
