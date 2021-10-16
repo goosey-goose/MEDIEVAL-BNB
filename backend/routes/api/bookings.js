@@ -57,7 +57,7 @@ router.post('/new', requireAuth,
             }
         });
 
-        console.log("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX", temp);
+        // console.log("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX", temp);
 
         // IF NO DUPLICATE EXISTS, CREATE BOOKING
         if (temp === null) {

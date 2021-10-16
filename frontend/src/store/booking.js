@@ -40,7 +40,7 @@ const createBooking = (booking) => {
 export const getUserBookings = () => async (dispatch) => {
   const response = await csrfFetch('/api/bookings');
   const data = await response.json();
-  console.log("**********************************************", data);
+  // console.log("**********************************************", data);
   dispatch(setBookings(data));
   return response;
 };
@@ -49,7 +49,7 @@ export const getUserBookings = () => async (dispatch) => {
 export const getAllUserBookings = () => async (dispatch) => {
   const response = await csrfFetch('/api/bookings/all');
   const data = await response.json();
-  console.log("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&", data);
+  // console.log("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&", data);
   dispatch(setAllBookings(data));
   return response;
 };
@@ -111,14 +111,14 @@ const bookingReducer = (state = initialState, action) => {
     case SET_BOOKINGS:
       // newState = Object.assign({}, state);
       newState = {...state, bookings: { ...state.bookings }, allUserBookings: { ...state.allUserBookings }};
-      console.log("1111111", action.payload);
+      // console.log("1111111", action.payload);
       newState.bookings = action.payload;
       return newState;
 
 
     case SET_ALL_BOOKINGS:
       newState = {...state, bookings: {...state.bookings}, allUserBookings: {...state.allUserBookings}};
-      console.log("222222222", action.payload);
+      // console.log("222222222", action.payload);
       newState.allUserBookings = action.payload;
       return newState;
 
@@ -131,12 +131,12 @@ const bookingReducer = (state = initialState, action) => {
 
 
     case CREATE_BOOKING:
-      console.log("UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU", state);
+      // console.log("UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU", state);
       // newState = {...state, bookings: {...state, ...state.bookings }, allUserBookings: [ ...state.allUserBookings ]};
       newState = {...state, bookings: {Bookings: [...state.bookings.Bookings]}, allUserBookings: {...state.allUserBookings}};
-      console.log("VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV", newState);
+      // console.log("VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV", newState);
       // console.log("OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO", newState);
-      console.log("OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO", action.payload["NEW BOOKING"]);
+      // console.log("OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO", action.payload["NEW BOOKING"]);
       // newState.bookings.Bookings[Object.keys(newState.bookings.Bookings).length] = action.payload["NEW BOOKING"];
       // newState.bookings.Bookings.push(action.payload["NEW BOOKING"]);
       newState.bookings.Bookings.push(action.payload["NEW BOOKING"]);

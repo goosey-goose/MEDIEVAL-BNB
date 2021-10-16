@@ -15,7 +15,7 @@ const setSpots = (spots) => {
 export const getAllSpots = () => async (dispatch) => {
   const response = await csrfFetch('/api/spots');
   const data = await response.json();
-  console.log("Calvin Klein", data);
+  // console.log("Calvin Klein", data);
   dispatch(setSpots(data));
   return response;
 };

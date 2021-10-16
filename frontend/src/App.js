@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 // import Modal from 'react-modal';
 // import DatePicker from 'react-datepicker';
 import { useDispatch, useSelector } from "react-redux";
-import { Route, Switch, Redirect, useHistory } from "react-router-dom";
+import { Route, Switch, useHistory } from "react-router-dom";
 import LoginFormPage from "./components/LoginFormPage";
 import SignupFormPage from "./components/SignupFormPage";
 import AllSpots from "./components/AllSpots/AllSpots";
@@ -32,7 +32,7 @@ function App() {
   const sessionUser = useSelector(state => state.session.user);
   // const allSpots = useSelector(state => state.spots.spots);
 
-  console.log('#####################################  APP COMPONENT RENDERED  ##################################');
+  // console.log('#####################################  APP COMPONENT RENDERED  ##################################');
 
   let history = useHistory();
 
@@ -130,12 +130,12 @@ function App() {
 
           <Route exact path="/login">
             <LoginFormPage />
-            {console.log("login page")}
+            {/* {console.log("login page")} */}
           </Route>
 
           <Route exact path="/signup">
             <SignupFormPage />
-            {console.log("signup page")}
+            {/* {console.log("signup page")} */}
           </Route>
 
         </Switch>

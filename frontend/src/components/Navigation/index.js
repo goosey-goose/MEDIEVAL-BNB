@@ -1,27 +1,27 @@
 // frontend/src/components/Navigation/index.js
 import React from 'react';
-import { NavLink, Link } from 'react-router-dom';
+// import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import ProfileButton from './ProfileButton';
+// import ProfileButton from './ProfileButton';
 import LoginFormPage from "../../components/LoginFormPage";
 import LogoutButton from '../LogoutButton';
 import './Navigation.css';
 
-function Navigation({ isLoaded }){
+function Navigation(){
   const sessionUser = useSelector(state => state.session.user);
 
-  let sessionLinks;
+  // let sessionLinks;
   if (sessionUser) {
-    sessionLinks = (
-      <ProfileButton user={sessionUser} />
-    );
+    // sessionLinks = (
+    //   <ProfileButton user={sessionUser} />
+    // );
   } else {
-    sessionLinks = (
-      <>
-        <NavLink to="/login">Log In</NavLink>
-        <NavLink to="/signup">Sign Up</NavLink>
-      </>
-    );
+    // sessionLinks = (
+    //   <>
+    //     <NavLink to="/login">Log In</NavLink>
+    //     <NavLink to="/signup">Sign Up</NavLink>
+    //   </>
+    // );
   }
 
   return (
