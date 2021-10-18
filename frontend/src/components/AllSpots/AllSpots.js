@@ -21,25 +21,29 @@ function AllSpots({ isLoaded }) {
     const [reservedDates, setReservedDates] = useState([]);
     const [currentSelectedSpot, setCurrentSelectedSpot] = useState(null);
 
+    const [copyOfAUB, setCopyOfAUB] = useState([]);
+
     const submitBooking = async () => {
-      await dispatch(createUserBooking('15', '4', '2021-10-23', '2021-10-26'));
+      await dispatch(createUserBooking('9', '4', '2021-10-20', '2021-10-25'));
       // console.log(temp);
       setModalIsOpen(false);
       setSelectedStartDate(null);
       setSelectedEndDate(null);
     }
 
-    console.log(allUserBookings);
-    // useEffect(() => {
-    //   if () dispatch(getUserBookings());
-    //   if () dispatch(getAllUserBookings());
-    //   if () dispatch(getAllReviews());
-    // });
+    // console.log(allUserBookings);
+
+    let temp1;
+
+
+
 
     // let reservedDates = [];
 
     useEffect(() => {
+      console.log("this should run............................");
         if (allSpots?.length) {
+          console.log("allSpots now has length..................................");
           let spotDivs = document.querySelectorAll(".spot_divs");
           spotDivs.forEach((spot) => {
             spot.addEventListener('click', (event) => {
@@ -69,16 +73,42 @@ function AllSpots({ isLoaded }) {
                   });
                 }
                 if (spotName) {
+                  console.log("spotName is true..................................");
                   spotName.innerText = '';
                   allSpots.forEach((spot) => {
                     if (spot.imageUrl === event.target.src) {
+                      console.log("spot has been found..........................................");
                       spotName.innerText = spot.spotName;
                       currentSpot = spot.id;
                       // let bookingValues = Object.values(allUserBookings);
                       let tempReservedDates = [];
                       // bookingValues.forEach((booking) => {
+                      setTimeout(() => {
+                        console.log(allUserBookings);
+                      }, 1000);
+
                       if (Array.isArray(allUserBookings)) {
+                        // console.log("allUserBookings", allUserBookings);
                         allUserBookings.forEach((booking) => {
+                          if (booking.spotId == currentSpot) {
+                            let date1 = new Date(booking.endDate);
+                            let date2 = new Date(booking.startDate);
+                            let difference = date1.getTime() - date2.getTime();
+                            let days = Math.ceil(difference / (1000 * 3600 * 24));
+                            let startDate = booking.startDate;
+                            let startDateInMilliseconds = new Date(startDate).getTime();
+                            for (let i = 0, milliseconds = 86400000; i <= days; ++i, milliseconds += 86400000) {
+                              tempReservedDates.push(new Date(startDateInMilliseconds + milliseconds));
+                            }
+                          }
+                        });
+                        setReservedDates(tempReservedDates);
+
+
+                      } else if (allUserBookings !== null && !Array.isArray(allUserBookings)) {
+                        let temp2 = Object.values(allUserBookings);
+                        // console.log("temp2", temp2);
+                        temp2.forEach((booking) => {
                           if (booking.spotId == currentSpot) {
                             let date1 = new Date(booking.endDate);
                             let date2 = new Date(booking.startDate);
@@ -112,7 +142,19 @@ function AllSpots({ isLoaded }) {
           });
         }
         // console.log(reservedDates);
-      }, []);
+      }, [allUserBookings]);
+
+
+      useEffect(() => {
+        // setCopyOfAUB(allUserBookings);
+        // temp1 = allUserBookings;
+        setTimeout(() => {
+          // if (!Array.isArray(allUserBookings)) {
+          //   console.log(Object.values(allUserBookings));
+          // }
+          // console.log(allUserBookings);
+        }, 1000);
+      });
 
 
 
