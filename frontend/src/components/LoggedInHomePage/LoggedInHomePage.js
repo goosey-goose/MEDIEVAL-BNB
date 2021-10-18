@@ -25,7 +25,7 @@ function LoggedInHomePage() {
           // console.log(booking.spotId);
           return (<div className="confirmed_bookings" key={index}>
               <img alt="" src={allSpots[parseInt(booking.spotId) - 1].imageUrl}></img>
-              <div style={{display: "flex", justifyContent: "space-between", marginTop: "1.3rem"}}><div>{allSpots[booking.spotId].spotName}</div><div>${allSpots[booking.spotId].price}</div></div>
+              <div style={{display: "flex", justifyContent: "space-between", marginTop: "1.3rem"}}><div>{allSpots[parseInt(booking.spotId) - 1].spotName}</div><div>${allSpots[booking.spotId].price}</div></div>
           </div>)
         })}
       </div>
