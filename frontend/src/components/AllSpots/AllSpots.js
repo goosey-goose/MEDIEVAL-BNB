@@ -19,6 +19,7 @@ function AllSpots({ isLoaded }) {
     const [selectedStartDate, setSelectedStartDate] = useState(null);
     const [selectedEndDate, setSelectedEndDate] = useState(null);
     const [reservedDates, setReservedDates] = useState([]);
+    const [currentSelectedSpot, setCurrentSelectedSpot] = useState(null);
 
     const submitBooking = async () => {
       await dispatch(createUserBooking('2', '1', '2021-11-23', '2021-11-26'));
@@ -45,6 +46,7 @@ function AllSpots({ isLoaded }) {
               let currentSpot;
               setModalIsOpen(true);
               spot.classList.add('no_effects');
+              setCurrentSelectedSpot(spot);
               // console.log(event);
               if (!sessionUser) {
                 let actualLoggedOutModal = document?.getElementById('actual_logged_out_modal');
@@ -188,10 +190,11 @@ function AllSpots({ isLoaded }) {
           let actualLoggedInModal = document.getElementById('actual_logged_in_modal');
           actualLoggedInModal.innerHTML = '';
           setModalIsOpen(false);
-          let spotDivs = document.querySelectorAll(".spot_divs");
-          spotDivs.forEach((spot) => {
-            spot.classList.remove('no_effects');
-          })
+          currentSelectedSpot.classList.remove('no_effects');
+          // let spotDivs = document.querySelectorAll(".spot_divs");
+          // spotDivs.forEach((spot) => {
+          //   spot.classList.remove('no_effects');
+          // })
           // let spotAddress = document?.getElementById("spot_address");
           // spotAddress.innerText = '';
         }}
