@@ -24,11 +24,12 @@ function AllSpots({ isLoaded }) {
     const [copyOfAUB, setCopyOfAUB] = useState([]);
 
     const submitBooking = async () => {
-      await dispatch(createUserBooking('9', '4', '2021-10-20', '2021-10-25'));
+      await dispatch(createUserBooking('16', '4', '2021-10-20', '2021-10-25'));
       // console.log(temp);
       setModalIsOpen(false);
       setSelectedStartDate(null);
       setSelectedEndDate(null);
+      currentSelectedSpot.classList.remove('no_effects');
     }
 
     // console.log(allUserBookings);
@@ -49,6 +50,7 @@ function AllSpots({ isLoaded }) {
             spot.addEventListener('click', (event) => {
               let currentSpot;
               setModalIsOpen(true);
+              console.log(spot.childNodes[0]);
               spot.classList.add('no_effects');
               setCurrentSelectedSpot(spot);
               // console.log(event);
@@ -83,9 +85,9 @@ function AllSpots({ isLoaded }) {
                       // let bookingValues = Object.values(allUserBookings);
                       let tempReservedDates = [];
                       // bookingValues.forEach((booking) => {
-                      setTimeout(() => {
-                        console.log(allUserBookings);
-                      }, 1000);
+                      // setTimeout(() => {
+                      //   console.log(allUserBookings);
+                      // }, 1000);
 
                       if (Array.isArray(allUserBookings)) {
                         // console.log("allUserBookings", allUserBookings);
@@ -229,9 +231,11 @@ function AllSpots({ isLoaded }) {
         id="actual_logged_in_modal"
         isOpen={modalIsOpen}
         onRequestClose={() => {
+          console.log("onRequestClose() called.......................................");
           let actualLoggedInModal = document.getElementById('actual_logged_in_modal');
           actualLoggedInModal.innerHTML = '';
           setModalIsOpen(false);
+          // console.log(currentSelectedSpot.childNodes[0]);
           currentSelectedSpot.classList.remove('no_effects');
           // let spotDivs = document.querySelectorAll(".spot_divs");
           // spotDivs.forEach((spot) => {
@@ -305,6 +309,7 @@ function AllSpots({ isLoaded }) {
               isClearable
               showYearDropdown
               scrollableMonthYearDropdown
+              excludeDates={reservedDates}
               />
           </div>
         </Modal>}
