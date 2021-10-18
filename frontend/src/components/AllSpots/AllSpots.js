@@ -22,7 +22,7 @@ function AllSpots({ isLoaded }) {
     const [currentSelectedSpot, setCurrentSelectedSpot] = useState(null);
 
     const submitBooking = async () => {
-      await dispatch(createUserBooking('2', '1', '2021-11-23', '2021-11-26'));
+      await dispatch(createUserBooking('15', '4', '2021-10-23', '2021-10-26'));
       // console.log(temp);
       setModalIsOpen(false);
       setSelectedStartDate(null);
@@ -112,7 +112,7 @@ function AllSpots({ isLoaded }) {
           });
         }
         // console.log(reservedDates);
-      });
+      }, []);
 
 
 
