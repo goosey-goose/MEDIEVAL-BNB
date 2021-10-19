@@ -150,6 +150,10 @@
     margin-right: .5rem;
 }
 
+#date_picker_container_div2 {
+    display: none;
+}
+
 .react-datepicker__triangle {
     /* position: static !important;
     left: 0px;

@@ -16,11 +16,20 @@ function LoggedInHomePage({ isLoaded }) {
   const [selectedStartDate, setSelectedStartDate] = useState(null);
   const [selectedEndDate, setSelectedEndDate] = useState(null);
   // const [errors, setErrors] = useState([]);
+  const [showDatePicker, setShowDatePicker] = useState(true);
 
 
 
   const updateBooking = () => {
     console.log("testing the update button");
+  };
+
+
+  const testFunction = () => {
+    let showDatePickerButton = document.getElementById("show_date_picker_button");
+    showDatePickerButton.style.display = "none";
+    let datePickerContainer = document.getElementById("date_picker_container_div2");
+    datePickerContainer.style.display = "flex";
   };
 
 
@@ -145,6 +154,7 @@ function LoggedInHomePage({ isLoaded }) {
           let actualLoggedInModal2 = document.getElementById('actual_logged_in_modal2');
           actualLoggedInModal2.innerHTML = '';
           setModalIsOpen(false);
+          // setShowDatePicker(false);
           // console.log(currentSelectedSpot.childNodes[0]);
           currentSelectedBooking.classList.remove('no_effects');
           // let spotDivs = document.querySelectorAll(".spot_divs");
@@ -189,7 +199,11 @@ function LoggedInHomePage({ isLoaded }) {
           </div>
 
 
-          <div id="date_picker_container_div2">
+          {showDatePicker && <div id="show_date_picker_button">
+            <button onClick={testFunction}>test</button>
+          </div>}
+
+          {showDatePicker && <div id="date_picker_container_div2">
             <DatePicker
               selected={selectedStartDate}
               onChange={date => setSelectedStartDate(date)}
@@ -221,7 +235,8 @@ function LoggedInHomePage({ isLoaded }) {
               scrollableMonthYearDropdown
               excludeDates={reservedDates}
               />
-          </div>
+          </div>}
+
         </Modal>}
     </>
   );

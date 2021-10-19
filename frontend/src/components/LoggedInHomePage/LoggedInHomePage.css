@@ -77,3 +77,8 @@
     transform: scale(1.25,1.25);
     z-index: 5;
 }
+
+#show_date_picker_button {
+    display: flex;
+    justify-content: center;
+}
