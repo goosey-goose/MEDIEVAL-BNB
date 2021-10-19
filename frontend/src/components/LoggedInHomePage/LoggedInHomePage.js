@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import Modal from 'react-modal';
 import DatePicker from 'react-datepicker';
+import { updateUserBooking } from "../../store/booking";
 import './LoggedInHomePage.css';
 
 function LoggedInHomePage({ isLoaded }) {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const sessionUser = useSelector(state => state.session.user);
   const userBookings = useSelector(state => state.bookings?.bookings?.Bookings);
   const allSpots = useSelector(state => state.spots.spots);
@@ -17,11 +18,15 @@ function LoggedInHomePage({ isLoaded }) {
   const [selectedEndDate, setSelectedEndDate] = useState(null);
   // const [errors, setErrors] = useState([]);
   const [showDatePicker, setShowDatePicker] = useState(true);
+  const [spotId, setSpotId] = useState(null);
+  const [originalStartDate, setOriginalStartDate] = useState(null);
+  const [originalEndDate, setOriginalEndDate] = useState(null);
 
 
 
   const updateBooking = () => {
     console.log("testing the update button");
+    dispatch(updateUserBooking(spotId, sessionUser.id, originalStartDate, originalEndDate, selectedStartDate, selectedEndDate));
   };
 
 
@@ -76,10 +81,13 @@ function LoggedInHomePage({ isLoaded }) {
                       console.log("spot has been found..........................................");
                       spotName.innerText = spot.spotName;
                       currentSpot = spot.id;
+                      setSpotId(spot.id);
 
                       if (bookingDates) {
                         userBookings.forEach((booking) => {
                           if (booking.spotId === currentSpot) {
+                            setOriginalStartDate(booking.startDate);
+                            setOriginalEndDate(booking.endDate);
                             let d1 = (booking.startDate).substr(5) + "-" + (booking.startDate).substr(0, 4);
                             let d2 = (booking.endDate).substr(5) + "-" + (booking.endDate).substr(0, 4);
                             bookingDates.innerHTML = `Your booking dates:` + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' + `${(new Date(d1)).toDateString()}`  + '&nbsp;&nbsp;&nbsp;&nbsp;' + 'to' + '&nbsp;&nbsp;&nbsp;&nbsp;' + `${(new Date(d2)).toDateString()}`;
