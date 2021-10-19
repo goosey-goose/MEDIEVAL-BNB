@@ -14,14 +14,15 @@ function AllSpots({ isLoaded }) {
     const dispatch = useDispatch();
     const sessionUser = useSelector(state => state.session.user);
     const allSpots = useSelector(state => state.spots.spots);
+    // const userBookings = useSelector(state => state.bookings?.bookings?.Bookings);
     const allUserBookings = useSelector(state => state.bookings.allUserBookings);
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const [selectedStartDate, setSelectedStartDate] = useState(null);
     const [selectedEndDate, setSelectedEndDate] = useState(null);
     const [reservedDates, setReservedDates] = useState([]);
     const [currentSelectedSpot, setCurrentSelectedSpot] = useState(null);
+    // const [currentSelectedBooking, setCurrentSelectedBooking] = useState(null);
 
-    const [copyOfAUB, setCopyOfAUB] = useState([]);
 
     const submitBooking = async () => {
       await dispatch(createUserBooking('16', '4', '2021-10-20', '2021-10-25'));
@@ -32,14 +33,16 @@ function AllSpots({ isLoaded }) {
       currentSelectedSpot.classList.remove('no_effects');
     }
 
-    // console.log(allUserBookings);
-
-    let temp1;
 
 
 
 
-    // let reservedDates = [];
+
+
+
+
+
+
 
     useEffect(() => {
       console.log("this should run............................");
@@ -82,12 +85,8 @@ function AllSpots({ isLoaded }) {
                       console.log("spot has been found..........................................");
                       spotName.innerText = spot.spotName;
                       currentSpot = spot.id;
-                      // let bookingValues = Object.values(allUserBookings);
+
                       let tempReservedDates = [];
-                      // bookingValues.forEach((booking) => {
-                      // setTimeout(() => {
-                      //   console.log(allUserBookings);
-                      // }, 1000);
 
                       if (Array.isArray(allUserBookings)) {
                         // console.log("allUserBookings", allUserBookings);
@@ -125,54 +124,22 @@ function AllSpots({ isLoaded }) {
                         });
                         setReservedDates(tempReservedDates);
                       }
-                      //////////////////////////////
                     }
                   });
                 }
               }
-              // const currentSpot = allSpots.forEach((spot) => {
-
-              // });
-              // console.log(allUserBookings);
-              // const reservedDates = allUserBookings?.map((item) => {
-              //   if (item.spotId == currentSpot) {
-              //     console.log("hooray");
-              //   }
-              //   // new Date(item.startDate);
-              // });
             })
           });
         }
-        // console.log(reservedDates);
       }, [allUserBookings]);
 
 
-      useEffect(() => {
-        // setCopyOfAUB(allUserBookings);
-        // temp1 = allUserBookings;
-        setTimeout(() => {
-          // if (!Array.isArray(allUserBookings)) {
-          //   console.log(Object.values(allUserBookings));
-          // }
-          // console.log(allUserBookings);
-        }, 1000);
-      });
 
 
 
-    // const reservedDates = [
-    //   new Date('2021-10-24'),
-    //   new Date('2021-10-25'),
-    //   new Date('2021-10-26'),
-    //   new Date('2021-10-27')
-    // ];
 
 
-    // const holidays = allUserBookings.map((item) => {
-    //   new Date(item.startDate);
-    // });
 
-    console.log(reservedDates);
 
     return (
         <>

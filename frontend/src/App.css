@@ -120,32 +120,32 @@
 }
 
 
-#div_inside_outer_modal, #div_inside_inner_modal {
+#div_inside_outer_modal, #div_inside_inner_modal, #div_inside_inner_modal2 {
     display: flex;
     justify-content: center;
     height: 25rem;
 }
 
-#div_inside_inner_modal {
+#div_inside_inner_modal, #div_inside_inner_modal2 {
     position: relative;
 }
 
-#div_inside_outer_modal img, #div_inside_inner_modal img {
+#div_inside_outer_modal img, #div_inside_inner_modal img, #div_inside_inner_modal2 img {
     border-radius: 10px;
 }
 
-#actual_logged_out_modal, #actual_logged_in_modal {
+#actual_logged_out_modal, #actual_logged_in_modal, #actual_logged_in_modal2 {
     position: static;
     margin: 17rem;
 }
 
-#date_picker_container_div {
+#date_picker_container_div, #date_picker_container_div2 {
     margin-top: 1rem;
     display: flex;
     justify-content: center;
 }
 
-#date_picker_container_div input {
+#date_picker_container_div input, #date_picker_container_div2 input {
     margin-left: .5rem;
     margin-right: .5rem;
 }

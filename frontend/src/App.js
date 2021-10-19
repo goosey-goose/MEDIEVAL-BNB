@@ -70,7 +70,7 @@ function App() {
 
           {sessionUser && <Route exact path="/home">
 
-            {sessionUser && <LoggedInHomePage />}
+            {sessionUser && <LoggedInHomePage isLoaded={isLoaded} />}
           </Route>}
 
           {!sessionUser && <Route to="/">

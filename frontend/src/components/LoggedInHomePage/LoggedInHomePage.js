@@ -1,36 +1,229 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import Modal from 'react-modal';
+import DatePicker from 'react-datepicker';
 import './LoggedInHomePage.css';
 
-function LoggedInHomePage() {
+function LoggedInHomePage({ isLoaded }) {
   // const dispatch = useDispatch();
-  // const sessionUser = useSelector(state => state.session.user);
+  const sessionUser = useSelector(state => state.session.user);
   const userBookings = useSelector(state => state.bookings?.bookings?.Bookings);
   const allSpots = useSelector(state => state.spots.spots);
+  // const userBookings = useSelector(state => state.bookings?.bookings?.Bookings);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [currentSelectedBooking, setCurrentSelectedBooking] = useState(null);
+  const [reservedDates, setReservedDates] = useState([]);
+  const [selectedStartDate, setSelectedStartDate] = useState(null);
+  const [selectedEndDate, setSelectedEndDate] = useState(null);
   // const [errors, setErrors] = useState([]);
 
-  // console.log(allSpots);
+
+
+  const updateBooking = () => {
+
+  };
+
+
+
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      useEffect(() => {
+        if (userBookings?.length) {
+          // console.log("allSpots now has length..................................");
+          let confirmedBookings = document.querySelectorAll(".confirmed_bookings");
+          confirmedBookings.forEach((spot) => {
+            spot.addEventListener('click', (event) => {
+              let currentSpot;
+              setModalIsOpen(true);
+              // console.log(spot.childNodes[0]);
+              spot.classList.add('no_effects');
+              setCurrentSelectedBooking(spot);
+              // console.log(event);
+              if (sessionUser) {
+                let actualLoggedInModal2 = document?.getElementById('actual_logged_in_modal2');
+                // console.log(actualLoggedInModal);
+                if (actualLoggedInModal2) {
+                  let imageForLoggedInBooking2 = document.getElementById('image_for_logged_in_booking2');
+                  imageForLoggedInBooking2.setAttribute('src', `${event.target.currentSrc}`)
+                }
+                let spotAddress = document?.getElementById("spot_address2");
+                let spotName = document?.getElementById("spot_name2");
+                if (spotAddress) {
+                  spotAddress.innerText = '';
+                  allSpots.forEach((spot) => {
+                    if (spot.imageUrl === event.target.src) spotAddress.innerText = spot.fullAddress;
+                  });
+                }
+                if (spotName) {
+                  console.log("spotName is true..................................");
+                  spotName.innerText = '';
+                  allSpots.forEach((spot) => {
+                    if (spot.imageUrl === event.target.src) {
+                      console.log("spot has been found..........................................");
+                      spotName.innerText = spot.spotName;
+                      currentSpot = spot.id;
+
+                      let tempReservedDates = [];
+
+                      // if (Array.isArray(allUserBookings)) {
+                      //   // console.log("allUserBookings", allUserBookings);
+                      //   allUserBookings.forEach((booking) => {
+                      //     if (booking.spotId == currentSpot) {
+                      //       let date1 = new Date(booking.endDate);
+                      //       let date2 = new Date(booking.startDate);
+                      //       let difference = date1.getTime() - date2.getTime();
+                      //       let days = Math.ceil(difference / (1000 * 3600 * 24));
+                      //       let startDate = booking.startDate;
+                      //       let startDateInMilliseconds = new Date(startDate).getTime();
+                      //       for (let i = 0, milliseconds = 86400000; i <= days; ++i, milliseconds += 86400000) {
+                      //         tempReservedDates.push(new Date(startDateInMilliseconds + milliseconds));
+                      //       }
+                      //     }
+                      //   });
+                      //   setReservedDates(tempReservedDates);
+
+
+                      // } else if (allUserBookings !== null && !Array.isArray(allUserBookings)) {
+                      //   let temp2 = Object.values(allUserBookings);
+                      //   // console.log("temp2", temp2);
+                      //   temp2.forEach((booking) => {
+                      //     if (booking.spotId == currentSpot) {
+                      //       let date1 = new Date(booking.endDate);
+                      //       let date2 = new Date(booking.startDate);
+                      //       let difference = date1.getTime() - date2.getTime();
+                      //       let days = Math.ceil(difference / (1000 * 3600 * 24));
+                      //       let startDate = booking.startDate;
+                      //       let startDateInMilliseconds = new Date(startDate).getTime();
+                      //       for (let i = 0, milliseconds = 86400000; i <= days; ++i, milliseconds += 86400000) {
+                      //         tempReservedDates.push(new Date(startDateInMilliseconds + milliseconds));
+                      //       }
+                      //     }
+                      //   });
+                      //   setReservedDates(tempReservedDates);
+                      // }
+                    }
+                  });
+                }
+              }
+            })
+          });
+        }
+      }, [userBookings]);
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
 
   return (
-    <div id="logged_in_main_div">
-      <div id="limd_div_1">
-        Trips
+    <>
+      <div id="logged_in_main_div">
+        <div id="limd_div_1">
+          Trips
+        </div>
+        <div id="limd_div_2">
+          Upcoming     Past
+        </div>
+        <div style={{margin: "1rem"}}>
+        <div id="limd_div_3">
+          {userBookings && userBookings.map((booking, index) => {
+            // console.log(booking.spotId);
+            return (<div className="confirmed_bookings" key={index}>
+                <img alt="" src={allSpots[parseInt(booking.spotId) - 1].imageUrl}></img>
+                <div style={{display: "flex", justifyContent: "space-between", marginTop: "1.3rem"}}><div>{allSpots[parseInt(booking.spotId) - 1].spotName}</div><div>${allSpots[parseInt(booking.spotId) - 1].price}</div></div>
+            </div>)
+          })}
+        </div>
+        </div>
       </div>
-      <div id="limd_div_2">
-        Upcoming     Past
-      </div>
-      <div style={{margin: "1rem"}}>
-      <div id="limd_div_3">
-        {userBookings && userBookings.map((booking, index) => {
-          // console.log(booking.spotId);
-          return (<div className="confirmed_bookings" key={index}>
-              <img alt="" src={allSpots[parseInt(booking.spotId) - 1].imageUrl}></img>
-              <div style={{display: "flex", justifyContent: "space-between", marginTop: "1.3rem"}}><div>{allSpots[parseInt(booking.spotId) - 1].spotName}</div><div>${allSpots[parseInt(booking.spotId) - 1].price}</div></div>
-          </div>)
-        })}
-      </div>
-      </div>
-    </div>
+
+
+
+        {/* MODAL FOR LOGGED IN */}
+        {isLoaded && sessionUser && <Modal
+        id="actual_logged_in_modal2"
+        isOpen={modalIsOpen}
+        onRequestClose={() => {
+          // console.log("onRequestClose() called.......................................");
+          let actualLoggedInModal2 = document.getElementById('actual_logged_in_modal2');
+          actualLoggedInModal2.innerHTML = '';
+          setModalIsOpen(false);
+          // console.log(currentSelectedSpot.childNodes[0]);
+          currentSelectedBooking.classList.remove('no_effects');
+          // let spotDivs = document.querySelectorAll(".spot_divs");
+          // spotDivs.forEach((spot) => {
+          //   spot.classList.remove('no_effects');
+          // })
+          // let spotAddress = document?.getElementById("spot_address");
+          // spotAddress.innerText = '';
+        }}
+        style={
+          {
+            overlay: {
+              backgroundColor: 'transparent',
+              // margin: '10rem'
+            },
+            content: {
+              position: 'absolute',
+              borderRadius: '10px',
+              height: 'fit-content',
+              margin: 'auto',
+              width: 'fit-content',
+              backgroundColor: 'rgb(134, 134, 225)',
+              border: 'none'
+            }
+          }
+        }
+        >
+        {/* {myDatePicker} */}
+
+
+          <div id="div_inside_inner_modal2">
+            <img alt="" id="image_for_logged_in_booking2"></img>
+            {selectedStartDate && selectedEndDate && <div id="update_booking_button_div"><button onClick={updateBooking}>Update Booking</button></div>}
+          </div>
+
+          <div id="spot_name2">
+
+          </div>
+
+          <div id="spot_address2">
+
+          </div>
+
+
+          <div id="date_picker_container_div2">
+            <DatePicker
+              selected={selectedStartDate}
+              onChange={date => setSelectedStartDate(date)}
+              selectsStart
+              startDate={selectedStartDate}
+              endDate={selectedEndDate}
+              dateFormat='yyyy-MM-dd'
+              minDate={new Date()}
+              placeholderText={'Start Date'}
+              isClearable
+              showYearDropdown
+              scrollableMonthYearDropdown
+              excludeDates={reservedDates}
+              />
+
+
+
+            <DatePicker
+              selected={selectedEndDate}
+              onChange={date => setSelectedEndDate(date)}
+              selectsEnd
+              startDate={selectedStartDate}
+              endDate={selectedEndDate}
+              dateFormat='yyyy-MM-dd'
+              minDate={new Date()}
+              placeholderText={'End Date'}
+              isClearable
+              showYearDropdown
+              scrollableMonthYearDropdown
+              excludeDates={reservedDates}
+              />
+          </div>
+        </Modal>}
+    </>
   );
 }
 
