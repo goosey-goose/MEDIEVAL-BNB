@@ -20,7 +20,7 @@ function LoggedInHomePage({ isLoaded }) {
 
 
   const updateBooking = () => {
-
+    console.log("testing the update button");
   };
 
 
@@ -64,42 +64,42 @@ function LoggedInHomePage({ isLoaded }) {
 
                       let tempReservedDates = [];
 
-                      // if (Array.isArray(allUserBookings)) {
-                      //   // console.log("allUserBookings", allUserBookings);
-                      //   allUserBookings.forEach((booking) => {
-                      //     if (booking.spotId == currentSpot) {
-                      //       let date1 = new Date(booking.endDate);
-                      //       let date2 = new Date(booking.startDate);
-                      //       let difference = date1.getTime() - date2.getTime();
-                      //       let days = Math.ceil(difference / (1000 * 3600 * 24));
-                      //       let startDate = booking.startDate;
-                      //       let startDateInMilliseconds = new Date(startDate).getTime();
-                      //       for (let i = 0, milliseconds = 86400000; i <= days; ++i, milliseconds += 86400000) {
-                      //         tempReservedDates.push(new Date(startDateInMilliseconds + milliseconds));
-                      //       }
-                      //     }
-                      //   });
-                      //   setReservedDates(tempReservedDates);
+                      if (Array.isArray(userBookings)) {
+                        // console.log("allUserBookings", allUserBookings);
+                        userBookings.forEach((booking) => {
+                          if (booking.spotId == currentSpot) {
+                            let date1 = new Date(booking.endDate);
+                            let date2 = new Date(booking.startDate);
+                            let difference = date1.getTime() - date2.getTime();
+                            let days = Math.ceil(difference / (1000 * 3600 * 24));
+                            let startDate = booking.startDate;
+                            let startDateInMilliseconds = new Date(startDate).getTime();
+                            for (let i = 0, milliseconds = 86400000; i <= days; ++i, milliseconds += 86400000) {
+                              tempReservedDates.push(new Date(startDateInMilliseconds + milliseconds));
+                            }
+                          }
+                        });
+                        setReservedDates(tempReservedDates);
 
 
-                      // } else if (allUserBookings !== null && !Array.isArray(allUserBookings)) {
-                      //   let temp2 = Object.values(allUserBookings);
-                      //   // console.log("temp2", temp2);
-                      //   temp2.forEach((booking) => {
-                      //     if (booking.spotId == currentSpot) {
-                      //       let date1 = new Date(booking.endDate);
-                      //       let date2 = new Date(booking.startDate);
-                      //       let difference = date1.getTime() - date2.getTime();
-                      //       let days = Math.ceil(difference / (1000 * 3600 * 24));
-                      //       let startDate = booking.startDate;
-                      //       let startDateInMilliseconds = new Date(startDate).getTime();
-                      //       for (let i = 0, milliseconds = 86400000; i <= days; ++i, milliseconds += 86400000) {
-                      //         tempReservedDates.push(new Date(startDateInMilliseconds + milliseconds));
-                      //       }
-                      //     }
-                      //   });
-                      //   setReservedDates(tempReservedDates);
-                      // }
+                      } else if (userBookings !== null && !Array.isArray(userBookings)) {
+                        let temp2 = Object.values(userBookings);
+                        // console.log("temp2", temp2);
+                        temp2.forEach((booking) => {
+                          if (booking.spotId == currentSpot) {
+                            let date1 = new Date(booking.endDate);
+                            let date2 = new Date(booking.startDate);
+                            let difference = date1.getTime() - date2.getTime();
+                            let days = Math.ceil(difference / (1000 * 3600 * 24));
+                            let startDate = booking.startDate;
+                            let startDateInMilliseconds = new Date(startDate).getTime();
+                            for (let i = 0, milliseconds = 86400000; i <= days; ++i, milliseconds += 86400000) {
+                              tempReservedDates.push(new Date(startDateInMilliseconds + milliseconds));
+                            }
+                          }
+                        });
+                        setReservedDates(tempReservedDates);
+                      }
                     }
                   });
                 }

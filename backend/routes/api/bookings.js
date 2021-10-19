@@ -86,11 +86,7 @@ router.patch('/edit', requireAuth,
 
         const { spotId, userId, startDate, endDate, newStart, newEnd } = req.body;
 
-        const newBookingInfo = {
-            startDate: newStart,
-            endDate: newEnd
-        }
-
+        // FIND THE CURRENT BOOKING
         const bookingToUpdate = await Booking.findOne({
             where: {
                 userId,
@@ -100,19 +96,45 @@ router.patch('/edit', requireAuth,
             }
         });
 
-        // console.log(bookingToUpdate);
+        // CHECK IF DUPLICATE BOOKING / RECORD EXISTS
+        const temp = await Booking.findOne({
+            where: {
+                spotId,
+                startDate,
+                endDate
+            }
+        });
 
-        // const data = bookingToUpdate.json();
+        // IF NO DUPLICATE EXISTS, UPDATE BOOKING
+        if (temp === null && bookingToUpdate !== null) {
+            const newBookingInfo = {
+                startDate: newStart,
+                endDate: newEnd
+            }
 
-        const originalBooking = {
-            "userId": bookingToUpdate.userId,
-            "spotId": bookingToUpdate.spotId,
-            "startDate": bookingToUpdate.startDate,
-            "endDate": bookingToUpdate.endDate
-        };
 
-        // USING THE .update() METHOD
-        await bookingToUpdate.update(newBookingInfo);
+            const originalBooking = {
+                "userId": bookingToUpdate.userId,
+                "spotId": bookingToUpdate.spotId,
+                "startDate": bookingToUpdate.startDate,
+                "endDate": bookingToUpdate.endDate
+            };
+
+            // USING THE .update() METHOD
+            await bookingToUpdate.update(newBookingInfo);
+
+
+            res.json(
+                {
+                    "ORIGINAL BOOKING:": originalBooking,
+                    "UPDATED BOOKING": bookingToUpdate
+                }
+            );
+
+
+        } else {
+            res.json({"Error": "Booking already exists or something else went wrong."});
+        }
 
 
         // USING THE .save() METHOD
@@ -122,12 +144,7 @@ router.patch('/edit', requireAuth,
 
         // await bookingToUpdate.save({ fields: ['spotId', 'startDate', 'endDate'] });
 
-        res.json(
-                {
-                    "ORIGINAL BOOKING:": originalBooking,
-                    "UPDATED BOOKING": bookingToUpdate
-                }
-            );
+
     }));
 
 

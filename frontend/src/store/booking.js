@@ -4,6 +4,7 @@ const SET_BOOKINGS = 'booking/setBookings';
 const REMOVE_BOOKINGS = 'booking/removeBookings';
 const CREATE_BOOKING = 'booking/createBooking';
 const SET_ALL_BOOKINGS = 'booking/setAllBookings';
+const UPDATE_BOOKING = 'booking/updateBooking';
 
 
 // ACTION CREATORS
@@ -30,6 +31,13 @@ const removeBookings = () => {
 const createBooking = (booking) => {
   return {
     type: CREATE_BOOKING,
+    payload: booking
+  };
+};
+
+const updateBooking = (booking) => {
+  return {
+    type: UPDATE_BOOKING,
     payload: booking
   };
 };
@@ -96,6 +104,44 @@ export const createUserBooking = (spotId, userId, startDate, endDate) => async (
 
 
 
+/////////////////////////////////////////////////////////////////////////////////////////
+export const updateUserBooking = (spotId, userId, startDate, endDate, newStart, newEnd) => async (dispatch) => {
+  const response = await csrfFetch('/api/bookings/edit', {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      spotId,
+      userId,
+      startDate,
+      endDate,
+      newStart,
+      newEnd
+    })
+  });
+
+  if (response.ok) {
+    const data = await response.json();
+    if (data.Error) {
+      return 'Booking already exists.';
+    } else {
+      dispatch(updateBooking(data));
+      return null;
+    }
+  } else if (response.status < 500) {
+    const data = await response.json();
+    if (data.errors) {
+      return data.errors
+    }
+  } else {
+    return ['An error occurred. Please try again.']
+  }
+};
+/////////////////////////////////////////////////////////////////////////////////////////
+
+
+
 
 
 
@@ -140,10 +186,16 @@ const bookingReducer = (state = initialState, action) => {
       // newState.bookings.Bookings[Object.keys(newState.bookings.Bookings).length] = action.payload["NEW BOOKING"];
       // newState.bookings.Bookings.push(action.payload["NEW BOOKING"]);
       newState.bookings.Bookings.push(action.payload["NEW BOOKING"]);
-
-
       newState.allUserBookings[Object.keys(newState.allUserBookings).length] = action.payload["NEW BOOKING"];
       return newState;
+
+
+      case UPDATE_BOOKING:
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
     default:

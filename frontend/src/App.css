@@ -173,12 +173,12 @@ button.react-datepicker__close-icon::after {
     height: 13px !important;
 }
 
-#book_it_button_div {
+#book_it_button_div, #update_booking_button_div {
     position: absolute;
     top: 35%;
 }
 
-#book_it_button_div button {
+#book_it_button_div button, #update_booking_button_div button {
     background-color: #27ff27;
     box-shadow: 0px 0px 5px 15px rgb(255 255 255 / 90%);
     font-size: 2rem;
@@ -187,6 +187,10 @@ button.react-datepicker__close-icon::after {
     width: 8rem;
     border: none;
     cursor: pointer;
+}
+
+#update_booking_button_div button {
+    font-size: 1.7rem;
 }
 
 
