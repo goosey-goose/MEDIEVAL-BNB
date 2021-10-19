@@ -100,8 +100,8 @@ router.patch('/edit', requireAuth,
         const temp = await Booking.findOne({
             where: {
                 spotId,
-                startDate,
-                endDate
+                "startDate": newStart,
+                "endDate": newEnd
             }
         });
 
