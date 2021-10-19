@@ -56,6 +56,12 @@ function LoggedInHomePage({ isLoaded }) {
                 }
                 let spotAddress = document?.getElementById("spot_address2");
                 let spotName = document?.getElementById("spot_name2");
+                let bookingDates = document?.getElementById("booking_dates");
+                // if (bookingDates) {
+                //   userBookings.forEach((booking) => {
+
+                //   })
+                // }
                 if (spotAddress) {
                   spotAddress.innerText = '';
                   allSpots.forEach((spot) => {
@@ -70,6 +76,16 @@ function LoggedInHomePage({ isLoaded }) {
                       console.log("spot has been found..........................................");
                       spotName.innerText = spot.spotName;
                       currentSpot = spot.id;
+
+                      if (bookingDates) {
+                        userBookings.forEach((booking) => {
+                          if (booking.spotId === currentSpot) {
+                            let d1 = (booking.startDate).substr(5) + "-" + (booking.startDate).substr(0, 4);
+                            let d2 = (booking.endDate).substr(5) + "-" + (booking.endDate).substr(0, 4);
+                            bookingDates.innerHTML = `Your booking dates:` + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' + `${(new Date(d1)).toDateString()}`  + '&nbsp;&nbsp;&nbsp;&nbsp;' + 'to' + '&nbsp;&nbsp;&nbsp;&nbsp;' + `${(new Date(d2)).toDateString()}`;
+                          }
+                        })
+                      }
 
                       let tempReservedDates = [];
 
@@ -176,7 +192,7 @@ function LoggedInHomePage({ isLoaded }) {
               height: 'fit-content',
               margin: 'auto',
               width: 'fit-content',
-              backgroundColor: 'rgb(134, 134, 225)',
+              backgroundColor: 'rgb(33 33 84)',
               border: 'none'
             }
           }
@@ -198,9 +214,13 @@ function LoggedInHomePage({ isLoaded }) {
 
           </div>
 
+          <div id="booking_dates">
+
+          </div>
+
 
           {showDatePicker && <div id="show_date_picker_button">
-            <button onClick={testFunction}>test</button>
+            <button onClick={testFunction}>Change This Booking?</button>
           </div>}
 
           {showDatePicker && <div id="date_picker_container_div2">

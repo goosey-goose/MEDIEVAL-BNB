@@ -49,15 +49,18 @@ function AllSpots({ isLoaded }) {
         if (allSpots?.length) {
           console.log("allSpots now has length..................................");
           let spotDivs = document.querySelectorAll(".spot_divs");
+          console.log(spotDivs);
           spotDivs.forEach((spot) => {
+            console.log("spot");
             spot.addEventListener('click', (event) => {
               let currentSpot;
               setModalIsOpen(true);
               console.log(spot.childNodes[0]);
               spot.classList.add('no_effects');
               setCurrentSelectedSpot(spot);
-              // console.log(event);
+              console.log(sessionUser);
               if (!sessionUser) {
+                console.log("there is no session user............");
                 let actualLoggedOutModal = document?.getElementById('actual_logged_out_modal');
                 if (actualLoggedOutModal) {
                   actualLoggedOutModal.innerHTML = `<div id="div_inside_outer_modal"><img src=${event.target.currentSrc}></img></div>`;
@@ -131,7 +134,7 @@ function AllSpots({ isLoaded }) {
             })
           });
         }
-      }, [allUserBookings]);
+      }, [allUserBookings, allSpots, sessionUser]);
 
 
 
@@ -181,7 +184,7 @@ function AllSpots({ isLoaded }) {
                 height: 'fit-content',
                 margin: 'auto',
                 width: 'fit-content',
-                backgroundColor: 'rgb(134, 134, 225)',
+                backgroundColor: 'rgb(33 33 84)',
                 border: 'none'
                 }
             }
@@ -223,7 +226,7 @@ function AllSpots({ isLoaded }) {
               height: 'fit-content',
               margin: 'auto',
               width: 'fit-content',
-              backgroundColor: 'rgb(134, 134, 225)',
+              backgroundColor: 'rgb(33 33 84)',
               border: 'none'
             }
           }
