@@ -3,6 +3,7 @@ const { User, Booking } = require('../../db/models');
 const router = express.Router();
 const asyncHandler = require('express-async-handler');
 const { requireAuth } = require('../../utils/auth');
+const { Op } = require("sequelize");
 
 
 // READ A SINGLE USER'S BOOKINGS
@@ -29,6 +30,47 @@ router.get('/all', requireAuth,
 
     return res.json(allBookings);
 }));
+
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// TESTING SEQUELIZE QUERIES
+router.get('/queries', requireAuth,
+    asyncHandler (async (req, res) => {
+
+    let id = '2';
+    let sDate = '2021-11-14';
+    let eDate = '2021-11-24';
+
+    const response = await Booking.findOne({
+        where: {
+            [Op.or]: [
+                        {
+                            spotId: id,
+                            startDate: {
+                                [Op.lt]: sDate
+                            },
+                            endDate: {
+                                [Op.gt]: sDate
+                            }
+                        },
+
+                        {
+                            spotId: id,
+                            startDate: {
+                                [Op.lt]: eDate
+                            },
+                            endDate: {
+                                [Op.gt]: eDate
+                            }
+                        }
+                    ]
+        }
+    });
+
+    return res.json(response);
+}));
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 

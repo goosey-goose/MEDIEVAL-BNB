@@ -75,7 +75,7 @@
 }
 
 .confirmed_bookings img:hover {
-    transform: scale(1.25,1.25);
+    transform: scale(1.07,1.07);
     z-index: 5;
 }
 
