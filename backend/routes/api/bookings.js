@@ -39,8 +39,8 @@ router.get('/queries', requireAuth,
     asyncHandler (async (req, res) => {
 
     let id = '2';
-    let sDate = '2021-11-14';
-    let eDate = '2021-11-24';
+    let sDate = '2021-11-15';
+    let eDate = '2021-11-29';
 
     const response = await Booking.findOne({
         where: {
@@ -62,6 +62,16 @@ router.get('/queries', requireAuth,
                             },
                             endDate: {
                                 [Op.gt]: eDate
+                            }
+                        },
+
+                        {
+                            spotId: id,
+                            startDate: {
+                                [Op.gt]: sDate
+                            },
+                            endDate: {
+                                [Op.lt]: eDate
                             }
                         }
                     ]
