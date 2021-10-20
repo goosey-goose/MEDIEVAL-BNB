@@ -48,7 +48,7 @@ const updateBooking = (booking) => {
 export const getUserBookings = () => async (dispatch) => {
   const response = await csrfFetch('/api/bookings');
   const data = await response.json();
-  // console.log("**********************************************", data);
+  console.log("**********************************************", data);
   dispatch(setBookings(data));
   return response;
 };
@@ -86,9 +86,12 @@ export const createUserBooking = (spotId, userId, startDate, endDate) => async (
 
   if (response.ok) {
     const data = await response.json();
-    if (data.Error) {
+    if (data.Error === "Booking already exists.") {
       return 'Booking already exists.';
-    } else {
+    } else if (data.Error === "Bookings cannot overlap.") {
+      return 'Bookings cannot overlap.';
+    }
+      else {
       dispatch(createBooking(data));
       return null;
     }

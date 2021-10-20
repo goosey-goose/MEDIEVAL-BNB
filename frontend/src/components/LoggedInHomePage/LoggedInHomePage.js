@@ -159,8 +159,9 @@ function LoggedInHomePage({ isLoaded }) {
         </div>
         <div style={{margin: "1rem"}}>
         <div id="limd_div_3">
+          {console.log(userBookings)}
           {userBookings && userBookings.map((booking, index) => {
-            // console.log(booking.spotId);
+            console.log(booking.spotId);
             return (<div className="confirmed_bookings" key={index}>
                 <img alt="" src={allSpots[parseInt(booking.spotId) - 1].imageUrl}></img>
                 <div style={{display: "flex", justifyContent: "space-between", marginTop: "1.3rem"}}><div>{allSpots[parseInt(booking.spotId) - 1].spotName}</div><div>${allSpots[parseInt(booking.spotId) - 1].price}</div></div>

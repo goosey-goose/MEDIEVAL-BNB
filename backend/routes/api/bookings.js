@@ -10,8 +10,14 @@ const { Op } = require("sequelize");
 router.get('/', requireAuth,
      asyncHandler (async (req, res) => {
 
-        const userBookings = await User.findByPk(req.user.id, {
-            include: Booking
+        // const userBookings = await User.findByPk(req.user.id, {
+        //     include: Booking
+        // });
+
+        const userBookings = await Booking.findAll({
+            where: {
+                userId: req.user.id
+            }
         });
 
         // console.log("**********************************************", userBookings);
@@ -40,7 +46,7 @@ router.get('/queries', requireAuth,
 
     let id = '2';
     let sDate = '2021-11-15';
-    let eDate = '2021-11-29';
+    let eDate = '2021-11-16';
 
     const response = await Booking.findOne({
         where: {
@@ -93,15 +99,18 @@ router.get('/queries', requireAuth,
 router.post('/new', requireAuth,
     asyncHandler(async (req, res) => {
 
-        const { userId, startDate, endDate } = req.body;
-        let { spotId } = req.body;
+        const { spotId, userId, startDate, endDate } = req.body;
+        // let { spotId } = req.body;
+        let sDate = startDate;
+        let eDate = endDate;
+        let id = spotId;
 
         // spotId = parseInt(spotId);
         // spotId = spotId + 1;
         // spotId.toString();
 
         // CHECK IF DUPLICATE BOOKING / RECORD EXISTS
-        const temp = await Booking.findOne({
+        const temp1 = await Booking.findOne({
             where: {
                 spotId,
                 startDate,
@@ -109,10 +118,45 @@ router.post('/new', requireAuth,
             }
         });
 
-        // console.log("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX", temp);
+        // CHECK IF THERE ARE ANY OVERLAPPING BOOKINGS
+        const temp2 = await Booking.findOne({
+            where: {
+                [Op.or]: [
+                            {
+                                spotId: id,
+                                startDate: {
+                                    [Op.lt]: sDate
+                                },
+                                endDate: {
+                                    [Op.gt]: sDate
+                                }
+                            },
 
-        // IF NO DUPLICATE EXISTS, CREATE BOOKING
-        if (temp === null) {
+                            {
+                                spotId: id,
+                                startDate: {
+                                    [Op.lt]: eDate
+                                },
+                                endDate: {
+                                    [Op.gt]: eDate
+                                }
+                            },
+
+                            {
+                                spotId: id,
+                                startDate: {
+                                    [Op.gt]: sDate
+                                },
+                                endDate: {
+                                    [Op.lt]: eDate
+                                }
+                            }
+                        ]
+            }
+        });
+
+        // IF NO DUPLICATE AND OVERLAPPING EXISTS, CREATE BOOKING
+        if (temp1 === null && temp2 === null) {
             const newBooking = await Booking.create({
                 spotId,
                 userId,
@@ -121,8 +165,12 @@ router.post('/new', requireAuth,
             });
 
             res.json({"NEW BOOKING": newBooking});
-        } else {
+        } else if (temp1 !== null) {
             res.json({"Error": "Booking already exists."});
+        } else if (temp2 !== null) {
+            res.json({"Error": "Bookings cannot overlap."});
+        } else {
+            res.json({"Error": "Something went wrong when creating this booking. Please try again."});
         }
 
     })
