@@ -193,6 +193,23 @@ const bookingReducer = (state = initialState, action) => {
       case UPDATE_BOOKING:
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         console.log(action.payload);
+        console.log(action.payload["ORIGINAL BOOKING:"].spotId);
+        newState = {...state, bookings: {Bookings: [...state.bookings.Bookings]}, allUserBookings: {...state.allUserBookings}};
+        console.log("&&&&&&&&&&&&&&&&&&", newState.bookings.Bookings);
+        newState.bookings.Bookings.forEach((booking) => {
+          console.log("######", booking);
+          if (booking.spotId === action.payload["ORIGINAL BOOKING:"].spotId && booking.userId === action.payload["ORIGINAL BOOKING:"].userId && booking.startDate === action.payload["ORIGINAL BOOKING:"].startDate && booking.endDate === action.payload["ORIGINAL BOOKING:"].endDate) {
+            booking.startDate = action.payload["UPDATED BOOKING"].startDate;
+            booking.endDate = action.payload["UPDATED BOOKING"].endDate;
+          }
+        });
+        Object.values(newState.allUserBookings).forEach((booking) => {
+          if (booking.spotId === action.payload["ORIGINAL BOOKING:"].spotId && booking.userId === action.payload["ORIGINAL BOOKING:"].userId && booking.startDate === action.payload["ORIGINAL BOOKING:"].startDate && booking.endDate === action.payload["ORIGINAL BOOKING:"].endDate) {
+            booking.startDate = action.payload["UPDATED BOOKING"].startDate;
+            booking.endDate = action.payload["UPDATED BOOKING"].endDate;
+          }
+        });
+        return newState;
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 

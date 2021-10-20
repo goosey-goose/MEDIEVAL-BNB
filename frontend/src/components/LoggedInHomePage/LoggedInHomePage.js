@@ -27,6 +27,9 @@ function LoggedInHomePage({ isLoaded }) {
   const updateBooking = () => {
     console.log("testing the update button");
     dispatch(updateUserBooking(spotId, sessionUser.id, originalStartDate, originalEndDate, selectedStartDate, selectedEndDate));
+    setModalIsOpen(false);
+    setSelectedStartDate(null);
+    setSelectedEndDate(null);
   };
 
 
