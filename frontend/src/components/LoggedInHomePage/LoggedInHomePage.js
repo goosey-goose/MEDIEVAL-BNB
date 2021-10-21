@@ -8,7 +8,7 @@ import './LoggedInHomePage.css';
 function LoggedInHomePage({ isLoaded }) {
   const dispatch = useDispatch();
   const sessionUser = useSelector(state => state.session.user);
-  const userBookings = useSelector(state => state.bookings?.bookings?.Bookings);
+  const userBookings = useSelector(state => state.bookings?.bookings);
   const allSpots = useSelector(state => state.spots.spots);
   // const userBookings = useSelector(state => state.bookings?.bookings?.Bookings);
   const [modalIsOpen, setModalIsOpen] = useState(false);

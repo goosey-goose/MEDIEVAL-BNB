@@ -159,21 +159,24 @@ const bookingReducer = (state = initialState, action) => {
 
     case SET_BOOKINGS:
       // newState = Object.assign({}, state);
-      newState = {...state, bookings: { ...state.bookings }, allUserBookings: { ...state.allUserBookings }};
+      console.log(action.payload);
+      // newState = {...state, bookings: {...state.bookings}, allUserBookings: {...state.allUserBookings} };
+      newState = {...state};
+      // newState = {...state, bookings: [...action.payload]};
       // console.log("1111111", action.payload);
       newState.bookings = action.payload;
       return newState;
 
 
     case SET_ALL_BOOKINGS:
-      newState = {...state, bookings: {...state.bookings}, allUserBookings: {...state.allUserBookings}};
+      newState = {...state, bookings: [...state.bookings]};
       // console.log("222222222", action.payload);
       newState.allUserBookings = action.payload;
       return newState;
 
 
     case REMOVE_BOOKINGS:
-      newState = Object.assign({}, state);
+      newState = {...state};
       newState.bookings = null;
       newState.allUserBookings = null;
       return newState;
@@ -182,14 +185,16 @@ const bookingReducer = (state = initialState, action) => {
     case CREATE_BOOKING:
       // console.log("UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU", state);
       // newState = {...state, bookings: {...state, ...state.bookings }, allUserBookings: [ ...state.allUserBookings ]};
-      newState = {...state, bookings: {Bookings: [...state.bookings.Bookings]}, allUserBookings: {...state.allUserBookings}};
+      // newState = {...state, bookings: {Bookings: [...state.bookings.Bookings]}, allUserBookings: {...state.allUserBookings}};   // ORIGINAL
+      newState = {...state, bookings: [...state.bookings], allUserBookings: [...state.allUserBookings]};
       // console.log("VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV", newState);
       // console.log("OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO", newState);
       // console.log("OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO", action.payload["NEW BOOKING"]);
       // newState.bookings.Bookings[Object.keys(newState.bookings.Bookings).length] = action.payload["NEW BOOKING"];
       // newState.bookings.Bookings.push(action.payload["NEW BOOKING"]);
-      newState.bookings.Bookings.push(action.payload["NEW BOOKING"]);
-      newState.allUserBookings[Object.keys(newState.allUserBookings).length] = action.payload["NEW BOOKING"];
+      newState.bookings.push(action.payload["NEW BOOKING"]);
+      // newState.allUserBookings[Object.keys(newState.allUserBookings).length] = action.payload["NEW BOOKING"];
+      newState.allUserBookings.push(action.payload["NEW BOOKING"]);
       return newState;
 
 
@@ -197,16 +202,17 @@ const bookingReducer = (state = initialState, action) => {
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         console.log(action.payload);
         console.log(action.payload["ORIGINAL BOOKING:"].spotId);
-        newState = {...state, bookings: {Bookings: [...state.bookings.Bookings]}, allUserBookings: {...state.allUserBookings}};
-        console.log("&&&&&&&&&&&&&&&&&&", newState.bookings.Bookings);
-        newState.bookings.Bookings.forEach((booking) => {
-          console.log("######", booking);
+        // newState = {...state, bookings: {Bookings: [...state.bookings.Bookings]}, allUserBookings: {...state.allUserBookings}};
+        newState = {...state, bookings: [...state.bookings], allUserBookings: [...state.allUserBookings]};
+        // console.log("&&&&&&&&&&&&&&&&&&", newState.bookings.Bookings);
+        newState.bookings.forEach((booking) => {
+          // console.log("######", booking);
           if (booking.spotId === action.payload["ORIGINAL BOOKING:"].spotId && booking.userId === action.payload["ORIGINAL BOOKING:"].userId && booking.startDate === action.payload["ORIGINAL BOOKING:"].startDate && booking.endDate === action.payload["ORIGINAL BOOKING:"].endDate) {
             booking.startDate = action.payload["UPDATED BOOKING"].startDate;
             booking.endDate = action.payload["UPDATED BOOKING"].endDate;
           }
         });
-        Object.values(newState.allUserBookings).forEach((booking) => {
+        newState.allUserBookings.forEach((booking) => {
           if (booking.spotId === action.payload["ORIGINAL BOOKING:"].spotId && booking.userId === action.payload["ORIGINAL BOOKING:"].userId && booking.startDate === action.payload["ORIGINAL BOOKING:"].startDate && booking.endDate === action.payload["ORIGINAL BOOKING:"].endDate) {
             booking.startDate = action.payload["UPDATED BOOKING"].startDate;
             booking.endDate = action.payload["UPDATED BOOKING"].endDate;

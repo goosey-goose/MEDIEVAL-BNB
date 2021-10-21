@@ -25,7 +25,7 @@ function AllSpots({ isLoaded }) {
 
 
     const submitBooking = async () => {
-      let temp = await dispatch(createUserBooking('11', '4', '2021-12-09', '2021-12-11'));
+      let temp = await dispatch(createUserBooking('12', '4', '2021-12-14', '2021-12-15'));
       console.log(temp);
       setModalIsOpen(false);
       setSelectedStartDate(null);
