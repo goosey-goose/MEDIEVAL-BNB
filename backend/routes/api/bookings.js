@@ -186,6 +186,10 @@ router.patch('/edit', requireAuth,
 
         const { spotId, userId, startDate, endDate, newStart, newEnd } = req.body;
 
+        let sDate = startDate;
+        let eDate = endDate;
+        let id = spotId;
+
         // FIND THE CURRENT BOOKING
         const bookingToUpdate = await Booking.findOne({
             where: {
@@ -197,7 +201,7 @@ router.patch('/edit', requireAuth,
         });
 
         // CHECK IF DUPLICATE BOOKING / RECORD EXISTS
-        const temp = await Booking.findOne({
+        const temp1 = await Booking.findOne({
             where: {
                 spotId,
                 "startDate": newStart,
@@ -205,8 +209,47 @@ router.patch('/edit', requireAuth,
             }
         });
 
-        // IF NO DUPLICATE EXISTS, UPDATE BOOKING
-        if (temp === null && bookingToUpdate !== null) {
+
+        // CHECK IF THERE ARE ANY OVERLAPPING BOOKINGS
+        const temp2 = await Booking.findOne({
+            where: {
+                [Op.or]: [
+                            {
+                                spotId: id,
+                                startDate: {
+                                    [Op.lt]: sDate
+                                },
+                                endDate: {
+                                    [Op.gt]: sDate
+                                }
+                            },
+
+                            {
+                                spotId: id,
+                                startDate: {
+                                    [Op.lt]: eDate
+                                },
+                                endDate: {
+                                    [Op.gt]: eDate
+                                }
+                            },
+
+                            {
+                                spotId: id,
+                                startDate: {
+                                    [Op.gt]: sDate
+                                },
+                                endDate: {
+                                    [Op.lt]: eDate
+                                }
+                            }
+                        ]
+            }
+        });
+
+
+        // IF NO DUPLICATE EXISTS AND NOTHING OVERLAPS, UPDATE BOOKING
+        if (temp1 === null && temp2 === null && bookingToUpdate !== null) {
             const newBookingInfo = {
                 startDate: newStart,
                 endDate: newEnd
