@@ -299,6 +299,8 @@ router.delete('/delete', requireAuth,
 
         const { spotId, userId, startDate, endDate } = req.body;
 
+        console.log("##########################", spotId, userId, startDate, endDate);
+
         const bookingToDelete = await Booking.findOne({
             where: {
                 userId,
@@ -308,7 +310,22 @@ router.delete('/delete', requireAuth,
             }
         });
 
-        await bookingToDelete.destroy();
+        // console.log("%%%%%%%%%%%%%%%%%%%", bookingToDelete);
+
+        // await bookingToDelete.destroy();
+
+        if (bookingToDelete !== null) {
+            await Booking.destroy({
+                where: {
+                    userId,
+                    spotId,
+                    startDate,
+                    endDate
+                }
+            });
+        }
+
+
 
         res.json(
             {

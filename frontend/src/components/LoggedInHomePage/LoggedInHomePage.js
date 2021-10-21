@@ -2,13 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Modal from 'react-modal';
 import DatePicker from 'react-datepicker';
-import { updateUserBooking } from "../../store/booking";
+import { updateUserBooking, deleteUserBooking } from "../../store/booking";
 import './LoggedInHomePage.css';
 
 function LoggedInHomePage({ isLoaded }) {
   const dispatch = useDispatch();
   const sessionUser = useSelector(state => state.session.user);
-  const userBookings = useSelector(state => state.bookings?.bookings);
+  const userBookings = useSelector(state => state.bookings.bookings);
   const allSpots = useSelector(state => state.spots.spots);
   // const userBookings = useSelector(state => state.bookings?.bookings?.Bookings);
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -25,7 +25,7 @@ function LoggedInHomePage({ isLoaded }) {
 
 
   const updateBooking = () => {
-    console.log("testing the update button");
+    // console.log("testing the update button");
     dispatch(updateUserBooking(spotId, sessionUser.id, originalStartDate, originalEndDate, selectedStartDate, selectedEndDate));
     setModalIsOpen(false);
     setSelectedStartDate(null);
@@ -38,7 +38,33 @@ function LoggedInHomePage({ isLoaded }) {
     showDatePickerButton.style.display = "none";
     let datePickerContainer = document.getElementById("date_picker_container_div2");
     datePickerContainer.style.display = "flex";
+    datePickerContainer.style.flexDirection = "column";
+    datePickerContainer.style.alignItems = "center";
+
+    let deleteCheckbox = document.getElementById("delete_checkbox");
+    let deleteBookingButton = document.getElementById("delete_booking_button");
+    deleteBookingButton.setAttribute('disabled', 'true');
+    deleteCheckbox.addEventListener('change', () => {
+      if (deleteCheckbox.checked) {
+        // console.log("check is working...........");
+        // deleteBookingButton.style.backgroundColor = "rgb(255 252 248)";
+        // deleteBookingButton.setAttribute('disabled', 'false');
+        deleteBookingButton.removeAttribute('disabled');
+        deleteBookingButton.style.cursor = "pointer";
+      } else {
+        // deleteBookingButton.style.backgroundColor = "#878787";
+        deleteBookingButton.setAttribute('disabled', 'true');
+        deleteBookingButton.style.cursor = 'inherit';
+      }
+    })
   };
+
+  const deleteBooking = () => {
+    // console.log("delete button is clicked");
+    dispatch(deleteUserBooking(spotId, sessionUser.id, originalStartDate, originalEndDate));
+    setModalIsOpen(false);
+    // console.log(spotId, sessionUser.id, originalStartDate, originalEndDate);
+  }
 
 
 
@@ -49,6 +75,7 @@ function LoggedInHomePage({ isLoaded }) {
           let confirmedBookings = document.querySelectorAll(".confirmed_bookings");
           confirmedBookings.forEach((spot) => {
             spot.addEventListener('click', (event) => {
+              // console.log(event.currentTarget.getAttribute('data-ca'));
               let currentSpot;
               setModalIsOpen(true);
               // console.log(spot.childNodes[0]);
@@ -77,18 +104,18 @@ function LoggedInHomePage({ isLoaded }) {
                   });
                 }
                 if (spotName) {
-                  console.log("spotName is true..................................");
+                  // console.log("spotName is true..................................");
                   spotName.innerText = '';
                   allSpots.forEach((spot) => {
                     if (spot.imageUrl === event.target.src) {
-                      console.log("spot has been found..........................................");
+                      // console.log("spot has been found..........................................");
                       spotName.innerText = spot.spotName;
                       currentSpot = spot.id;
                       setSpotId(spot.id);
 
                       if (bookingDates) {
                         userBookings.forEach((booking) => {
-                          if (booking.spotId === currentSpot) {
+                          if (booking.spotId === currentSpot && booking.createdAt === event.currentTarget.getAttribute('data-ca')) {
                             setOriginalStartDate(booking.startDate);
                             setOriginalEndDate(booking.endDate);
                             let d1 = (booking.startDate).substr(5) + "-" + (booking.startDate).substr(0, 4);
@@ -159,10 +186,10 @@ function LoggedInHomePage({ isLoaded }) {
         </div>
         <div style={{margin: "1rem"}}>
         <div id="limd_div_3">
-          {console.log(userBookings)}
+          {/* {console.log(userBookings)} */}
           {userBookings && userBookings.map((booking, index) => {
-            console.log(booking.spotId);
-            return (<div className="confirmed_bookings" key={index}>
+            // console.log(booking.spotId);
+            return (<div className="confirmed_bookings" data-ca={booking.createdAt} key={index}>
                 <img alt="" src={allSpots[parseInt(booking.spotId) - 1].imageUrl}></img>
                 <div style={{display: "flex", justifyContent: "space-between", marginTop: "1.3rem"}}><div>{allSpots[parseInt(booking.spotId) - 1].spotName}</div><div>${allSpots[parseInt(booking.spotId) - 1].price}</div></div>
             </div>)
@@ -232,10 +259,12 @@ function LoggedInHomePage({ isLoaded }) {
 
 
           {showDatePicker && <div id="show_date_picker_button">
-            <button onClick={testFunction}>Change This Booking?</button>
+            <button style={{cursor: "pointer"}} onClick={testFunction}>Change This Booking?</button>
           </div>}
 
           {showDatePicker && <div id="date_picker_container_div2">
+
+            <div style={{display: "inline-flex"}}>
             <DatePicker
               selected={selectedStartDate}
               onChange={date => setSelectedStartDate(date)}
@@ -267,6 +296,17 @@ function LoggedInHomePage({ isLoaded }) {
               scrollableMonthYearDropdown
               excludeDates={reservedDates}
               />
+              </div>
+
+
+              <div style={{marginTop: "1rem"}}>
+                <div style={{display: "inline-block"}}>
+                  <input id="delete_checkbox" type="checkbox"></input>
+                </div>
+                <div style={{display: "inline-block"}}>
+                  <button id="delete_booking_button" onClick={deleteBooking} style={{border: "none", lineHeight: "1.2"}}>Delete this booking?</button>
+                </div>
+              </div>
           </div>}
 
         </Modal>}

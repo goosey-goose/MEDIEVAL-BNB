@@ -5,6 +5,7 @@ const REMOVE_BOOKINGS = 'booking/removeBookings';
 const CREATE_BOOKING = 'booking/createBooking';
 const SET_ALL_BOOKINGS = 'booking/setAllBookings';
 const UPDATE_BOOKING = 'booking/updateBooking';
+const DELETE_BOOKING = 'booking/deleteBooking';
 
 
 // ACTION CREATORS
@@ -42,13 +43,20 @@ const updateBooking = (booking) => {
   };
 };
 
+const deleteBooking = (booking) => {
+  return {
+    type: DELETE_BOOKING,
+    payload: booking
+  };
+};
+
 
 
 // THUNKS
 export const getUserBookings = () => async (dispatch) => {
   const response = await csrfFetch('/api/bookings');
   const data = await response.json();
-  console.log("**********************************************", data);
+  // console.log("**********************************************", data);
   dispatch(setBookings(data));
   return response;
 };
@@ -107,7 +115,7 @@ export const createUserBooking = (spotId, userId, startDate, endDate) => async (
 
 
 
-/////////////////////////////////////////////////////////////////////////////////////////
+
 export const updateUserBooking = (spotId, userId, startDate, endDate, newStart, newEnd) => async (dispatch) => {
   const response = await csrfFetch('/api/bookings/edit', {
     method: 'PATCH',
@@ -141,7 +149,38 @@ export const updateUserBooking = (spotId, userId, startDate, endDate, newStart, 
     return ['An error occurred. Please try again.']
   }
 };
-/////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const deleteUserBooking = (spotId, userId, startDate, endDate) => async (dispatch) => {
+  const response = await csrfFetch('/api/bookings/delete', {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      spotId,
+      userId,
+      startDate,
+      endDate
+    })
+  });
+
+  if (response.ok) {
+    const data = await response.json();
+    dispatch(deleteBooking(data));
+  } else if (response.status < 500) {
+    const data = await response.json();
+    if (data.errors) {
+      return data.errors
+    }
+  } else {
+    return ['An error occurred. Please try again.']
+  }
+};
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 
 
 
@@ -159,7 +198,7 @@ const bookingReducer = (state = initialState, action) => {
 
     case SET_BOOKINGS:
       // newState = Object.assign({}, state);
-      console.log(action.payload);
+      // console.log(action.payload);
       // newState = {...state, bookings: {...state.bookings}, allUserBookings: {...state.allUserBookings} };
       newState = {...state};
       // newState = {...state, bookings: [...action.payload]};
@@ -183,7 +222,7 @@ const bookingReducer = (state = initialState, action) => {
 
 
     case CREATE_BOOKING:
-      // console.log("UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU", state);
+      // console.log("UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU", action.payload);
       // newState = {...state, bookings: {...state, ...state.bookings }, allUserBookings: [ ...state.allUserBookings ]};
       // newState = {...state, bookings: {Bookings: [...state.bookings.Bookings]}, allUserBookings: {...state.allUserBookings}};   // ORIGINAL
       newState = {...state, bookings: [...state.bookings], allUserBookings: [...state.allUserBookings]};
@@ -200,8 +239,8 @@ const bookingReducer = (state = initialState, action) => {
 
       case UPDATE_BOOKING:
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        console.log(action.payload);
-        console.log(action.payload["ORIGINAL BOOKING:"].spotId);
+        // console.log(action.payload);
+        // console.log(action.payload["ORIGINAL BOOKING:"].spotId);
         // newState = {...state, bookings: {Bookings: [...state.bookings.Bookings]}, allUserBookings: {...state.allUserBookings}};
         newState = {...state, bookings: [...state.bookings], allUserBookings: [...state.allUserBookings]};
         // console.log("&&&&&&&&&&&&&&&&&&", newState.bookings.Bookings);
@@ -221,6 +260,52 @@ const bookingReducer = (state = initialState, action) => {
         return newState;
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+
+      case DELETE_BOOKING:
+        newState = {...state, bookings: [...state.bookings], allUserBookings: [...state.allUserBookings]};
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        console.log(newState.bookings);
+        for (let i = 0; i < newState.bookings.length; ++i) {
+          if (newState.bookings[i].createdAt === action.payload["DELETED BOOKING"].createdAt && newState.bookings[i].startDate === action.payload["DELETED BOOKING"].startDate) {
+            const bookingIndex = i;
+            if (bookingIndex > -1) {
+              newState.bookings.splice(bookingIndex, 1);
+              break;
+            }
+          }
+        }
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // newState.bookings.forEach((booking) => {
+        //   if (booking.spotId === action.payload["DELETED BOOKING"].spotId && booking.userId === action.payload["DELETED BOOKING"].userId && booking.startDate === action.payload["DELETED BOOKING"].startDate && booking.endDate === action.payload["DELETED BOOKING"].endDate) {
+        //     // delete booking;
+        //     const i = newState.bookings.indexOf(booking);
+        //     if (i > -1) {
+        //       newState.bookings.splice(i, 1);
+        //     }
+        //   }
+        // });
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        console.log(newState.allUserBookings);
+        for (let i = 0; i < newState.allUserBookings.length; ++i) {
+          if (newState.allUserBookings[i].createdAt === action.payload["DELETED BOOKING"].createdAt && newState.allUserBookings[i].startDate === action.payload["DELETED BOOKING"].startDate) {
+            const bookingIndex = i;
+            if (bookingIndex > -1) {
+              newState.allUserBookings.splice(bookingIndex, 1);
+              break;
+            }
+          }
+        }
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // newState.allUserBookings.forEach((booking) => {
+        //   if (booking.spotId === action.payload["DELETED BOOKING"].spotId && booking.userId === action.payload["DELETED BOOKING"].userId && booking.startDate === action.payload["DELETED BOOKING"].startDate && booking.endDate === action.payload["DELETED BOOKING"].endDate) {
+        //     // delete booking;
+        //     const i = newState.allUserBookings.indexOf(booking);
+        //     if (i > -1) {
+        //       newState.allUserBookings.splice(i, 1);
+        //     }
+        //   }
+        // });
+        return newState;
 
     default:
       return state;

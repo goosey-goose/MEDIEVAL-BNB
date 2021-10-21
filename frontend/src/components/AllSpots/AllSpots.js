@@ -21,12 +21,13 @@ function AllSpots({ isLoaded }) {
     const [selectedEndDate, setSelectedEndDate] = useState(null);
     const [reservedDates, setReservedDates] = useState([]);
     const [currentSelectedSpot, setCurrentSelectedSpot] = useState(null);
+    const [spotId, setSpotId] = useState(null);
     // const [currentSelectedBooking, setCurrentSelectedBooking] = useState(null);
 
 
     const submitBooking = async () => {
-      let temp = await dispatch(createUserBooking('12', '4', '2021-12-14', '2021-12-15'));
-      console.log(temp);
+      let temp = await dispatch(createUserBooking(spotId, sessionUser.id, selectedStartDate, selectedEndDate));
+      // console.log(temp);
       setModalIsOpen(false);
       setSelectedStartDate(null);
       setSelectedEndDate(null);
@@ -45,22 +46,22 @@ function AllSpots({ isLoaded }) {
 
 
     useEffect(() => {
-      console.log("this should run............................");
+      // console.log("this should run............................");
         if (allSpots?.length) {
-          console.log("allSpots now has length..................................");
+          // console.log("allSpots now has length..................................");
           let spotDivs = document.querySelectorAll(".spot_divs");
-          console.log(spotDivs);
+          // console.log(spotDivs);
           spotDivs.forEach((spot) => {
-            console.log("spot");
+            // console.log("spot");
             spot.addEventListener('click', (event) => {
               let currentSpot;
               setModalIsOpen(true);
-              console.log(spot.childNodes[0]);
+              // console.log(spot.childNodes[0]);
               spot.classList.add('no_effects');
               setCurrentSelectedSpot(spot);
-              console.log(sessionUser);
+              // console.log(sessionUser);
               if (!sessionUser) {
-                console.log("there is no session user............");
+                // console.log("there is no session user............");
                 let actualLoggedOutModal = document?.getElementById('actual_logged_out_modal');
                 if (actualLoggedOutModal) {
                   actualLoggedOutModal.innerHTML = `<div id="div_inside_outer_modal"><img src=${event.target.currentSrc}></img></div>`;
@@ -81,13 +82,14 @@ function AllSpots({ isLoaded }) {
                   });
                 }
                 if (spotName) {
-                  console.log("spotName is true..................................");
+                  // console.log("spotName is true..................................");
                   spotName.innerText = '';
                   allSpots.forEach((spot) => {
                     if (spot.imageUrl === event.target.src) {
-                      console.log("spot has been found..........................................");
+                      // console.log("spot has been found..........................................");
                       spotName.innerText = spot.spotName;
                       currentSpot = spot.id;
+                      setSpotId(spot.id);
 
                       let tempReservedDates = [];
 
@@ -201,7 +203,7 @@ function AllSpots({ isLoaded }) {
         id="actual_logged_in_modal"
         isOpen={modalIsOpen}
         onRequestClose={() => {
-          console.log("onRequestClose() called.......................................");
+          // console.log("onRequestClose() called.......................................");
           let actualLoggedInModal = document.getElementById('actual_logged_in_modal');
           actualLoggedInModal.innerHTML = '';
           setModalIsOpen(false);
