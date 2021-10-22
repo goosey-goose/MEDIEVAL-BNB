@@ -45,43 +45,85 @@ router.get('/queries', requireAuth,
     asyncHandler (async (req, res) => {
 
     let id = '2';
-    let sDate = '2021-11-15';
-    let eDate = '2021-11-16';
+    let sDate = '2021-10-27';
+    let eDate = '2021-11-22';
 
-    const response = await Booking.findOne({
+    // FIND THE CURRENT BOOKING
+    const bookingToUpdate = await Booking.findOne({
+        where: {
+            userId: "4",
+            spotId: "2",
+            startDate: "2021-10-28",
+            endDate: "2021-11-16"
+        }
+    });
+
+    const response = await Booking.findAll({
         where: {
             [Op.or]: [
                         {
                             spotId: id,
                             startDate: {
-                                [Op.lt]: sDate
+                                [Op.lt]: sDate,
+                                // [Op.ne]: sDate
                             },
                             endDate: {
-                                [Op.gt]: sDate
+                                [Op.gt]: sDate,
+                                // [Op.ne]: eDate
+                            },
+                            createdAt: {
+                                [Op.ne]: bookingToUpdate.createdAt
                             }
                         },
 
                         {
                             spotId: id,
                             startDate: {
-                                [Op.lt]: eDate
+                                [Op.lt]: eDate,
+                                // [Op.ne]: sDate
                             },
                             endDate: {
-                                [Op.gt]: eDate
+                                [Op.gt]: eDate,
+                                // [Op.ne]: eDate
+                            },
+                            createdAt: {
+                                [Op.ne]: bookingToUpdate.createdAt
                             }
                         },
 
                         {
                             spotId: id,
                             startDate: {
-                                [Op.gt]: sDate
+                                [Op.gt]: sDate,
+                                // [Op.ne]: sDate
                             },
                             endDate: {
-                                [Op.lt]: eDate
+                                [Op.lt]: eDate,
+                                // [Op.ne]: eDate
+                            },
+                            createdAt: {
+                                [Op.ne]: bookingToUpdate.createdAt
                             }
-                        }
+                        },
+
+                        // {
+                        //     spotId: id,
+                        //     startDate: {
+                        //         // [Op.gt]: sDate,
+                        //         [Op.ne]: sDate
+                        //     },
+                        //     endDate: {
+                        //         // [Op.lt]: eDate,
+                        //         [Op.ne]: eDate
+                        //     }
+                        // }
                     ]
-        }
+        },
+        // where: {
+        //     startDate: {[Op.ne]: sDate},
+        //     endDate: {[Op.ne]: eDate}
+        // }
+
     });
 
     return res.json(response);
@@ -186,8 +228,8 @@ router.patch('/edit', requireAuth,
 
         const { spotId, userId, startDate, endDate, newStart, newEnd } = req.body;
 
-        let sDate = startDate;
-        let eDate = endDate;
+        let sDate = newStart;
+        let eDate = newEnd;
         let id = spotId;
 
         // FIND THE CURRENT BOOKING
@@ -211,7 +253,7 @@ router.patch('/edit', requireAuth,
 
 
         // CHECK IF THERE ARE ANY OVERLAPPING BOOKINGS
-        const temp2 = await Booking.findOne({
+        const temp2 = await Booking.findAll({
             where: {
                 [Op.or]: [
                             {
@@ -221,6 +263,9 @@ router.patch('/edit', requireAuth,
                                 },
                                 endDate: {
                                     [Op.gt]: sDate
+                                },
+                                createdAt: {
+                                    [Op.ne]: bookingToUpdate.createdAt
                                 }
                             },
 
@@ -231,6 +276,9 @@ router.patch('/edit', requireAuth,
                                 },
                                 endDate: {
                                     [Op.gt]: eDate
+                                },
+                                createdAt: {
+                                    [Op.ne]: bookingToUpdate.createdAt
                                 }
                             },
 
@@ -241,15 +289,28 @@ router.patch('/edit', requireAuth,
                                 },
                                 endDate: {
                                     [Op.lt]: eDate
+                                },
+                                createdAt: {
+                                    [Op.ne]: bookingToUpdate.createdAt
                                 }
-                            }
+                            },
+
+                            // {
+                            //     spotId: id,
+                            //     startDate: {
+                            //         [Op.ne]: sDate
+                            //     },
+                            //     endDate: {
+                            //         [Op.ne]: eDate
+                            //     }
+                            // }
                         ]
             }
         });
 
 
         // IF NO DUPLICATE EXISTS AND NOTHING OVERLAPS, UPDATE BOOKING
-        if (temp1 === null && temp2 === null && bookingToUpdate !== null) {
+        if (temp1 === null && temp2.length === 0 && bookingToUpdate !== null) {
             const newBookingInfo = {
                 startDate: newStart,
                 endDate: newEnd
