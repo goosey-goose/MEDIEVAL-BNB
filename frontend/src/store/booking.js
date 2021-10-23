@@ -239,7 +239,7 @@ const bookingReducer = (state = initialState, action) => {
 
       case UPDATE_BOOKING:
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        // console.log(action.payload);
+        console.log(action.payload);
         // console.log(action.payload["ORIGINAL BOOKING:"].spotId);
         // newState = {...state, bookings: {Bookings: [...state.bookings.Bookings]}, allUserBookings: {...state.allUserBookings}};
         newState = {...state, bookings: [...state.bookings], allUserBookings: [...state.allUserBookings]};

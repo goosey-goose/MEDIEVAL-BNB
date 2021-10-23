@@ -242,6 +242,7 @@ router.patch('/edit', requireAuth,
             }
         });
 
+
         // CHECK IF DUPLICATE BOOKING / RECORD EXISTS
         const temp1 = await Booking.findOne({
             where: {
@@ -325,13 +326,38 @@ router.patch('/edit', requireAuth,
             };
 
             // USING THE .update() METHOD
-            await bookingToUpdate.update(newBookingInfo);
+            // await bookingToUpdate.update(newBookingInfo);
+            await Booking.update(newBookingInfo, {
+                where: {
+                    userId,
+                    spotId,
+                    startDate,
+                    endDate
+                }
+            });
+
+            const newUpdatedBooking = await Booking.findOne({
+                where: {
+                    userId,
+                    spotId,
+                    startDate: newStart,
+                    endDate: newEnd
+                }
+            })
+
+
+            // USING THE .save() METHOD
+            // bookingToUpdate.spotId = newSpot;
+            // bookingToUpdate.startDate = newStart;
+            // bookingToUpdate.endDate = newEnd;
+
+            // await bookingToUpdate.save({ fields: ['startDate', 'endDate'] });
 
 
             res.json(
                 {
                     "ORIGINAL BOOKING:": originalBooking,
-                    "UPDATED BOOKING": bookingToUpdate
+                    "UPDATED BOOKING": newUpdatedBooking
                 }
             );
 
@@ -340,13 +366,6 @@ router.patch('/edit', requireAuth,
             res.json({"Error": "Booking already exists or something else went wrong."});
         }
 
-
-        // USING THE .save() METHOD
-        // bookingToUpdate.spotId = newSpot;
-        // bookingToUpdate.startDate = newStart;
-        // bookingToUpdate.endDate = newEnd;
-
-        // await bookingToUpdate.save({ fields: ['spotId', 'startDate', 'endDate'] });
 
 
     }));
