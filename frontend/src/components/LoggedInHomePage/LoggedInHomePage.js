@@ -122,6 +122,8 @@ function LoggedInHomePage({ isLoaded }) {
                             setOriginalEndDate(booking.endDate);
                             ogStartDate = booking.startDate;
                             ogEndDate = booking.endDate;
+                            setSelectedStartDate(new Date((booking.startDate).substr(5) + "-" + (booking.startDate).substr(0, 4)));
+                            setSelectedEndDate(new Date((booking.endDate).substr(5) + "-" + (booking.endDate).substr(0, 4)));
                             let d1 = (booking.startDate).substr(5) + "-" + (booking.startDate).substr(0, 4);
                             let d2 = (booking.endDate).substr(5) + "-" + (booking.endDate).substr(0, 4);
                             bookingDates.innerHTML = `Your booking dates:` + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' + `${(new Date(d1)).toDateString()}`  + '&nbsp;&nbsp;&nbsp;&nbsp;' + 'to' + '&nbsp;&nbsp;&nbsp;&nbsp;' + `${(new Date(d2)).toDateString()}`;
