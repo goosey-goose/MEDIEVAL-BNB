@@ -45,16 +45,16 @@ router.get('/queries', requireAuth,
     asyncHandler (async (req, res) => {
 
     let id = '2';
-    let sDate = '2021-10-27';
-    let eDate = '2021-11-22';
+    let sDate = '2021-11-10';
+    let eDate = '2021-11-11';
 
     // FIND THE CURRENT BOOKING
     const bookingToUpdate = await Booking.findOne({
         where: {
             userId: "4",
             spotId: "2",
-            startDate: "2021-10-28",
-            endDate: "2021-11-16"
+            startDate: "2021-11-09",
+            endDate: "2021-11-12"
         }
     });
 
@@ -106,17 +106,20 @@ router.get('/queries', requireAuth,
                             }
                         },
 
-                        // {
-                        //     spotId: id,
-                        //     startDate: {
-                        //         // [Op.gt]: sDate,
-                        //         [Op.ne]: sDate
-                        //     },
-                        //     endDate: {
-                        //         // [Op.lt]: eDate,
-                        //         [Op.ne]: eDate
-                        //     }
-                        // }
+                        {
+                            spotId: id,
+                            startDate: {
+                                [Op.lt]: sDate,
+                                [Op.lt]: eDate
+                            },
+                            endDate: {
+                                [Op.gt]: sDate,
+                                [Op.gt]: eDate
+                            },
+                            createdAt: {
+                                [Op.ne]: bookingToUpdate.createdAt
+                            }
+                        }
                     ]
         },
         // where: {
@@ -191,6 +194,19 @@ router.post('/new', requireAuth,
                                 },
                                 endDate: {
                                     [Op.lt]: eDate
+                                }
+                            },
+
+                            ////////////
+                            {
+                                spotId: id,
+                                startDate: {
+                                    [Op.lt]: sDate,
+                                    [Op.lt]: eDate
+                                },
+                                endDate: {
+                                    [Op.gt]: sDate,
+                                    [Op.gt]: eDate
                                 }
                             }
                         ]
@@ -295,6 +311,21 @@ router.patch('/edit', requireAuth,
                                     [Op.ne]: bookingToUpdate.createdAt
                                 }
                             },
+
+                            {
+                                spotId: id,
+                                startDate: {
+                                    [Op.lt]: sDate,
+                                    [Op.lt]: eDate
+                                },
+                                endDate: {
+                                    [Op.gt]: sDate,
+                                    [Op.gt]: eDate
+                                },
+                                createdAt: {
+                                    [Op.ne]: bookingToUpdate.createdAt
+                                }
+                            }
 
                             // {
                             //     spotId: id,
