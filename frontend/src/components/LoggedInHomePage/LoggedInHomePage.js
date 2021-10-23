@@ -77,6 +77,8 @@ function LoggedInHomePage({ isLoaded }) {
             spot.addEventListener('click', (event) => {
               // console.log(event.currentTarget.getAttribute('data-ca'));
               let currentSpot;
+              let ogStartDate;
+              let ogEndDate;
               setModalIsOpen(true);
               // console.log(spot.childNodes[0]);
               spot.classList.add('no_effects');
@@ -118,6 +120,8 @@ function LoggedInHomePage({ isLoaded }) {
                           if (booking.spotId === currentSpot && booking.createdAt === event.currentTarget.getAttribute('data-ca')) {
                             setOriginalStartDate(booking.startDate);
                             setOriginalEndDate(booking.endDate);
+                            ogStartDate = booking.startDate;
+                            ogEndDate = booking.endDate;
                             let d1 = (booking.startDate).substr(5) + "-" + (booking.startDate).substr(0, 4);
                             let d2 = (booking.endDate).substr(5) + "-" + (booking.endDate).substr(0, 4);
                             bookingDates.innerHTML = `Your booking dates:` + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' + `${(new Date(d1)).toDateString()}`  + '&nbsp;&nbsp;&nbsp;&nbsp;' + 'to' + '&nbsp;&nbsp;&nbsp;&nbsp;' + `${(new Date(d2)).toDateString()}`;
@@ -130,7 +134,7 @@ function LoggedInHomePage({ isLoaded }) {
                       if (Array.isArray(userBookings)) {
                         // console.log("allUserBookings", allUserBookings);
                         userBookings.forEach((booking) => {
-                          if (booking.spotId == currentSpot) {
+                          if (booking.spotId == currentSpot && booking.startDate !== ogStartDate && booking.endDate !== ogEndDate) {
                             let date1 = new Date(booking.endDate);
                             let date2 = new Date(booking.startDate);
                             let difference = date1.getTime() - date2.getTime();
