@@ -6,7 +6,7 @@ const { requireAuth } = require('../../utils/auth');
 
 
 // READ ALL REVIEWS
-router.get('/', requireAuth,
+router.get('/',
      asyncHandler (async (req, res) => {
 
         const allReviews = await Review.findAll();

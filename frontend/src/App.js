@@ -39,6 +39,7 @@ function App() {
 
   useEffect(() => {
     dispatch(getAllSpots());
+    dispatch(getAllReviews());
     dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
   }, [dispatch]);
 
@@ -49,7 +50,7 @@ function App() {
     } else {
       dispatch(getUserBookings());
       dispatch(getAllUserBookings());
-      dispatch(getAllReviews());
+      // dispatch(getAllReviews());
       history.push("/home");
     }
   })

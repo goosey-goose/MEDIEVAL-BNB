@@ -16,6 +16,7 @@ function AllSpots({ isLoaded }) {
     const allSpots = useSelector(state => state.spots.spots);
     // const userBookings = useSelector(state => state.bookings?.bookings?.Bookings);
     const allUserBookings = useSelector(state => state.bookings.allUserBookings);
+    const allUserReviews = useSelector(state => state.reviews.reviews);
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const [selectedStartDate, setSelectedStartDate] = useState(null);
     const [selectedEndDate, setSelectedEndDate] = useState(null);
@@ -37,7 +38,28 @@ function AllSpots({ isLoaded }) {
 
 
 
+    const showReviews = (id) => {
+      // console.log("show the reviews");
+      let loggedOutReviewsContainer = document.getElementById("logged_out_reviews_container");
 
+      loggedOutReviewsContainer.style.animation = "slideMe .5s ease-in";
+      // console.log(loggedOutReviewsContainer);
+
+      let showReviewsbutton = document.getElementById("show_reviews_button");
+      showReviewsbutton.style.display = "none";
+
+      allUserReviews.forEach((review) => {
+        console.log(id);
+        if (review.spotId === id) {
+          let reviewDiv = document.createElement("div");
+          reviewDiv.innerText = review.review;
+
+          loggedOutReviewsContainer.appendChild(reviewDiv);
+        }
+      });
+
+
+    }
 
 
 
@@ -64,7 +86,17 @@ function AllSpots({ isLoaded }) {
                 // console.log("there is no session user............");
                 let actualLoggedOutModal = document?.getElementById('actual_logged_out_modal');
                 if (actualLoggedOutModal) {
-                  actualLoggedOutModal.innerHTML = `<div id="div_inside_outer_modal"><img src=${event.target.currentSrc}></img></div>`;
+                  actualLoggedOutModal.innerHTML = `<div id="div_inside_outer_modal" style="position: relative"><img src=${event.target.currentSrc}></img><div id="logged_out_reviews_container" style="position: absolute"></div><button id="show_reviews_button" type="button" style="position: absolute">REVIEWS</button></div>`;
+                  let showReviewsbutton = document.getElementById("show_reviews_button");
+                  allSpots.forEach((spot) => {
+                    if (spot.imageUrl === event.target.src) {
+                      if (showReviewsbutton) {
+                        showReviewsbutton.addEventListener('click', () => {
+                          showReviews(spot.id);
+                        })
+                      }
+                    };
+                  });
                 }
               } else if (sessionUser) {
                 let actualLoggedInModal = document?.getElementById('actual_logged_in_modal');

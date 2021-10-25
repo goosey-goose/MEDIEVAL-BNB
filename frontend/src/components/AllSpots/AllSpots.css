@@ -2,3 +2,11 @@
     color: white;
     margin-top: 1rem;
 }
+
+
+
+@keyframes slideMe{
+    0%{
+      transform: translateX(-500px);
+    }
+  }
