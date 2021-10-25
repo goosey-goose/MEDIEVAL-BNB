@@ -140,6 +140,10 @@
     box-shadow: 0px 0px 2px 6px rgb(255 255 255 / 40%);
 }
 
+#actual_logged_out_modal::-webkit-scrollbar {
+    display: none;
+}
+
 #date_picker_container_div, #date_picker_container_div2 {
     margin-top: 1rem;
     display: flex;

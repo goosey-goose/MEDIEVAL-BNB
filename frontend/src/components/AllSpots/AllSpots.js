@@ -91,7 +91,7 @@ function AllSpots({ isLoaded }) {
                 // console.log("there is no session user............");
                 let actualLoggedOutModal = document?.getElementById('actual_logged_out_modal');
                 if (actualLoggedOutModal) {
-                  actualLoggedOutModal.innerHTML = `<div id="div_inside_outer_modal" style="position: relative"><img src=${event.target.currentSrc}></img><div id="logged_out_reviews_container" style="position: absolute; padding-bottom: .5rem; width: 100%"></div><button id="show_reviews_button" type="button" style="position: absolute">REVIEWS</button></div>`;
+                  actualLoggedOutModal.innerHTML = `<div id="div_inside_outer_modal" style="position: relative"><img src=${event.target.currentSrc}></img><div id="logged_out_reviews_container" style="position: absolute; padding-bottom: .5rem; width: 100%; max-height: calc(100% - .5rem); overflow-y: scroll; border-radius: 10px"></div><button id="show_reviews_button" type="button" style="position: absolute">REVIEWS</button></div>`;
                   let showReviewsbutton = document.getElementById("show_reviews_button");
                   allSpots.forEach((spot) => {
                     if (spot.imageUrl === event.target.src) {

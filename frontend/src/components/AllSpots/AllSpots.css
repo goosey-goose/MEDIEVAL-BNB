@@ -3,6 +3,10 @@
     margin-top: 1rem;
 }
 
+#logged_out_reviews_container::-webkit-scrollbar {
+  display: none;
+}
+
 
 
 @keyframes slideMe{
