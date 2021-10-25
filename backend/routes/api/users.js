@@ -51,4 +51,23 @@ router.post('/', validateSignup,
 
 
 
+
+// GET ALL USERS TO ASSOCIATE WITH REVIEWS
+router.get('/users',
+    asyncHandler(async (req, res) => {
+      const users = await User.findAll({
+        raw: true
+      });
+
+      let usersObject = {};
+      users.forEach((user) => {
+          usersObject[user.id] = user;
+      })
+
+      return res.json(usersObject);
+    })
+);
+
+
+
 module.exports = router;

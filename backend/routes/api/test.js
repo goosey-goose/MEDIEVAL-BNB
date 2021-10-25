@@ -7,22 +7,32 @@ const router = express.Router();
 
 router.get('/', async (req, res) => {
 
-    const user = await User.findOne({
-        where: {
-          username: 'Demo-lition'
-        },
-        include: [Booking, Review]
-    });
+    // const user = await User.findOne({
+    //     where: {
+    //       username: 'Demo-lition'
+    //     },
+    //     include: [Booking, Review]
+    // });
 
     // res.json({
     //     "hello": "ebenezer"
     // });
     // console.log(user);
-    return res.json(
-        {
-            spotId: user.Bookings[0]["spotId"]
-        }
-    );
+
+    const users = await User.findAll({
+        raw: true
+    });
+
+    //console.log({...users});  // OUTPUTS ONE LARGE OBJECT INSTEAD OF AN ARRAY
+    let usersObject = {};
+    users.forEach((user) => {
+        usersObject[user.id] = user;
+    })
+    console.log(usersObject);
+    // const data = await users.json();
+
+    return res.json(usersObject);
+    // return res.json({"hi": "eben"});
 });
 
 

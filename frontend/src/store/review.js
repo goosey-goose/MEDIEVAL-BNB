@@ -2,8 +2,10 @@ import { csrfFetch } from './csrf';
 
 const SET_REVIEWS = 'review/setReviews';
 const REMOVE_REVIEWS = 'review/removeReviews';
+const GET_USERS = 'review/getUsers';
 
 
+// ACTION CREATORS
 const setReviews = (reviews) => {
   return {
     type: SET_REVIEWS,
@@ -20,7 +22,16 @@ const removeReviews = () => {
 };
 
 
+const getUsers = (users) => {
+  return {
+    type: GET_USERS,
+    payload: users
+  };
+};
 
+
+
+// THUNKS
 export const getAllReviews = () => async (dispatch) => {
   const response = await csrfFetch('/api/reviews');
   const data = await response.json();
@@ -37,8 +48,23 @@ export const removeAllReviews = () => async (dispatch) => {
 
 
 
+export const getAllUsers = () => async (dispatch) => {
+  const response = await csrfFetch('/api/users/users');
+  if (response.ok) {
+    const data = await response.json();
+    dispatch(getUsers(data));
+    return response;
+  } else {
+    return ['An error occurred. Please try again.']
+  }
 
-const initialState = { reviews: null };
+};
+
+
+
+
+// REDUCER
+const initialState = { reviews: null, users: null };
 
 const reviewReducer = (state = initialState, action) => {
   let newState;
@@ -51,6 +77,11 @@ const reviewReducer = (state = initialState, action) => {
       newState = Object.assign({}, state);
       newState.reviews = null;
       return newState;
+      ////////////////////////////////
+    case GET_USERS:
+      newState = {...state, reviews: [...state.reviews], users: action.payload};
+      return newState;
+      ////////////////////////////////
     default:
       return state;
   }

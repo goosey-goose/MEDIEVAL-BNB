@@ -16,7 +16,7 @@ import { getAllSpots } from "./store/spot";
 import 'react-datepicker/dist/react-datepicker.css'
 import './App.css';
 import { getUserBookings, getAllUserBookings } from './store/booking';
-import { getAllReviews } from "./store/review";
+import { getAllReviews, getAllUsers } from "./store/review";
 import LoggedInHomePage from "./components/LoggedInHomePage/LoggedInHomePage";
 
 
@@ -40,6 +40,7 @@ function App() {
   useEffect(() => {
     dispatch(getAllSpots());
     dispatch(getAllReviews());
+    dispatch(getAllUsers());
     dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
   }, [dispatch]);
 
