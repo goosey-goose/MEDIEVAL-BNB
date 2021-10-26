@@ -3,14 +3,72 @@
     margin-top: 1rem;
 }
 
-#logged_out_reviews_container::-webkit-scrollbar {
+#logged_out_reviews_container::-webkit-scrollbar, #logged_in_reviews_container::-webkit-scrollbar {
   display: none;
 }
 
+#logged_out_close_reviews_button, #logged_in_close_reviews_button {
+  display: none;
+  position: absolute;
+  border-radius: 50px;
+  line-height: 1rem;
+  border: none;
+  height: 1.5rem;
+  width: 1.5rem;
+  right: -.8rem;
+  top: -.8rem;
+  font-weight: bold;
+  font-size: 1.2rem;
+  cursor: pointer;
+  z-index: 1;
+}
+
+/* delete this */
+/* #logged_out_reviews_container {
+  transition: transform .3s ease-in-out;
+}
+
+.testers {
+  transform: translateX(900px);
+} */
 
 
+
+/* ORIGINAL ANIMATION */
 @keyframes slideMe{
     0%{
       transform: translateX(-500px);
     }
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* @keyframes slideMeOut{ */
+    /* from {
+      transform: translateX(0%);
+    }
+
+    to {
+      transform: translateX(100%);
+    } */
+
+    /* 100% {
+      transform: translateX(-100%);
+      animation-play-state: paused;
+    } */
+
+    /* 100% {
+      opacity: 0;
+      transform: translateX(0%);
+    } */
+  /* } */

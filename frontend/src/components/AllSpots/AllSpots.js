@@ -25,6 +25,7 @@ function AllSpots({ isLoaded }) {
     const [currentSelectedSpot, setCurrentSelectedSpot] = useState(null);
     const [spotId, setSpotId] = useState(null);
     // const [currentSelectedBooking, setCurrentSelectedBooking] = useState(null);
+    const [testSpotId, setTestSpotId] = useState(null);
 
 
     const submitBooking = async () => {
@@ -40,26 +41,67 @@ function AllSpots({ isLoaded }) {
 
 
     const showReviews = (id) => {
-      // console.log("show the reviews");
+      console.log(id);
+      let showReviewsbutton = document.querySelector(".show_reviews_button");
       let loggedOutReviewsContainer = document.getElementById("logged_out_reviews_container");
+      let loggedInReviewsContainer = document.getElementById("logged_in_reviews_container");
+      if (!sessionUser) {
+        console.log("logged out");
+        // let loggedOutReviewsContainer = document.getElementById("logged_out_reviews_container");
+        let loggedOutCloseReviewsButton = document.getElementById("logged_out_close_reviews_button");
+        loggedOutCloseReviewsButton.style.display = "inline-block";
 
-      loggedOutReviewsContainer.style.animation = "slideMe .3s ease-in";
-      loggedOutReviewsContainer.style.backgroundColor = "white";
-      // console.log(loggedOutReviewsContainer);
+        loggedOutReviewsContainer.style.animation = "slideMe .3s ease-in";
+        loggedOutReviewsContainer.style.backgroundColor = "white";
 
-      let showReviewsbutton = document.getElementById("show_reviews_button");
-      showReviewsbutton.style.display = "none";
-      // console.log("#############", allUsers);
+        // let showReviewsbutton = document.querySelector(".show_reviews_button");
+
+        loggedOutCloseReviewsButton.addEventListener('click', () => {
+          loggedOutCloseReviewsButton.style.display = "none";
+          loggedOutReviewsContainer.innerHTML = '';
+          loggedOutReviewsContainer.style.visibility = 'hidden';
+          showReviewsbutton.style.visibility = "visible";
+        });
+      } else {
+        console.log("logged in");
+          // let loggedInReviewsContainer = document.getElementById("logged_in_reviews_container");
+          let loggedInCloseReviewsButton = document.getElementById("logged_in_close_reviews_button");
+          loggedInCloseReviewsButton.style.display = "inline-block";
+
+          loggedInReviewsContainer.style.animation = "slideMe .3s ease-in";
+          loggedInReviewsContainer.style.backgroundColor = "white";
+
+          // let showReviewsbutton = document.querySelector(".show_reviews_button");
+
+          loggedInCloseReviewsButton.addEventListener('click', () => {
+            loggedInCloseReviewsButton.style.display = "none";
+            loggedInReviewsContainer.innerHTML = '';
+            loggedInReviewsContainer.style.visibility = 'hidden';
+            showReviewsbutton.style.visibility = "visible";
+          });
+        }
+
+      showReviewsbutton.style.visibility = "hidden";
       allUserReviews?.forEach((review) => {
-        // console.log(id);
         if (review.spotId === id) {
           let reviewDiv = document.createElement("div");
           reviewDiv.style.padding = ".5rem .5rem 0 .5rem";
-          // reviewDiv.innerHTML = `<span style="font-weight: bold">${allUsers[3].username}</span>`;
-          // reviewDiv.innerText = allUsers[review.userId].username + " -- " + '"' + review.review + '"';
           reviewDiv.innerHTML = `<span style="font-weight: bold">${allUsers?.[review.userId].username}</span> -- ${review.review}`;
 
-          loggedOutReviewsContainer.appendChild(reviewDiv);
+          if (!sessionUser) {
+            console.log("logged out");
+            loggedOutReviewsContainer.appendChild(reviewDiv);
+            loggedOutReviewsContainer.style.visibility = 'visible';
+          } else {
+            console.log("logged in");
+            loggedInReviewsContainer.appendChild(reviewDiv);
+            loggedInReviewsContainer.style.visibility = 'visible';
+          }
+        }
+        if (loggedInReviewsContainer.innerHTML === '') {
+          loggedInReviewsContainer.style.paddingBottom = "0";
+        } else if (loggedInReviewsContainer.innerHTML !== '') {
+          loggedInReviewsContainer.style.paddingBottom = ".5rem";
         }
       });
 
@@ -88,15 +130,17 @@ function AllSpots({ isLoaded }) {
               setCurrentSelectedSpot(spot);
               // console.log(sessionUser);
               if (!sessionUser) {
+                console.log("no session user here");
                 // console.log("there is no session user............");
                 let actualLoggedOutModal = document?.getElementById('actual_logged_out_modal');
                 if (actualLoggedOutModal) {
-                  actualLoggedOutModal.innerHTML = `<div id="div_inside_outer_modal" style="position: relative"><img src=${event.target.currentSrc}></img><div id="logged_out_reviews_container" style="position: absolute; padding-bottom: .5rem; width: 100%; max-height: calc(100% - .5rem); overflow-y: scroll; border-radius: 10px"></div><button id="show_reviews_button" type="button" style="position: absolute">REVIEWS</button></div>`;
-                  let showReviewsbutton = document.getElementById("show_reviews_button");
+                  actualLoggedOutModal.innerHTML = `<div id="div_inside_outer_modal" style="position: relative"><img src=${event.target.currentSrc}></img><div style="position: relative"><button id="logged_out_close_reviews_button">X</button></div><div id="logged_out_reviews_container" style="position: absolute; padding-bottom: .5rem; width: 100%; max-height: calc(100% - .5rem); overflow-y: scroll; border-radius: 10px"></div><button class="show_reviews_button" type="button" style="position: absolute">REVIEWS</button></div>`;
+                  let showReviewsbutton = document.querySelector(".show_reviews_button");
                   allSpots.forEach((spot) => {
                     if (spot.imageUrl === event.target.src) {
                       if (showReviewsbutton) {
                         showReviewsbutton.addEventListener('click', () => {
+                          console.log("outside call");
                           showReviews(spot.id);
                         })
                       }
@@ -104,11 +148,26 @@ function AllSpots({ isLoaded }) {
                   });
                 }
               } else if (sessionUser) {
+                console.log("right after session user");
                 let actualLoggedInModal = document?.getElementById('actual_logged_in_modal');
                 // console.log(actualLoggedInModal);
                 if (actualLoggedInModal) {
                   let imageForLoggedInBooking = document.getElementById('image_for_logged_in_booking');
-                  imageForLoggedInBooking.setAttribute('src', `${event.target.currentSrc}`)
+                  imageForLoggedInBooking.setAttribute('src', `${event.target.currentSrc}`);
+                  // let showReviewsbutton = document.querySelector(".show_reviews_button");
+                  allSpots.forEach((spot) => {
+                    if (spot.imageUrl === event.target.src) {
+                      setTestSpotId(spot.id);
+                      console.log("*************", testSpotId);
+                      // if (showReviewsbutton) {
+                      //   console.log("inside call");
+                      //   showReviewsbutton.addEventListener('click', () => {
+                      //     // console.log("inside call");
+                      //     showReviews(spot.id);
+                      //   })
+                      // }
+                    };
+                  });
                 }
                 let spotAddress = document?.getElementById("spot_address");
                 let spotName = document?.getElementById("spot_name");
@@ -276,6 +335,13 @@ function AllSpots({ isLoaded }) {
 
           <div id="div_inside_inner_modal">
             <img alt="" id="image_for_logged_in_booking"></img>
+            <div style={{position: "relative"}}>
+              <button id="logged_in_close_reviews_button">X</button>
+            </div>
+            <div id="logged_in_reviews_container" style={{position: "absolute", paddingBottom: ".5rem", width: "100%", maxHeight: "calc(100% - .5rem)", overflowY: "scroll", borderRadius: "10px"}}>
+
+            </div>
+            <button className="show_reviews_button" type="button" onClick={() => showReviews(testSpotId)} style={{position: "absolute"}}>REVIEWS</button>
             {selectedStartDate && selectedEndDate && <div id="book_it_button_div"><button onClick={submitBooking}>Book It</button></div>}
           </div>
 
