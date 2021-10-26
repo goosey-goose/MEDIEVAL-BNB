@@ -3,6 +3,7 @@ import { csrfFetch } from './csrf';
 const SET_REVIEWS = 'review/setReviews';
 const REMOVE_REVIEWS = 'review/removeReviews';
 const GET_USERS = 'review/getUsers';
+const ADD_REVIEW = 'review/addReview';
 
 
 // ACTION CREATORS
@@ -26,6 +27,13 @@ const getUsers = (users) => {
   return {
     type: GET_USERS,
     payload: users
+  };
+};
+
+const addReview = (review) => {
+  return {
+    type: ADD_REVIEW,
+    payload: review
   };
 };
 
@@ -61,6 +69,31 @@ export const getAllUsers = () => async (dispatch) => {
 };
 
 
+export const addUserReview = (userId, spotId, review) => async (dispatch) => {
+  console.log("@@@@@@@@@@@@@@@ ", userId, spotId, review);
+  const response = await csrfFetch('/api/reviews/new', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      userId,
+      spotId,
+      review
+    })
+  });
+
+  if (response.ok) {
+    const data = await response.json();
+    dispatch(addReview(data));
+    return response;
+  } else {
+    return ['An error occurred. Please try again.']
+  }
+
+};
+
+
 
 
 // REDUCER
@@ -77,11 +110,17 @@ const reviewReducer = (state = initialState, action) => {
       newState = Object.assign({}, state);
       newState.reviews = null;
       return newState;
-      ////////////////////////////////
     case GET_USERS:
       newState = {...state, reviews: [...state.reviews], users: action.payload};
       return newState;
-      ////////////////////////////////
+    ///////////////////////////////////////////////////
+    case ADD_REVIEW:
+      // console.log(action.payload);
+      newState = {...state, reviews: [...state.reviews], users: {...state.users}};
+      newState.reviews.push(action.payload["NEW REVIEW"]);
+      return newState;
+      // return state;
+    ///////////////////////////////////////////////////
     default:
       return state;
   }

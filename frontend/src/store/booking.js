@@ -200,18 +200,30 @@ const bookingReducer = (state = initialState, action) => {
       // newState = Object.assign({}, state);
       // console.log(action.payload);
       // newState = {...state, bookings: {...state.bookings}, allUserBookings: {...state.allUserBookings} };
-      newState = {...state};
-      // newState = {...state, bookings: [...action.payload]};
-      // console.log("1111111", action.payload);
-      newState.bookings = action.payload;
-      return newState;
+      if (!state.allUserBookings) {
+        newState = {...state};
+        // newState = {...state, bookings: [...action.payload]};
+        newState.bookings = action.payload;
+        return newState;
+      } else if (state.allUserBookings) {
+        newState = {...state, allUserBookings: [...state.allUserBookings]};
+        newState.bookings = action.payload;
+        return newState;
+      }
 
 
     case SET_ALL_BOOKINGS:
-      newState = {...state, bookings: [...state.bookings]};
-      // console.log("222222222", action.payload);
-      newState.allUserBookings = action.payload;
-      return newState;
+      if (state.bookings) {
+        newState = {...state, bookings: [...state.bookings]};  // ORIGINAL
+        // newState = {...state, bookings ?: [...state.bookings] : [...state.bookings]};
+        // console.log("222222222", action.payload);
+        newState.allUserBookings = action.payload;
+        return newState;
+      } else if (!state.bookings) {
+        newState = {...state};
+        newState.allUserBookings = action.payload;
+        return newState;
+      }
 
 
     case REMOVE_BOOKINGS:

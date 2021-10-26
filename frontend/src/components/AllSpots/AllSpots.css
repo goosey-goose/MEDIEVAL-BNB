@@ -23,6 +23,21 @@
   z-index: 1;
 }
 
+
+#review_box {
+  width: 100%;
+  height: 25%;
+  resize: none;
+  bottom: 0;
+  padding: 0;
+}
+
+#submit_review_button {
+  bottom: -2.34rem;
+  right: 7.6rem;
+  z-index: 1;
+}
+
 /* delete this */
 /* #logged_out_reviews_container {
   transition: transform .3s ease-in-out;

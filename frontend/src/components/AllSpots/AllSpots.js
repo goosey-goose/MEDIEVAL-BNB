@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createUserBooking } from "../../store/booking";
-// import { getAllReviews } from "../../store/review";
+import { addUserReview } from "../../store/review";
 import Modal from 'react-modal';
 import DatePicker from 'react-datepicker';
 
@@ -26,6 +26,10 @@ function AllSpots({ isLoaded }) {
     const [spotId, setSpotId] = useState(null);
     // const [currentSelectedBooking, setCurrentSelectedBooking] = useState(null);
     const [testSpotId, setTestSpotId] = useState(null);
+    // const [showWriteReview, setShowWriteReview] = useState(false);
+    const [review, setReview] = useState(null);
+
+    let sId = null;
 
 
     const submitBooking = async () => {
@@ -38,6 +42,15 @@ function AllSpots({ isLoaded }) {
     }
 
 
+
+    const submitReview = () => {
+      let reviewTextArea = document.getElementById("review_box");
+      // console.log(reviewTextArea.value);
+      dispatch(addUserReview(sessionUser.id, sId, reviewTextArea.value));
+      console.log(sId);
+    }
+
+    console.log("eben: ", testSpotId);
 
 
     const showReviews = (id) => {
@@ -105,12 +118,38 @@ function AllSpots({ isLoaded }) {
         }
       });
 
+      // setShowWriteReview(true);
+
 
     }
 
+    // console.log(review);
 
-
-
+    const abc = () => {
+      let temp = document.getElementById("review_box");
+      let temp2 = document.getElementById("submit_review_button");
+      if (!temp) {
+        let divInsideInnerModal = document.getElementById("div_inside_inner_modal");
+        let submitReviewButton = document.createElement("button");
+        submitReviewButton.setAttribute('id', 'submit_review_button');
+        submitReviewButton.style.position = 'absolute';
+        submitReviewButton.innerText = 'Submit Review';
+        submitReviewButton.addEventListener('click', () => {
+          submitReview();
+        })
+        let reviewTextArea = document.createElement("textarea");
+        reviewTextArea.setAttribute('id', 'review_box');
+        // reviewTextArea.rows = "1";
+        // reviewTextArea.cols = "72";
+        reviewTextArea.style.position = "absolute";
+        // reviewTextArea.onchange = setReview;
+        divInsideInnerModal.appendChild(submitReviewButton);
+        divInsideInnerModal.appendChild(reviewTextArea);
+      } else if (temp) {
+          temp.remove();
+          temp2.remove();
+      }
+    }
 
 
 
@@ -158,6 +197,7 @@ function AllSpots({ isLoaded }) {
                   allSpots.forEach((spot) => {
                     if (spot.imageUrl === event.target.src) {
                       setTestSpotId(spot.id);
+                      sId = spot.id;
                       console.log("*************", testSpotId);
                       // if (showReviewsbutton) {
                       //   console.log("inside call");
@@ -183,9 +223,17 @@ function AllSpots({ isLoaded }) {
                   allSpots.forEach((spot) => {
                     if (spot.imageUrl === event.target.src) {
                       // console.log("spot has been found..........................................");
-                      spotName.innerText = spot.spotName;
+                      let addReviewButtonRaw = (`<button id="write_review_button">Write a Review</button>`);
+                      // spotName.innerText = spot.spotName;
+                      spotName.innerHTML = spot.spotName + addReviewButtonRaw;
                       currentSpot = spot.id;
                       setSpotId(spot.id);
+
+                      let addReviewButton = document.getElementById("write_review_button");
+                      addReviewButton.addEventListener('click', () => {
+                        abc();
+                      })
+                      console.log(addReviewButton);
 
                       let tempReservedDates = [];
 
@@ -345,7 +393,7 @@ function AllSpots({ isLoaded }) {
             {selectedStartDate && selectedEndDate && <div id="book_it_button_div"><button onClick={submitBooking}>Book It</button></div>}
           </div>
 
-          <div id="spot_name">
+          <div style={{display: "flex", justifyContent: "space-between"}} id="spot_name">
 
           </div>
 

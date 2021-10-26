@@ -23,7 +23,7 @@ router.post('/new', requireAuth,
     asyncHandler(async (req, res) => {
 
         const { userId, spotId, review } = req.body;
-
+        console.log(userId, spotId, review);
         const newReview = await Review.create({
             userId,
             spotId,
