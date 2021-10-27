@@ -134,8 +134,11 @@ export const updateUserBooking = (spotId, userId, startDate, endDate, newStart, 
 
   if (response.ok) {
     const data = await response.json();
-    if (data.Error) {
+    console.log(data.Error);
+    if (data.Error === "Booking already exists.") {
       return 'Booking already exists.';
+    } else if (data.Error === "Bookings cannot overlap.") {
+        return "Bookings cannot overlap.";
     } else {
       dispatch(updateBooking(data));
       return null;

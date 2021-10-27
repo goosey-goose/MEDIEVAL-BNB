@@ -213,6 +213,9 @@ router.post('/new', requireAuth,
             }
         });
 
+        // console.log("############", temp1);
+        // console.log("%%%%%%%%%%%%", temp2);
+
         // IF NO DUPLICATE AND OVERLAPPING EXISTS, CREATE BOOKING
         if (temp1 === null && temp2 === null) {
             const newBooking = await Booking.create({
@@ -340,6 +343,9 @@ router.patch('/edit', requireAuth,
             }
         });
 
+        // console.log("############", temp1);
+        // console.log("%%%%%%%%%%%%", temp2);
+
 
         // IF NO DUPLICATE EXISTS AND NOTHING OVERLAPS, UPDATE BOOKING
         if (temp1 === null && temp2.length === 0 && bookingToUpdate !== null) {
@@ -393,8 +399,10 @@ router.patch('/edit', requireAuth,
             );
 
 
-        } else {
-            res.json({"Error": "Booking already exists or something else went wrong."});
+        } else if (temp1 !== null) {
+            res.json({"Error": "Booking already exists."});
+        } else if (temp2.length > 0) {
+            res.json({"Error": "Bookings cannot overlap."});
         }
 
 

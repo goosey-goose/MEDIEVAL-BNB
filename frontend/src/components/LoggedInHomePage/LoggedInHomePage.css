@@ -84,3 +84,22 @@
     justify-content: center;
     margin-top: 1rem;
 }
+
+.cb_dates {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1rem;
+}
+
+.cb_total_cost {
+    display: flex;
+    justify-content: flex-start;
+}
+
+#modal2_errors_div {
+    position: absolute;
+    background-color: white;
+    border-radius: 10px;
+    color: red;
+    z-index: 1;
+}

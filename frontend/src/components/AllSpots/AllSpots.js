@@ -34,11 +34,29 @@ function AllSpots({ isLoaded }) {
 
     const submitBooking = async () => {
       let temp = await dispatch(createUserBooking(spotId, sessionUser.id, selectedStartDate, selectedEndDate));
-      // console.log(temp);
-      setModalIsOpen(false);
-      setSelectedStartDate(null);
-      setSelectedEndDate(null);
-      currentSelectedSpot.classList.remove('no_effects');
+      // console.log(typeof(temp));
+      if (temp === null) {
+        setModalIsOpen(false);
+        setSelectedStartDate(null);
+        setSelectedEndDate(null);
+        currentSelectedSpot.classList.remove('no_effects');
+      } else if (temp === "Bookings cannot overlap.") {
+        let modalErrorsDiv = document.getElementById("modal_errors_div");
+        if (modalErrorsDiv.innerHTML !== '') {
+          modalErrorsDiv.innerHTML = '';
+          modalErrorsDiv.style.padding = '0';
+        }
+        modalErrorsDiv.innerHTML = "<div>*Bookings cannot overlap.</div>";
+        modalErrorsDiv.style.padding = ".5rem";
+      } else if (temp === "Booking already exists.") {
+        let modalErrorsDiv = document.getElementById("modal_errors_div");
+        if (modalErrorsDiv.innerHTML !== '') {
+          modalErrorsDiv.innerHTML = '';
+          modalErrorsDiv.style.padding = '0';
+        }
+        modalErrorsDiv.innerHTML = "<div>*Booking already exists.</div>";
+        modalErrorsDiv.style.padding = ".5rem";
+      }
     }
 
 
@@ -46,29 +64,38 @@ function AllSpots({ isLoaded }) {
     const submitReview = () => {
       let reviewTextArea = document.getElementById("review_box");
       // console.log(reviewTextArea.value);
-      dispatch(addUserReview(sessionUser.id, sId, reviewTextArea.value));
-      console.log(sId);
-      let addReviewButton = document.getElementById("write_review_button");
-      addReviewButton.innerText = 'Write a Review';
-      let temp = document.getElementById("review_box");
-      temp.remove();
-      let temp2 = document.getElementById("submit_review_button");
-      temp2.remove();
-      /////////////////////////////////////////////////////////////
-      let loggedInReviewsContainer = document.getElementById("logged_in_reviews_container");
-      if (loggedInReviewsContainer.style.visibility === 'visible') {
-        let reviewDiv = document.createElement("div");
-        reviewDiv.style.padding = ".5rem .5rem 0 .5rem";
-        reviewDiv.innerHTML = `<span style="font-weight: bold">${allUsers?.[sessionUser.id].username}</span> -- ${reviewTextArea.value}`;
-        loggedInReviewsContainer.appendChild(reviewDiv);
+      if (reviewTextArea.value !== '') {
+        dispatch(addUserReview(sessionUser.id, sId, reviewTextArea.value));
+        console.log(sId);
+        let addReviewButton = document.getElementById("write_review_button");
+        addReviewButton.innerText = 'Write a Review';
+        let temp = document.getElementById("review_box");
+        temp.remove();
+        let temp2 = document.getElementById("submit_review_button");
+        temp2.remove();
+        let loggedInReviewsContainer = document.getElementById("logged_in_reviews_container");
+        if (loggedInReviewsContainer.style.visibility === 'visible') {
+          let reviewDiv = document.createElement("div");
+          reviewDiv.style.padding = ".5rem .5rem 0 .5rem";
+          reviewDiv.innerHTML = `<span style="font-weight: bold">${allUsers?.[sessionUser.id].username}</span> -- ${reviewTextArea.value}`;
+          loggedInReviewsContainer.appendChild(reviewDiv);
+        }
+      } else {
+        let modalErrorsDiv = document.getElementById("modal_errors_div");
+        modalErrorsDiv.style.padding = ".5rem";
+        modalErrorsDiv.innerHTML = "<div>*Review cannot be empty.</div>";
       }
-      /////////////////////////////////////////////////////////////
     }
 
     console.log("eben: ", testSpotId);
 
 
     const showReviews = (id) => {
+      let modalErrorsDiv = document.getElementById("modal_errors_div");
+      if (modalErrorsDiv.innerHTML !== '') {
+        modalErrorsDiv.innerHTML = '';
+        modalErrorsDiv.style.padding = '0';
+      }
       console.log(id);
       let showReviewsbutton = document.querySelector(".show_reviews_button");
       let loggedOutReviewsContainer = document.getElementById("logged_out_reviews_container");
@@ -141,6 +168,11 @@ function AllSpots({ isLoaded }) {
     // console.log(review);
 
     const abc = () => {
+      let modalErrorsDiv = document.getElementById("modal_errors_div");
+      if (modalErrorsDiv.innerHTML !== '') {
+        modalErrorsDiv.innerHTML = '';
+        modalErrorsDiv.style.padding = '0';
+      }
       let temp = document.getElementById("review_box");
       let temp2 = document.getElementById("submit_review_button");
       if (!temp) {
@@ -246,7 +278,18 @@ function AllSpots({ isLoaded }) {
                 if (spotAddress) {
                   spotAddress.innerText = '';
                   allSpots.forEach((spot) => {
-                    if (spot.imageUrl === event.target.src) spotAddress.innerText = spot.fullAddress;
+                    if (spot.imageUrl === event.target.src) {
+                      // let showReviewsButtonRaw = (`<button id="show_reviews_below_write" className="show_reviews_button" type="button">Reviews</button>`);
+                      spotAddress.innerText = spot.fullAddress;
+                      // spotAddress.innerHTML = spot.fullAddress + showReviewsButtonRaw;
+                      // let showReviewsButton = document.getElementById("show_reviews_below_write");
+                      // showReviewsButton.addEventListener('click', () => {
+                      //   let loggedInReviewsContainer = document.getElementById("logged_in_reviews_container");
+                      //   if (loggedInReviewsContainer.innerHTML === '') {
+                      //     showReviews(spot.id);
+                      //   }
+                      // })
+                    }
                   });
                 }
                 if (spotName) {
@@ -414,6 +457,7 @@ function AllSpots({ isLoaded }) {
 
 
           <div id="div_inside_inner_modal">
+            <div id="modal_errors_div"></div>
             <img alt="" id="image_for_logged_in_booking"></img>
             <div style={{position: "relative"}}>
               <button id="logged_in_close_reviews_button">X</button>
@@ -421,7 +465,7 @@ function AllSpots({ isLoaded }) {
             <div id="logged_in_reviews_container" style={{position: "absolute", paddingBottom: ".5rem", width: "100%", maxHeight: "calc(100% - .5rem)", overflowY: "scroll", borderRadius: "10px"}}>
 
             </div>
-            <button className="show_reviews_button" type="button" onClick={() => showReviews(testSpotId)} style={{position: "absolute"}}>REVIEWS</button>
+            <button className="show_reviews_button" type="button" onClick={() => showReviews(testSpotId)} style={{position: "absolute"}}>Reviews</button>
             {selectedStartDate && selectedEndDate && <div id="book_it_button_div"><button onClick={submitBooking}>Book It</button></div>}
           </div>
 

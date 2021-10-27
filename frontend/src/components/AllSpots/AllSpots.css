@@ -3,6 +3,11 @@
     margin-top: 1rem;
 }
 
+/* #spot_address {
+  display: flex;
+  justify-content: space-between;
+} */
+
 #logged_out_reviews_container::-webkit-scrollbar, #logged_in_reviews_container::-webkit-scrollbar {
   display: none;
 }
@@ -32,6 +37,11 @@
   padding: 0;
 }
 
+.show_reviews_button {
+  bottom: -4.7rem;
+  right: 0;
+}
+
 #write_review_button {
   width: 6.8rem;
 }
@@ -39,6 +49,14 @@
 #submit_review_button {
   bottom: -2.34rem;
   right: 7.6rem;
+  z-index: 1;
+}
+
+#modal_errors_div {
+  position: absolute;
+  background-color: white;
+  border-radius: 10px;
+  color: red;
   z-index: 1;
 }
 

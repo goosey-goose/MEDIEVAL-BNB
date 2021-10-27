@@ -24,12 +24,31 @@ function LoggedInHomePage({ isLoaded }) {
 
 
 
-  const updateBooking = () => {
+  const updateBooking = async () => {
     // console.log("testing the update button");
-    dispatch(updateUserBooking(spotId, sessionUser.id, originalStartDate, originalEndDate, selectedStartDate, selectedEndDate));
-    setModalIsOpen(false);
-    setSelectedStartDate(null);
-    setSelectedEndDate(null);
+    let temp = await dispatch(updateUserBooking(spotId, sessionUser.id, originalStartDate, originalEndDate, selectedStartDate, selectedEndDate));
+    console.log(temp);
+    if (temp === null) {
+      setModalIsOpen(false);
+      setSelectedStartDate(null);
+      setSelectedEndDate(null);
+    } else if (temp === "Bookings cannot overlap.") {
+      let modal2ErrorsDiv = document.getElementById("modal2_errors_div");
+      if (modal2ErrorsDiv.innerHTML !== '') {
+        modal2ErrorsDiv.innerHTML = '';
+        modal2ErrorsDiv.style.padding = '0';
+      }
+      modal2ErrorsDiv.innerHTML = "<div>*Bookings cannot overlap.</div>";
+      modal2ErrorsDiv.style.padding = ".5rem";
+    } else if (temp === "Booking already exists.") {
+      let modal2ErrorsDiv = document.getElementById("modal2_errors_div");
+      if (modal2ErrorsDiv.innerHTML !== '') {
+        modal2ErrorsDiv.innerHTML = '';
+        modal2ErrorsDiv.style.padding = '0';
+      }
+      modal2ErrorsDiv.innerHTML = "<div>*Booking already exists.</div>";
+      modal2ErrorsDiv.style.padding = ".5rem";
+    }
   };
 
 
@@ -65,6 +84,24 @@ function LoggedInHomePage({ isLoaded }) {
     setModalIsOpen(false);
     // console.log(spotId, sessionUser.id, originalStartDate, originalEndDate);
   }
+
+
+
+  //////////////////////////////////////////////////////////////////////////////////////////////////
+  const totalBookingCost = (booking) => {
+    let date1 = new Date(booking.endDate);
+    let date2 = new Date(booking.startDate);
+    let difference = date1.getTime() - date2.getTime();
+    let days = Math.ceil(difference / (1000 * 3600 * 24));
+    let totalCost;
+    allSpots.forEach((spot) => {
+      if (spot.id === booking.spotId) {
+        totalCost = parseInt(days) * spot.price;
+      }
+    })
+    return totalCost;
+  }
+  //////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
@@ -197,7 +234,9 @@ function LoggedInHomePage({ isLoaded }) {
             // console.log(booking.spotId);
             return (<div className="confirmed_bookings" data-ca={booking.createdAt} key={index}>
                 <img alt="" src={allSpots[parseInt(booking.spotId) - 1].imageUrl}></img>
-                <div style={{display: "flex", justifyContent: "space-between", marginTop: "1.3rem"}}><div>{allSpots[parseInt(booking.spotId) - 1].spotName}</div><div>${allSpots[parseInt(booking.spotId) - 1].price}</div></div>
+                <div className="cb_dates"><div>{((new Date((booking.startDate).substr(5) + "-" + (booking.startDate).substr(0, 4))).toDateString()).substr(4)}</div><div>to</div><div>{((new Date((booking.endDate).substr(5) + "-" + (booking.endDate).substr(0, 4))).toDateString()).substr(4)}</div></div>
+                <div style={{display: "flex", justifyContent: "space-between", marginTop: "0"}}><div>{allSpots[parseInt(booking.spotId) - 1].spotName}</div><div></div></div>
+                <div className="cb_total_cost"><div>{"Total:"}&nbsp;&nbsp;</div><div>{"$" + totalBookingCost(booking)}</div></div>
             </div>)
           })}
         </div>
@@ -247,6 +286,7 @@ function LoggedInHomePage({ isLoaded }) {
 
 
           <div id="div_inside_inner_modal2">
+          <div id="modal2_errors_div"></div>
             <img alt="" id="image_for_logged_in_booking2"></img>
             {selectedStartDate && selectedEndDate && <div id="update_booking_button_div"><button onClick={updateBooking}>Update Booking</button></div>}
           </div>
