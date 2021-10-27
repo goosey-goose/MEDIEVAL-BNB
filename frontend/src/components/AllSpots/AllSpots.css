@@ -32,6 +32,10 @@
   padding: 0;
 }
 
+#write_review_button {
+  width: 6.8rem;
+}
+
 #submit_review_button {
   bottom: -2.34rem;
   right: 7.6rem;

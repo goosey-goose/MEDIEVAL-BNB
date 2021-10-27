@@ -48,6 +48,21 @@ function AllSpots({ isLoaded }) {
       // console.log(reviewTextArea.value);
       dispatch(addUserReview(sessionUser.id, sId, reviewTextArea.value));
       console.log(sId);
+      let addReviewButton = document.getElementById("write_review_button");
+      addReviewButton.innerText = 'Write a Review';
+      let temp = document.getElementById("review_box");
+      temp.remove();
+      let temp2 = document.getElementById("submit_review_button");
+      temp2.remove();
+      /////////////////////////////////////////////////////////////
+      let loggedInReviewsContainer = document.getElementById("logged_in_reviews_container");
+      if (loggedInReviewsContainer.style.visibility === 'visible') {
+        let reviewDiv = document.createElement("div");
+        reviewDiv.style.padding = ".5rem .5rem 0 .5rem";
+        reviewDiv.innerHTML = `<span style="font-weight: bold">${allUsers?.[sessionUser.id].username}</span> -- ${reviewTextArea.value}`;
+        loggedInReviewsContainer.appendChild(reviewDiv);
+      }
+      /////////////////////////////////////////////////////////////
     }
 
     console.log("eben: ", testSpotId);
@@ -149,6 +164,21 @@ function AllSpots({ isLoaded }) {
           temp.remove();
           temp2.remove();
       }
+      ///////////////////////////////////////////////////////////
+      let loggedInReviewsContainer = document.getElementById("logged_in_reviews_container");
+      let loggedInCloseReviewsButton = document.getElementById("logged_in_close_reviews_button");
+      let showReviewsbutton = document.querySelector(".show_reviews_button");
+      loggedInCloseReviewsButton.style.display = "none";
+      loggedInReviewsContainer.innerHTML = '';
+      loggedInReviewsContainer.style.visibility = 'hidden';
+      showReviewsbutton.style.visibility = "visible";
+      ///////////////////////////////////////////////////////////
+      let addReviewButton = document.getElementById("write_review_button");
+      if (addReviewButton.innerText === 'Write a Review') {
+        addReviewButton.innerText = 'Close';
+      } else if (addReviewButton.innerText === 'Close') {
+        addReviewButton.innerText = 'Write a Review';
+      }
     }
 
 
@@ -173,8 +203,10 @@ function AllSpots({ isLoaded }) {
                 // console.log("there is no session user............");
                 let actualLoggedOutModal = document?.getElementById('actual_logged_out_modal');
                 if (actualLoggedOutModal) {
-                  actualLoggedOutModal.innerHTML = `<div id="div_inside_outer_modal" style="position: relative"><img src=${event.target.currentSrc}></img><div style="position: relative"><button id="logged_out_close_reviews_button">X</button></div><div id="logged_out_reviews_container" style="position: absolute; padding-bottom: .5rem; width: 100%; max-height: calc(100% - .5rem); overflow-y: scroll; border-radius: 10px"></div><button class="show_reviews_button" type="button" style="position: absolute">REVIEWS</button></div>`;
+                  actualLoggedOutModal.innerHTML = `<div id="div_inside_outer_modal" style="position: relative"><img src=${event.target.currentSrc}></img><div style="position: relative"><button id="logged_out_close_reviews_button">X</button></div><div id="logged_out_reviews_container" style="position: absolute; padding-bottom: .5rem; width: 100%; max-height: calc(100% - .5rem); overflow-y: scroll; border-radius: 10px"></div><button id="hide_this_button" class="show_reviews_button" type="button" style="position: absolute">REVIEWS</button></div>`;
                   let showReviewsbutton = document.querySelector(".show_reviews_button");
+                  let hideThisButton = document.getElementById("hide_this_button");
+                  hideThisButton.style.display = "none";
                   allSpots.forEach((spot) => {
                     if (spot.imageUrl === event.target.src) {
                       if (showReviewsbutton) {
