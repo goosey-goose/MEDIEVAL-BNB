@@ -98,7 +98,7 @@
 }
 
 .spot_divs img:hover {
-    transform: scale(1.25,1.25);
+    transform: scale(1.07,1.07);
     z-index: 5;
 }
 
@@ -247,5 +247,18 @@ button.react-datepicker__close-icon::after {
 
     #description_subpoints {
         width: 62.5rem;
+    }
+
+    #root {
+        width: 78rem;
+    }
+
+    #spots_grid {
+        padding: 0;
+        padding-top: 1rem;
+    }
+
+    body {
+        min-width: 0;
     }
   }
