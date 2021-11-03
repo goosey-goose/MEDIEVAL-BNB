@@ -70,10 +70,12 @@ function LoggedInHomePage({ isLoaded }) {
         // deleteBookingButton.setAttribute('disabled', 'false');
         deleteBookingButton.removeAttribute('disabled');
         deleteBookingButton.style.cursor = "pointer";
+        deleteBookingButton.style.color = "black";
       } else {
         // deleteBookingButton.style.backgroundColor = "#878787";
         deleteBookingButton.setAttribute('disabled', 'true');
         deleteBookingButton.style.cursor = 'inherit';
+        deleteBookingButton.style.color = "white";
       }
     })
   };
@@ -350,7 +352,7 @@ function LoggedInHomePage({ isLoaded }) {
                   <input id="delete_checkbox" type="checkbox"></input>
                 </div>
                 <div style={{display: "inline-block"}}>
-                  <button id="delete_booking_button" onClick={deleteBooking} style={{border: "none", lineHeight: "1.2"}}>Delete this booking?</button>
+                  <button id="delete_booking_button" onClick={deleteBooking} style={{border: "none", lineHeight: "1.2", color: "white"}}>Delete this booking?</button>
                 </div>
               </div>
           </div>}
