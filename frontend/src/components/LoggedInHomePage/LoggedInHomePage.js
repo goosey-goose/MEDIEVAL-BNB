@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Modal from 'react-modal';
+import { NavLink } from 'react-router-dom';
 import DatePicker from 'react-datepicker';
 import { updateUserBooking, deleteUserBooking } from "../../store/booking";
 import './LoggedInHomePage.css';
@@ -21,6 +22,10 @@ function LoggedInHomePage({ isLoaded }) {
   const [spotId, setSpotId] = useState(null);
   const [originalStartDate, setOriginalStartDate] = useState(null);
   const [originalEndDate, setOriginalEndDate] = useState(null);
+  ////////////////////////////////////////////////////////////////////////////
+  const [showFutureBookings, setShowFutureBookings] = useState(true);
+  const [showPastBookings, setShowPastBookings] = useState(false);
+  ////////////////////////////////////////////////////////////////////////////
 
 
 
@@ -232,12 +237,22 @@ function LoggedInHomePage({ isLoaded }) {
           Trips
         </div>
         <div id="limd_div_2">
-          Upcoming     Past
+          <button>Upcoming</button><button>Past</button>
         </div>
         <div style={{margin: "1rem"}}>
         <div id="limd_div_3">
           {/* {console.log(userBookings)} */}
-          {userBookings && (userBookings.filter(booking => new Date(booking.startDate) > new Date())).map((booking, index) => {
+          {userBookings && showFutureBookings && (userBookings.filter(booking => new Date(booking.startDate) > new Date())).map((booking, index) => {
+            // console.log(booking.spotId);
+            return (<div className="confirmed_bookings" data-ca={booking.createdAt} key={index}>
+                <img alt="" src={allSpots[parseInt(booking.spotId) - 1].imageUrl}></img>
+                <div className="cb_dates"><div>{((new Date((booking.startDate).substr(5) + "-" + (booking.startDate).substr(0, 4))).toDateString()).substr(4)}</div><div>to</div><div>{((new Date((booking.endDate).substr(5) + "-" + (booking.endDate).substr(0, 4))).toDateString()).substr(4)}</div></div>
+                <div style={{display: "flex", justifyContent: "space-between", marginTop: "0"}}><div>{allSpots[parseInt(booking.spotId) - 1].spotName}</div><div></div></div>
+                <div className="cb_total_cost"><div>{"Total:"}&nbsp;&nbsp;</div><div>{"$" + totalBookingCost(booking)}</div></div>
+            </div>)
+          })}
+
+          {userBookings && showPastBookings && (userBookings.filter(booking => new Date(booking.startDate) < new Date())).map((booking, index) => {
             // console.log(booking.spotId);
             return (<div className="confirmed_bookings" data-ca={booking.createdAt} key={index}>
                 <img alt="" src={allSpots[parseInt(booking.spotId) - 1].imageUrl}></img>
