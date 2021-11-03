@@ -187,6 +187,10 @@ button.react-datepicker__close-icon::after {
     top: 35%;
 }
 
+#book_it_button_div {
+    visibility: hidden;
+}
+
 #book_it_button_div button, #update_booking_button_div button {
     background-color: #27ff27;
     box-shadow: 0px 0px 5px 15px rgb(255 255 255 / 90%);
@@ -264,5 +268,6 @@ button.react-datepicker__close-icon::after {
 
     #limd_div_3 {
         grid-gap: .7rem;
+        /* grid-template-columns: 1fr 1fr 1fr 1fr; */
     }
   }

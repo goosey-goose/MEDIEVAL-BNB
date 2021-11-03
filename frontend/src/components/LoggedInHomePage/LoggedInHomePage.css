@@ -31,7 +31,7 @@
     padding: 4rem;
     display: grid;
     grid-template-rows: 1fr 1fr auto;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
     /* min-height: 47rem; */
     /* max-height: 21rem; */
     height: 37rem;

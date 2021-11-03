@@ -34,13 +34,14 @@ function AllSpots({ isLoaded }) {
 
     const submitBooking = async () => {
       let temp = await dispatch(createUserBooking(spotId, sessionUser.id, selectedStartDate, selectedEndDate));
-      // console.log(typeof(temp));
+      // let bookItButtonDiv = document.getElementById("book_it_button_div");
       if (temp === null) {
         setModalIsOpen(false);
         setSelectedStartDate(null);
         setSelectedEndDate(null);
         currentSelectedSpot.classList.remove('no_effects');
       } else if (temp === "Bookings cannot overlap.") {
+        // if (bookItButtonDiv) bookItButtonDiv.remove();
         let modalErrorsDiv = document.getElementById("modal_errors_div");
         if (modalErrorsDiv.innerHTML !== '') {
           modalErrorsDiv.innerHTML = '';
@@ -49,6 +50,7 @@ function AllSpots({ isLoaded }) {
         modalErrorsDiv.innerHTML = "<div>*Bookings cannot overlap.</div>";
         modalErrorsDiv.style.padding = ".5rem";
       } else if (temp === "Booking already exists.") {
+        // if (bookItButtonDiv) bookItButtonDiv.remove();
         let modalErrorsDiv = document.getElementById("modal_errors_div");
         if (modalErrorsDiv.innerHTML !== '') {
           modalErrorsDiv.innerHTML = '';
@@ -91,6 +93,12 @@ function AllSpots({ isLoaded }) {
 
 
     const showReviews = (id) => {
+      // if (selectedStartDate || selectedEndDate) {
+      //   setSelectedStartDate(null);
+      //   setSelectedEndDate(null);
+      // }
+      let bookItButtonDiv = document.getElementById("book_it_button_div");
+      if (bookItButtonDiv) bookItButtonDiv.style.visibility = "hidden";
       let modalErrorsDiv = document.getElementById("modal_errors_div");
       if (modalErrorsDiv.innerHTML !== '') {
         modalErrorsDiv.innerHTML = '';
@@ -168,6 +176,17 @@ function AllSpots({ isLoaded }) {
     // console.log(review);
 
     const abc = () => {
+      // let reactDatepickerInputContainer = document.querySelectorAll(".react-datepicker__input-container");
+      // console.log(reactDatepickerInputContainer[0].children[0].value);
+      // if (reactDatepickerInputContainer[0].children[0].value) {
+      //   reactDatepickerInputContainer[0].children[0].value = '';
+      // }
+      // if (reactDatepickerInputContainer[1].children[0].value) {
+      //   reactDatepickerInputContainer[1].children[0].value = '';
+      // }
+      let bookItButtonDiv = document.getElementById("book_it_button_div");
+      if (bookItButtonDiv) bookItButtonDiv.style.visibility = "hidden";
+
       let modalErrorsDiv = document.getElementById("modal_errors_div");
       if (modalErrorsDiv.innerHTML !== '') {
         modalErrorsDiv.innerHTML = '';
@@ -466,7 +485,8 @@ function AllSpots({ isLoaded }) {
 
             </div>
             <button className="show_reviews_button" type="button" onClick={() => showReviews(testSpotId)} style={{position: "absolute"}}>Reviews</button>
-            {selectedStartDate && selectedEndDate && <div id="book_it_button_div"><button onClick={submitBooking}>Book It</button></div>}
+            {/* {selectedStartDate && selectedEndDate && <div id="book_it_button_div"><button onClick={submitBooking}>Book It</button></div>} */}
+            <div id="book_it_button_div"><button onClick={submitBooking}>Book It</button></div>
           </div>
 
           <div style={{display: "flex", justifyContent: "space-between"}} id="spot_name">
@@ -481,7 +501,7 @@ function AllSpots({ isLoaded }) {
           <div id="date_picker_container_div">
             <DatePicker
               selected={selectedStartDate}
-              onChange={date => setSelectedStartDate(date)}
+              onChange={date => {setSelectedStartDate(date); if (date && selectedEndDate) {document.getElementById("book_it_button_div").style.visibility = "visible";} else {document.getElementById("book_it_button_div").style.visibility = "hidden";} console.log(date);}}
               selectsStart
               startDate={selectedStartDate}
               endDate={selectedEndDate}
@@ -498,7 +518,7 @@ function AllSpots({ isLoaded }) {
 
             <DatePicker
               selected={selectedEndDate}
-              onChange={date => setSelectedEndDate(date)}
+              onChange={date => {setSelectedEndDate(date); if (date && selectedStartDate) {document.getElementById("book_it_button_div").style.visibility = "visible";} else {document.getElementById("book_it_button_div").style.visibility = "hidden";}}}
               selectsEnd
               startDate={selectedStartDate}
               endDate={selectedEndDate}
