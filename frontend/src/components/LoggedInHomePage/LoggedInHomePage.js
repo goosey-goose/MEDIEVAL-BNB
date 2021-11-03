@@ -89,7 +89,12 @@ function LoggedInHomePage({ isLoaded }) {
 
 
 
-  //////////////////////////////////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////////////////////////////////
+
+  ///////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
   const totalBookingCost = (booking) => {
     let date1 = new Date(booking.endDate);
     let date2 = new Date(booking.startDate);
@@ -103,7 +108,7 @@ function LoggedInHomePage({ isLoaded }) {
     })
     return totalCost;
   }
-  //////////////////////////////////////////////////////////////////////////////////////////////////
+
 
 
 
@@ -232,7 +237,7 @@ function LoggedInHomePage({ isLoaded }) {
         <div style={{margin: "1rem"}}>
         <div id="limd_div_3">
           {/* {console.log(userBookings)} */}
-          {userBookings && userBookings.map((booking, index) => {
+          {userBookings && (userBookings.filter(booking => new Date(booking.startDate) > new Date())).map((booking, index) => {
             // console.log(booking.spotId);
             return (<div className="confirmed_bookings" data-ca={booking.createdAt} key={index}>
                 <img alt="" src={allSpots[parseInt(booking.spotId) - 1].imageUrl}></img>
