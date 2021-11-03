@@ -261,4 +261,8 @@ button.react-datepicker__close-icon::after {
     body {
         min-width: 0;
     }
+
+    #limd_div_3 {
+        grid-gap: .7rem;
+    }
   }

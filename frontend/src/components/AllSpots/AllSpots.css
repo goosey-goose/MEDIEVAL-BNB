@@ -54,10 +54,11 @@
 
 #modal_errors_div {
   position: absolute;
-  background-color: white;
+  background-color: #7a7373;
   border-radius: 10px;
-  color: red;
+  color: white;
   z-index: 1;
+  bottom: 0;
 }
 
 /* delete this */
