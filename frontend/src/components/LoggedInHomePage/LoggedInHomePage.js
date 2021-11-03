@@ -96,7 +96,7 @@ function LoggedInHomePage({ isLoaded }) {
     let totalCost;
     allSpots.forEach((spot) => {
       if (spot.id === booking.spotId) {
-        totalCost = parseInt(days) * spot.price;
+        totalCost = (parseInt(days) + 1) * spot.price;
       }
     })
     return totalCost;
