@@ -94,12 +94,6 @@ function LoggedInHomePage({ isLoaded }) {
 
 
 
-  ///////////////////////////////////////////////////////////////////////////////////////////////////
-
-  ///////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
   const totalBookingCost = (booking) => {
     let date1 = new Date(booking.endDate);
     let date2 = new Date(booking.startDate);
@@ -228,6 +222,30 @@ function LoggedInHomePage({ isLoaded }) {
       }, [userBookings]);
       ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      const toggleFuturePastBookings = (event) => {
+        // console.log(event.target.id);
+        let upcomingButton = document.getElementById("upcoming_bookings_button");
+        let pastButton = document.getElementById("past_bookings_button");
+        if (event.target.id === "upcoming_bookings_button") {
+          pastButton.classList.remove("actively_focused_button");
+          upcomingButton.classList.add("actively_focused_button");
+          setShowPastBookings(false);
+          setShowFutureBookings(true);
+        } else if (event.target.id === "past_bookings_button") {
+            upcomingButton.classList.remove("actively_focused_button");
+            pastButton.classList.add("actively_focused_button");
+            setShowFutureBookings(false);
+            setShowPastBookings(true);
+        }
+      }
+
+      useEffect(() => {
+        let upcomingButton = document.getElementById("upcoming_bookings_button");
+        upcomingButton.classList.add("actively_focused_button");
+      }, [])
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 
 
   return (
@@ -237,7 +255,7 @@ function LoggedInHomePage({ isLoaded }) {
           Trips
         </div>
         <div id="limd_div_2">
-          <button>Upcoming</button><button>Past</button>
+          <button id="upcoming_bookings_button" onClick={(event) => toggleFuturePastBookings(event)}>Upcoming</button><button id="past_bookings_button" onClick={(event) => toggleFuturePastBookings(event)}>Past</button>
         </div>
         <div style={{margin: "1rem"}}>
         <div id="limd_div_3">
