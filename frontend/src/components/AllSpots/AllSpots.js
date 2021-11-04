@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createUserBooking } from "../../store/booking";
-import { addUserReview } from "../../store/review";
+import { addUserReview, deleteUserReview } from "../../store/review";
 import Modal from 'react-modal';
 import DatePicker from 'react-datepicker';
 
@@ -148,8 +148,15 @@ function AllSpots({ isLoaded }) {
       allUserReviews?.forEach((review) => {
         if (review.spotId === id) {
           let reviewDiv = document.createElement("div");
+          reviewDiv.setAttribute('data-id', `${review.createdAt}`);
           reviewDiv.style.padding = ".5rem .5rem 0 .5rem";
+          reviewDiv.style.cursor = "pointer";
           reviewDiv.innerHTML = `<span style="font-weight: bold">${allUsers?.[review.userId].username}</span> -- ${review.review}`;
+          reviewDiv.addEventListener('click', (event) => {
+            dispatch(deleteUserReview(event.target.attributes[0].value));
+            setModalIsOpen(false);
+            // console.log(event.target.attributes[0].value);
+          })
 
           if (!sessionUser) {
             console.log("logged out");

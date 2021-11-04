@@ -87,17 +87,29 @@ router.patch('/edit', requireAuth,
 router.delete('/delete', requireAuth,
     asyncHandler(async (req, res) => {
 
-        const { spotId, userId, review } = req.body;
+        // const { spotId, userId, review } = req.body;
+        const { createdAt } = req.body;
 
         const reviewToDelete = await Review.findOne({
+            // where: {
+            //     userId,
+            //     spotId,
+            //     review
+            // }
             where: {
-                userId,
-                spotId,
-                review
+                createdAt
             }
         });
 
-        await reviewToDelete.destroy();
+        if (reviewToDelete !== null) {
+            await Review.destroy({
+                where: {
+                    createdAt
+                }
+            });
+        }
+
+        // await reviewToDelete.destroy();
 
         res.json(
           {"DELETED REVIEW": reviewToDelete}
