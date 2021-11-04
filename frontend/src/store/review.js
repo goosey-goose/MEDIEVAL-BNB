@@ -110,10 +110,15 @@ const reviewReducer = (state = initialState, action) => {
       newState = Object.assign({}, state);
       newState.reviews = null;
       return newState;
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////
     case GET_USERS:
-      newState = {...state, reviews: [...state.reviews], users: action.payload};
+      if (state.reviews) {
+        newState = {...state, reviews: [...state.reviews], users: action.payload};
+      } else if (!state.reviews) {
+          newState = {...state, users: action.payload};
+      }
       return newState;
-    ///////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////
     case ADD_REVIEW:
       // console.log(action.payload);
       newState = {...state, reviews: [...state.reviews], users: {...state.users}};
