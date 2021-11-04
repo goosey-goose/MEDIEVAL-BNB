@@ -26,6 +26,7 @@ function LoggedInHomePage({ isLoaded }) {
   const [showFutureBookings, setShowFutureBookings] = useState(true);
   const [showPastBookings, setShowPastBookings] = useState(false);
   ////////////////////////////////////////////////////////////////////////////
+  const [showUpdateButton, setShowUpdateButton] = useState(false);
 
 
 
@@ -58,6 +59,7 @@ function LoggedInHomePage({ isLoaded }) {
 
 
   const testFunction = () => {
+    setShowUpdateButton(true);
     let showDatePickerButton = document.getElementById("show_date_picker_button");
     showDatePickerButton.style.display = "none";
     let datePickerContainer = document.getElementById("date_picker_container_div2");
@@ -252,7 +254,7 @@ function LoggedInHomePage({ isLoaded }) {
     <>
       <div id="logged_in_main_div">
         <div id="limd_div_1">
-          Trips
+          Bookings
         </div>
         <div id="limd_div_2">
           <button id="upcoming_bookings_button" onClick={(event) => toggleFuturePastBookings(event)}>Upcoming</button><button id="past_bookings_button" onClick={(event) => toggleFuturePastBookings(event)}>Past</button>
@@ -294,7 +296,7 @@ function LoggedInHomePage({ isLoaded }) {
           let actualLoggedInModal2 = document.getElementById('actual_logged_in_modal2');
           actualLoggedInModal2.innerHTML = '';
           setModalIsOpen(false);
-          // setShowDatePicker(false);
+          setShowUpdateButton(false);
           // console.log(currentSelectedSpot.childNodes[0]);
           currentSelectedBooking.classList.remove('no_effects');
           // let spotDivs = document.querySelectorAll(".spot_divs");
@@ -328,7 +330,7 @@ function LoggedInHomePage({ isLoaded }) {
           <div id="div_inside_inner_modal2">
           <div id="modal2_errors_div"></div>
             <img alt="" id="image_for_logged_in_booking2"></img>
-            {selectedStartDate && selectedEndDate && <div id="update_booking_button_div"><button onClick={updateBooking}>Update Booking</button></div>}
+            {showUpdateButton && selectedStartDate && selectedEndDate && <div id="update_booking_button_div"><button onClick={updateBooking}>Update Booking</button></div>}
           </div>
 
           <div id="spot_name2">
