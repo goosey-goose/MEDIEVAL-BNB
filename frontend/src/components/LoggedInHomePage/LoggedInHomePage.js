@@ -4,6 +4,7 @@ import Modal from 'react-modal';
 import { NavLink } from 'react-router-dom';
 import DatePicker from 'react-datepicker';
 import { updateUserBooking, deleteUserBooking } from "../../store/booking";
+import { getAllUsers } from '../../store/review';
 import './LoggedInHomePage.css';
 
 function LoggedInHomePage({ isLoaded }) {
@@ -11,6 +12,7 @@ function LoggedInHomePage({ isLoaded }) {
   const sessionUser = useSelector(state => state.session.user);
   const userBookings = useSelector(state => state.bookings.bookings);
   const allSpots = useSelector(state => state.spots.spots);
+  const usersForReviews = useSelector(state => state?.reviews?.users);
   // const userBookings = useSelector(state => state.bookings?.bookings?.Bookings);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [currentSelectedBooking, setCurrentSelectedBooking] = useState(null);
@@ -248,6 +250,15 @@ function LoggedInHomePage({ isLoaded }) {
       }, [])
       ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+      useEffect(() => {
+        if (!usersForReviews[sessionUser.id]) {
+          // console.log("no such user");
+          dispatch(getAllUsers());
+        }
+        if (usersForReviews[sessionUser.id]) {
+          console.log("USER FOUND!!!!!");
+        }
+      })
 
 
   return (

@@ -61,6 +61,11 @@
   bottom: 0;
 }
 
+
+.review_div_class:hover {
+  background-color: grey;
+}
+
 /* delete this */
 /* #logged_out_reviews_container {
   transition: transform .3s ease-in-out;

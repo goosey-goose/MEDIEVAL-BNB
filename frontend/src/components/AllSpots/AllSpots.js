@@ -149,13 +149,15 @@ function AllSpots({ isLoaded }) {
         if (review.spotId === id) {
           let reviewDiv = document.createElement("div");
           reviewDiv.setAttribute('data-id', `${review.createdAt}`);
+          reviewDiv.setAttribute('class', 'review_div_class');
           reviewDiv.style.padding = ".5rem .5rem 0 .5rem";
           reviewDiv.style.cursor = "pointer";
           reviewDiv.innerHTML = `<span style="font-weight: bold">${allUsers?.[review.userId].username}</span> -- ${review.review}`;
           reviewDiv.addEventListener('click', (event) => {
-            dispatch(deleteUserReview(event.target.attributes[0].value));
-            setModalIsOpen(false);
-            // console.log(event.target.attributes[0].value);
+            if (review.userId == sessionUser.id) {
+              dispatch(deleteUserReview(event.target.attributes[0].value));
+              setModalIsOpen(false);
+            }
           })
 
           if (!sessionUser) {

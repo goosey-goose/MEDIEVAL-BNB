@@ -32,7 +32,7 @@ function App() {
   const sessionUser = useSelector(state => state.session.user);
   // const allSpots = useSelector(state => state.spots.spots);
 
-  // console.log('#####################################  APP COMPONENT RENDERED  ##################################');
+  console.log('#####################################  APP COMPONENT RENDERED  ##################################');
 
   let history = useHistory();
 
