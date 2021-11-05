@@ -154,9 +154,23 @@ function AllSpots({ isLoaded }) {
           reviewDiv.style.cursor = "pointer";
           reviewDiv.innerHTML = `<span style="font-weight: bold">${allUsers?.[review.userId].username}</span> -- ${review.review}`;
           reviewDiv.addEventListener('click', (event) => {
-            if (review.userId == sessionUser.id) {
-              dispatch(deleteUserReview(event.target.attributes[0].value));
-              setModalIsOpen(false);
+            // if (review.userId == sessionUser.id) {
+            //   dispatch(deleteUserReview(event.target.attributes[0].value));
+            //   setModalIsOpen(false);
+            // }
+            if (review.userId === sessionUser.id && !reviewDiv.getElementsByTagName('button').length) {
+              let editOrDeleteReviewDiv = document.createElement("div");
+              let deleteReviewButton = document.createElement("button");
+              deleteReviewButton.innerText = "Delete";
+              deleteReviewButton.onclick = () => {
+                if (review.userId === sessionUser.id) {
+                  dispatch(deleteUserReview(event.target.attributes[0].value));
+                  setModalIsOpen(false);
+                  // console.log(event.target.attributes[0].value);
+                }
+              };
+              editOrDeleteReviewDiv.appendChild(deleteReviewButton);
+              reviewDiv.appendChild(editOrDeleteReviewDiv);
             }
           })
 
