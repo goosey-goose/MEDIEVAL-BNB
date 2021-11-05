@@ -158,6 +158,7 @@ function AllSpots({ isLoaded }) {
             //   dispatch(deleteUserReview(event.target.attributes[0].value));
             //   setModalIsOpen(false);
             // }
+            console.log(event.currentTarget);
             if (review.userId === sessionUser.id && !reviewDiv.getElementsByTagName('button').length) {
               let editOrDeleteReviewDiv = document.createElement("div");
               let deleteReviewButton = document.createElement("button");
@@ -165,6 +166,7 @@ function AllSpots({ isLoaded }) {
               deleteReviewButton.onclick = () => {
                 if (review.userId === sessionUser.id) {
                   dispatch(deleteUserReview(event.target.attributes[0].value));
+                  currentSelectedSpot.classList.remove('no_effects');
                   setModalIsOpen(false);
                   // console.log(event.target.attributes[0].value);
                 }
