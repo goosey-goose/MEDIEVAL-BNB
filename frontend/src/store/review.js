@@ -104,15 +104,17 @@ export const addUserReview = (userId, spotId, review) => async (dispatch) => {
 };
 
 
-////////////////////////////////////////////////////////////////////  userId, spotId, review
-export const deleteUserReview = (createdAt) => async (dispatch) => {
+//////////////////////////////////////////////////////////////  (userId, spotId, review) OR createdAt
+export const deleteUserReview = (userId, spotId, review) => async (dispatch) => {
   const response = await csrfFetch('/api/reviews/delete', {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({
-      createdAt
+      userId,
+      spotId,
+      review
     })
   });
 
