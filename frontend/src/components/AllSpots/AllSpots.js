@@ -79,7 +79,7 @@ function AllSpots({ isLoaded }) {
         if (loggedInReviewsContainer.style.visibility === 'visible') {
           let reviewDiv = document.createElement("div");
           reviewDiv.style.padding = ".5rem .5rem 0 .5rem";
-          reviewDiv.innerHTML = `<span style="font-weight: bold">${allUsers?.[sessionUser.id].username}</span> -- ${reviewTextArea.value}`;
+          reviewDiv.innerHTML = `<span style="font-weight: bold">${sessionUser.username}</span> -- ${reviewTextArea.value}`;
           loggedInReviewsContainer.appendChild(reviewDiv);
         }
       } else {
@@ -89,14 +89,8 @@ function AllSpots({ isLoaded }) {
       }
     }
 
-    console.log("eben: ", testSpotId);
-
 
     const showReviews = (id) => {
-      // if (selectedStartDate || selectedEndDate) {
-      //   setSelectedStartDate(null);
-      //   setSelectedEndDate(null);
-      // }
       let bookItButtonDiv = document.getElementById("book_it_button_div");
       if (bookItButtonDiv) bookItButtonDiv.style.visibility = "hidden";
       let modalErrorsDiv = document.getElementById("modal_errors_div");

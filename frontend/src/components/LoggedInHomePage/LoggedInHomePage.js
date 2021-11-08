@@ -251,14 +251,16 @@ function LoggedInHomePage({ isLoaded }) {
       ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
       useEffect(() => {
-        if (!usersForReviews[sessionUser.id]) {
-          // console.log("no such user");
-          dispatch(getAllUsers());
-        }
-        if (usersForReviews[sessionUser.id]) {
-          console.log("USER FOUND!!!!!");
-        }
-      })
+        // if (!usersForReviews[sessionUser.id]) {
+        //   // console.log("no such user");
+        //   dispatch(getAllUsers());
+        // }
+        // if (usersForReviews[sessionUser.id]) {
+        //   console.log("USER FOUND!!!!!");
+        // }
+        console.log("The Office");
+        dispatch(getAllUsers());
+      }, [sessionUser])
 
 
   return (
