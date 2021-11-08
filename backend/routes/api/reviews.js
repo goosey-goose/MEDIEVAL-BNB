@@ -6,7 +6,7 @@ const { requireAuth } = require('../../utils/auth');
 
 
 // READ ALL REVIEWS
-router.get('/', requireAuth,
+router.get('/',
      asyncHandler (async (req, res) => {
 
         const allReviews = await Review.findAll();
@@ -23,7 +23,7 @@ router.post('/new', requireAuth,
     asyncHandler(async (req, res) => {
 
         const { userId, spotId, review } = req.body;
-
+        console.log(userId, spotId, review);
         const newReview = await Review.create({
             userId,
             spotId,
@@ -87,17 +87,29 @@ router.patch('/edit', requireAuth,
 router.delete('/delete', requireAuth,
     asyncHandler(async (req, res) => {
 
-        const { spotId, userId, review } = req.body;
+        // const { spotId, userId, review } = req.body;
+        const { createdAt } = req.body;
 
         const reviewToDelete = await Review.findOne({
+            // where: {
+            //     userId,
+            //     spotId,
+            //     review
+            // }
             where: {
-                userId,
-                spotId,
-                review
+                createdAt
             }
         });
 
-        await reviewToDelete.destroy();
+        if (reviewToDelete !== null) {
+            await Review.destroy({
+                where: {
+                    createdAt
+                }
+            });
+        }
+
+        // await reviewToDelete.destroy();
 
         res.json(
           {"DELETED REVIEW": reviewToDelete}

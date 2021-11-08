@@ -1,33 +1,46 @@
 // frontend/src/App.js
 import React, { useState, useEffect } from "react";
+// import Modal from 'react-modal';
+// import DatePicker from 'react-datepicker';
 import { useDispatch, useSelector } from "react-redux";
-import { Route, Switch, Redirect, useHistory } from "react-router-dom";
+import { Route, Switch, useHistory } from "react-router-dom";
 import LoginFormPage from "./components/LoginFormPage";
 import SignupFormPage from "./components/SignupFormPage";
+import AllSpots from "./components/AllSpots/AllSpots";
 import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
 import { RiBook3Line } from 'react-icons/ri';
 import { HiPencilAlt } from 'react-icons/hi';
 import { HiOutlineSearch } from 'react-icons/hi';
 import { getAllSpots } from "./store/spot";
+import 'react-datepicker/dist/react-datepicker.css'
 import './App.css';
-import { getUserBookings } from './store/booking';
-import { getAllReviews } from "./store/review";
+import { getUserBookings, getAllUserBookings } from './store/booking';
+import { getAllReviews, getAllUsers } from "./store/review";
 import LoggedInHomePage from "./components/LoggedInHomePage/LoggedInHomePage";
+
+
+
+// Modal.setAppElement('#root');
 
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
+  // const [modalIsOpen, setModalIsOpen] = useState(false);
+  // const [selectedStartDate, setSelectedStartDate] = useState(null);
+  // const [selectedEndDate, setSelectedEndDate] = useState(null);
   const sessionUser = useSelector(state => state.session.user);
-  const allSpots = useSelector(state => state.spots.spots);
+  // const allSpots = useSelector(state => state.spots.spots);
 
-
+  console.log('#####################################  APP COMPONENT RENDERED  ##################################');
 
   let history = useHistory();
 
 
   useEffect(() => {
     dispatch(getAllSpots());
+    dispatch(getAllReviews());
+    dispatch(getAllUsers());
     dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
   }, [dispatch]);
 
@@ -37,10 +50,17 @@ function App() {
       history.push("/");
     } else {
       dispatch(getUserBookings());
-      dispatch(getAllReviews());
+      dispatch(getAllUserBookings());
+      // dispatch(getAllReviews());
       history.push("/home");
     }
   })
+
+
+
+
+
+
 
 
 
@@ -51,8 +71,8 @@ function App() {
         <Switch>
 
           {sessionUser && <Route exact path="/home">
-            {/* {!sessionUser && <Redirect to="/" />} */}
-            {sessionUser && <LoggedInHomePage />}
+
+            {sessionUser && <LoggedInHomePage isLoaded={isLoaded} />}
           </Route>}
 
           {!sessionUser && <Route to="/">
@@ -112,30 +132,21 @@ function App() {
 
           <Route exact path="/login">
             <LoginFormPage />
-            {console.log("login page")}
+            {/* {console.log("login page")} */}
           </Route>
 
           <Route exact path="/signup">
             <SignupFormPage />
-            {console.log("signup page")}
+            {/* {console.log("signup page")} */}
           </Route>
 
         </Switch>
       )}
 
-      {isLoaded && <div id="tommy-test">
-        <div id="spots_grid">
-          {allSpots && allSpots.map((spot, index) => {
-            return (<div className="spot_divs" key={index}>
-              <img src={spot.imageUrl}></img>
-              <div style={{display: "flex", justifyContent: "space-between", marginTop: ".3rem"}}><div>{spot.spotName}</div><div>${spot.price}</div></div>
-              {/* <div>${spot.price}</div> */}
-            </div>)
-          })}
-        </div>
+      {isLoaded && <AllSpots isLoaded={isLoaded} />}
 
 
-      </div>}
+
 
 
     </>

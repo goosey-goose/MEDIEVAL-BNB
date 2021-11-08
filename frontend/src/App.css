@@ -91,13 +91,14 @@
     /* max-width: 100%; */
     /* width: 100%; */
     /* max-height: 100%; */
+    cursor: pointer;
     height: 100%;
     border-radius: 10px;
     transition: 0.5s ease;
 }
 
 .spot_divs img:hover {
-    transform: scale(1.25,1.25);
+    transform: scale(1.07,1.07);
     z-index: 5;
 }
 
@@ -112,6 +113,98 @@
 
 
 
+
+.spot_divs.no_effects img {
+    transform: none;
+    z-index: 0;
+}
+
+
+#div_inside_outer_modal, #div_inside_inner_modal, #div_inside_inner_modal2 {
+    display: flex;
+    justify-content: center;
+    height: 25rem;
+}
+
+#div_inside_inner_modal, #div_inside_inner_modal2 {
+    position: relative;
+}
+
+#div_inside_outer_modal img, #div_inside_inner_modal img, #div_inside_inner_modal2 img {
+    border-radius: 10px;
+}
+
+#actual_logged_out_modal, #actual_logged_in_modal, #actual_logged_in_modal2 {
+    position: static;
+    margin: 17rem;
+    box-shadow: 0px 0px 2px 6px rgb(255 255 255 / 40%);
+}
+
+#actual_logged_out_modal::-webkit-scrollbar {
+    display: none;
+}
+
+#date_picker_container_div, #date_picker_container_div2 {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+}
+
+#date_picker_container_div input, #date_picker_container_div2 input {
+    margin-left: .5rem;
+    margin-right: .5rem;
+}
+
+#date_picker_container_div2 {
+    display: none;
+}
+
+.react-datepicker__triangle {
+    /* position: static !important;
+    left: 0px;
+    transform: none !important; */
+    display: none !important;
+}
+
+.react-datepicker-wrapper {
+    width: fit-content !important;
+}
+
+.react-datepicker__close-icon {
+    /* width: 15px !important;
+    height: 15px !important; */
+    top: .4px;
+    right: 4px;
+}
+
+button.react-datepicker__close-icon::after {
+    width: 13px !important;
+    height: 13px !important;
+}
+
+#book_it_button_div, #update_booking_button_div {
+    position: absolute;
+    top: 35%;
+}
+
+#book_it_button_div {
+    visibility: hidden;
+}
+
+#book_it_button_div button, #update_booking_button_div button {
+    background-color: #27ff27;
+    box-shadow: 0px 0px 5px 15px rgb(255 255 255 / 90%);
+    font-size: 2rem;
+    border-radius: 50%;
+    height: 8rem;
+    width: 8rem;
+    border: none;
+    cursor: pointer;
+}
+
+#update_booking_button_div button {
+    font-size: 1.7rem;
+}
 
 
 
@@ -158,5 +251,23 @@
 
     #description_subpoints {
         width: 62.5rem;
+    }
+
+    #root {
+        width: 78rem;
+    }
+
+    #spots_grid {
+        padding: 0;
+        padding-top: 1rem;
+    }
+
+    body {
+        min-width: 0;
+    }
+
+    #limd_div_3 {
+        grid-gap: .7rem;
+        /* grid-template-columns: 1fr 1fr 1fr 1fr; */
     }
   }

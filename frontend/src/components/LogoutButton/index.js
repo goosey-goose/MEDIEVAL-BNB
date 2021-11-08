@@ -13,7 +13,7 @@ const LogoutButton = () => {
         e.preventDefault();
         dispatch(sessionActions.logout());
         dispatch(removeUserBookings());
-        dispatch(removeAllReviews());
+        // dispatch(removeAllReviews());
     };
 
     return <button id="navlink_logout_button" onClick={logout}>Logout</button>;

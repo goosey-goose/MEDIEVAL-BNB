@@ -1,0 +1,117 @@
+#spot_address, #spot_name, #spot_address2, #spot_name2, #booking_dates {
+    color: white;
+    margin-top: 1rem;
+}
+
+/* #spot_address {
+  display: flex;
+  justify-content: space-between;
+} */
+
+#logged_out_reviews_container::-webkit-scrollbar, #logged_in_reviews_container::-webkit-scrollbar {
+  display: none;
+}
+
+#logged_out_close_reviews_button, #logged_in_close_reviews_button {
+  display: none;
+  position: absolute;
+  border-radius: 50px;
+  line-height: 1rem;
+  border: none;
+  height: 1.5rem;
+  width: 1.5rem;
+  right: -.8rem;
+  top: -.8rem;
+  font-weight: bold;
+  font-size: 1.2rem;
+  cursor: pointer;
+  z-index: 1;
+}
+
+
+#review_box {
+  width: 100%;
+  height: 25%;
+  resize: none;
+  bottom: 0;
+  padding: 0;
+}
+
+.show_reviews_button {
+  bottom: -4.7rem;
+  right: 0;
+}
+
+#write_review_button {
+  width: 6.8rem;
+}
+
+#submit_review_button {
+  bottom: -2.34rem;
+  right: 7.6rem;
+  z-index: 1;
+}
+
+#modal_errors_div {
+  position: absolute;
+  background-color: #7a7373;
+  border-radius: 10px;
+  color: white;
+  z-index: 1;
+  bottom: 0;
+}
+
+
+.review_div_class:hover {
+  background-color: grey;
+}
+
+/* delete this */
+/* #logged_out_reviews_container {
+  transition: transform .3s ease-in-out;
+}
+
+.testers {
+  transform: translateX(900px);
+} */
+
+
+
+/* ORIGINAL ANIMATION */
+@keyframes slideMe{
+    0%{
+      transform: translateX(-500px);
+    }
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* @keyframes slideMeOut{ */
+    /* from {
+      transform: translateX(0%);
+    }
+
+    to {
+      transform: translateX(100%);
+    } */
+
+    /* 100% {
+      transform: translateX(-100%);
+      animation-play-state: paused;
+    } */
+
+    /* 100% {
+      opacity: 0;
+      transform: translateX(0%);
+    } */
+  /* } */
