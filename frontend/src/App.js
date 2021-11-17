@@ -112,7 +112,7 @@ function App() {
                         <HiOutlineSearch size='5rem' />
 
                         <div className="subpoints_text">
-                          Search for castles based on the features you're looking for.
+                          Create fun, lasting memories for everyone to enjoy together.
                         </div>
 
                       </div>
