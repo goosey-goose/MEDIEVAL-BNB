@@ -32,7 +32,7 @@ function SignupFormPage() {
 
   return (
     <form id="signup_form" onSubmit={handleSubmit}>
-      <ul>
+      <ul style={{position: "absolute", top: ".4rem", left: "-2rem", color: "white"}}>
         {errors.map((error, idx) => <li key={idx}>{error}</li>)}
       </ul>
       <p>Sign Up</p>

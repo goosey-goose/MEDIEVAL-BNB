@@ -8,6 +8,7 @@
 } */
 
 form#signup_form {
+    position: relative;
     /* display: flex;
     flex-direction: column; */
 }
@@ -54,7 +55,7 @@ form#signup_form p {
     font-weight: bold;
     font-size: 3rem;
     margin: 0;
-    padding-top: 2rem;
+    padding-top: 2.5rem;
     padding-bottom: 2rem;
 }
 

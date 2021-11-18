@@ -4,7 +4,7 @@ const { jwtConfig } = require('../config');
 const { User } = require('../db/models');
 debugger
 const { secret, expiresIn } = jwtConfig;
-
+// debugger
 // Sends a JWT Cookie
 const setTokenCookie = (res, user) => {
     // Create the token.
@@ -27,7 +27,7 @@ const setTokenCookie = (res, user) => {
     return token;
   };
 
-
+  // debugger
   const restoreUser = (req, res, next) => {
     // token parsed from cookies
     const { token } = req.cookies;
