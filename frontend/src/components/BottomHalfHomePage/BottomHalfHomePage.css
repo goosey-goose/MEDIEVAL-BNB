@@ -1,0 +1,11 @@
+#homepage-bottom-grid {
+  display: grid;
+  /* width: 100vw; */
+  grid-template-columns: repeat(auto-fill, 12rem);
+  gap: 10px;
+}
+
+.test-div {
+  background-color: gray;
+  height: 10rem;
+}

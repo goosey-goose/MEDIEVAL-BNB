@@ -3,7 +3,7 @@ import './TopHalfHomePage.css';
 
 function TopHalfHomePage() {
   return (
-    <p>Top Half Page Component</p>
+    <div id="homepage-top-grid"></div>
   );
 }
 
