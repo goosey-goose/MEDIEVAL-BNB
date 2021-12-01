@@ -8,7 +8,7 @@
 }
 
 .test-div {
-  background-color: gray;
+  /* background-color: gray; */
   height: 10rem;
   border-radius: 10px;
 }

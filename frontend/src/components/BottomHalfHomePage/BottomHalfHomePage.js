@@ -8,9 +8,7 @@ function BottomHalfHomePage() {
 
   const allSpots = useSelector(state => state.spots.spots);
 
-  if (allSpots) {
-    console.log(allSpots);
-  }
+
 
   useEffect(() => {
     dispatch(getAllSpots());
@@ -18,26 +16,11 @@ function BottomHalfHomePage() {
 
   return (
     <div id="homepage-bottom-grid">
-      <div className="test-div"></div>
-      <div className="test-div"></div>
-      <div className="test-div"></div>
-      <div className="test-div"></div>
-      <div className="test-div"></div>
-      <div className="test-div"></div>
-      <div className="test-div"></div>
-      <div className="test-div"></div>
-      <div className="test-div"></div>
-      <div className="test-div"></div>
-      <div className="test-div"></div>
-      <div className="test-div"></div>
-      <div className="test-div"></div>
-      <div className="test-div"></div>
-      <div className="test-div"></div>
-      <div className="test-div"></div>
-      <div className="test-div"></div>
-      <div className="test-div"></div>
-      <div className="test-div"></div>
-      <div className="test-div"></div>
+      {allSpots && allSpots.map((spot, index) => {
+        return (<div className="test-div" key={index}>
+          <img alt="" src={spot.imageUrl}></img>
+        </div>)
+      })}
     </div>
   );
 }
