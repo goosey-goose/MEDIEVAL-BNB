@@ -1,11 +1,14 @@
 #homepage-bottom-grid {
   display: grid;
-  /* width: 100vw; */
+  justify-content: center;
   grid-template-columns: repeat(auto-fill, 12rem);
   gap: 10px;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
 }
 
 .test-div {
   background-color: gray;
   height: 10rem;
+  border-radius: 10px;
 }
