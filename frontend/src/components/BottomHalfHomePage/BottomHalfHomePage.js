@@ -12,7 +12,7 @@ function BottomHalfHomePage() {
 
   useEffect(() => {
     dispatch(getAllSpots());
-  }, [])
+  }, [dispatch])
 
   return (
     <div id="homepage-bottom-grid">

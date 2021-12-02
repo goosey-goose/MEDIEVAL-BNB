@@ -2,12 +2,14 @@ import React, { useState, useEffect } from 'react';
 import './TopHalfHomePage.css';
 
 function TopHalfHomePage() {
-  let menu;
-  let closeIcon;
-  let menuIcon;
+  // let menu;
+  // let closeIcon;
+  // let menuIcon;
 
   function toggleMenu() {
-    console.log("hamburger menu clicked");
+    const menu = document.querySelector(".menu");
+    const closeIcon= document.querySelector(".closeIcon");
+    const menuIcon = document.querySelector(".menuIcon");
     if (menu.classList.contains("showMenu")) {
       console.log("A");
       menu.classList.remove("showMenu");
@@ -22,11 +24,11 @@ function TopHalfHomePage() {
   }
 
   useEffect(() => {
-    menu = document.querySelector(".menu");
+    // menu = document.querySelector(".menu");
     const menuItems = document.querySelectorAll(".menuItem");
     const hamburger= document.querySelector(".hamburger");
-    closeIcon= document.querySelector(".closeIcon");
-    menuIcon = document.querySelector(".menuIcon");
+    // closeIcon= document.querySelector(".closeIcon");
+    // menuIcon = document.querySelector(".menuIcon");
 
     hamburger.addEventListener("click", toggleMenu);
 
