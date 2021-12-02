@@ -1,10 +1,60 @@
 #homepage-top-grid {
   display: grid;
   background-color: blue;
-  /* width: 100%; */
+  /* width: 100%; DON'T USE THIS */
   height: 70%;
   background-image: url("../../images/rome-6207755_1920.jpg");
   background-size: cover;
   margin: .5rem;
   border-radius: 0 0 10px 10px;
+}
+
+header {
+  position: fixed;
+  height: fit-content;
+  color: white;
+  font-size: 2.5rem;
+}
+
+.hamburger {
+  position: fixed;
+  z-index: 100;
+  top: 1rem;
+  right: 1rem;
+  padding: 4px;
+  border: black solid 1px;
+  background: white;
+  cursor: pointer;
+}
+
+.closeIcon {
+  display: none;
+}
+
+.menu {
+  position: fixed;
+  transform: translateY(-100%);
+  transition: transform 0.2s;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 99;
+  backdrop-filter: blur(5px);
+  color: white;
+  /* list-style: none; */
+  padding-top: 4rem;
+}
+
+.showMenu {
+  transform: translateY(0);
+}
+
+header nav ul li {
+  width: fit-content;
+}
+
+header nav ul li a {
+  text-decoration: none;
+  color: white;
 }

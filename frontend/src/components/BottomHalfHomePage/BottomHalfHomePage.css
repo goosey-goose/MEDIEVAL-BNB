@@ -3,12 +3,11 @@
   justify-content: center;
   grid-template-columns: repeat(auto-fill, 12rem);
   gap: .5rem;
-  padding-bottom: 1rem;
+  padding-bottom: .5rem;
 }
 
 .test-div {
   height: 10rem;
-  width: 12rem;
 }
 
 .test-div img {
