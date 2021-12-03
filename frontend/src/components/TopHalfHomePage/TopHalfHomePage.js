@@ -44,23 +44,26 @@ function TopHalfHomePage() {
   }, [])
 
   return (
-    <div id="homepage-top-grid">
+    <>
       <header>
-        Medieval BNB
-        <nav>
-          <ul className="menu">
-            <li><a className="menuItem" href="#">Home</a></li>
-            <li><a className="menuItem" href="#">Food</a></li>
-            <li><a className="menuItem" href="#">Places</a></li>
-            <li><a className="menuItem" href="#">Things</a></li>
-          </ul>
-          <button className="hamburger">
-            <i className="menuIcon">menu</i>
-            <i className="closeIcon">close</i>
-          </button>
-        </nav>
+          Medieval BNB
+          <nav>
+            <ul className="menu">
+              <li><a className="menuItem" href="#">Home</a></li>
+              <li><a className="menuItem" href="#">Food</a></li>
+              <li><a className="menuItem" href="#">Places</a></li>
+              <li><a className="menuItem" href="#">Things</a></li>
+            </ul>
+            <button className="hamburger">
+              <i className="menuIcon">menu</i>
+              <i className="closeIcon">close</i>
+            </button>
+          </nav>
       </header>
-    </div>
+      <div className="root-div-spacer"></div>
+      <div id="homepage-top-grid">
+      </div>
+    </>
   );
 }
 
