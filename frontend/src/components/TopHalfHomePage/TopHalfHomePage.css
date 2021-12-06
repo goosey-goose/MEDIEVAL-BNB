@@ -3,8 +3,9 @@
   background-color: blue;
   /* width: 100%; DON'T USE THIS */
   height: 74%;
-  background-image: url("../../images/rome-6207755_1920.jpg");
+  background: url("../../images/rome-6207755_1920.jpg") no-repeat center;
   background-size: cover;
+  background-position: 8% 3rem;
   /* margin: .5rem; */
   margin: 0 .5rem .5rem .5rem;
   /* margin-top: 3.5rem; */
