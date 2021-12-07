@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import LoginFormPage from '../LoginFormPage/index';
 import './TopHalfHomePage.css';
 
 function TopHalfHomePage() {
@@ -63,6 +64,9 @@ function TopHalfHomePage() {
               <li><a className="menuItem" href="#">Places</a></li>
               <li><a className="menuItem" href="#">Things</a></li>
             </ul>
+            <div id="nav-login-form-page-div">
+              <LoginFormPage />
+            </div>
             <button className="hamburger">
               {/* <i className="menuIcon">menu</i>
               <i className="closeIcon">close</i> */}
