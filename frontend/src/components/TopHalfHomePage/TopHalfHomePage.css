@@ -41,9 +41,12 @@ header p {
 }
 
 .hamburger {
+  display: none;
   position: fixed;
+  width: 2rem;
+  height: 2rem;
   z-index: 100;
-  top: 1.2rem;
+  top: 1rem;
   right: 1rem;
   padding: 4px;
   border: black solid 1px;
@@ -91,4 +94,12 @@ header nav ul li {
 header nav ul li a {
   text-decoration: none;
   color: white;
+}
+
+
+
+@media all and (max-width: 48rem) {
+  .hamburger {
+    display: inline-block;
+  }
 }
