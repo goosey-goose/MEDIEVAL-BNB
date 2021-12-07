@@ -16,6 +16,7 @@ body::-webkit-scrollbar {
 
 #root {
   width: 100%;
+  min-width: 16rem;
   height: 100%;
   font-family: sans-serif;
 }

@@ -46,7 +46,7 @@ function TopHalfHomePage() {
   return (
     <>
       <header>
-          Medieval BNB
+          <p>Medieval BNB</p>
           <nav>
             <ul className="menu">
               <li><a className="menuItem" href="#">Home</a></li>
