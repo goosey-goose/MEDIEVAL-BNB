@@ -6,25 +6,34 @@ function TopHalfHomePage() {
   const toggleMenu = (event) => {
     event.stopPropagation();
     const menu = document.querySelector(".menu");
-    const closeIcon= document.querySelector(".closeIcon");
-    const menuIcon = document.querySelector(".menuIcon");
-    if (event.target.className === "menuIcon" || event.target.className === "closeIcon") {
+    // const closeIcon= document.querySelector(".closeIcon");
+    // const menuIcon = document.querySelector(".menuIcon");
+    // if (event.target.className === "menuIcon" || event.target.className === "closeIcon") {
+    //   if (menu.classList.contains("showMenu")) {
+    //     menu.classList.remove("showMenu");
+    //     closeIcon.style.display = "none";
+    //     menuIcon.style.display = "block";
+    //   } else {
+    //     menu.classList.add("showMenu");
+    //     closeIcon.style.display = "block";
+    //     menuIcon.style.display = "none";
+    //   }
+    // } else if (menu.classList.contains("showMenu")) {
+    //     menu.classList.remove("showMenu");
+    //     closeIcon.style.display = "none";
+    //     menuIcon.style.display = "block";
+    // }
+    if (event.currentTarget.className === "hamburger") {
+      console.log("hamsburger");
       if (menu.classList.contains("showMenu")) {
-        // console.log("A");
         menu.classList.remove("showMenu");
-        closeIcon.style.display = "none";
-        menuIcon.style.display = "block";
       } else {
-        // console.log("B");
         menu.classList.add("showMenu");
-        closeIcon.style.display = "block";
-        menuIcon.style.display = "none";
       }
     } else if (menu.classList.contains("showMenu")) {
-        menu.classList.remove("showMenu");
-        closeIcon.style.display = "none";
-        menuIcon.style.display = "block";
+      menu.classList.remove("showMenu");
     }
+
   }
 
   useEffect(() => {
@@ -55,8 +64,9 @@ function TopHalfHomePage() {
               <li><a className="menuItem" href="#">Things</a></li>
             </ul>
             <button className="hamburger">
-              <i className="menuIcon">menu</i>
-              <i className="closeIcon">close</i>
+              {/* <i className="menuIcon">menu</i>
+              <i className="closeIcon">close</i> */}
+              <i className="fas fa-bars"></i>
             </button>
           </nav>
       </header>
