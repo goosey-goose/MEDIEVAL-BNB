@@ -6,6 +6,7 @@
   /* grid-template-columns: repeat(auto-fill, 12rem); */
   gap: .5rem;
   padding-bottom: .5rem;
+  margin: 0 .5rem 0 .5rem;
 }
 
 .test-div {
