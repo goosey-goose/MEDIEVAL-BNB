@@ -76,6 +76,14 @@ function TopHalfHomePage() {
       </header>
       <div className="root-div-spacer"></div>
       <div id="homepage-top-grid">
+        <div id="homepage-top-grid_title">
+          Discover your next journey through time with family and friends on Medieval BNB.
+        </div>
+        <div id="homepage-top-grid_subpoints">
+          <p>Book spots at amazing castles all over the United Kindom.</p>
+          <p>Write reviews to let everyone know how awesome your stay was.</p>
+          <p>Create fun, lasting memories for everyone to enjoy together.</p>
+        </div>
       </div>
     </>
   );

@@ -1,8 +1,9 @@
 #homepage-top-grid {
   display: grid;
   background-color: blue;
+  grid-template-rows: fit-content(0%);
   /* width: 100%; DON'T USE THIS */
-  height: 74%;
+  min-height: 74%;
   background: url("../../images/rome-6207755_1920.jpg") no-repeat center;
   background-size: cover;
   background-position: 8% 3rem;
@@ -13,6 +14,41 @@
   border-radius: 0 0 10px 10px;
 }
 
+#homepage-top-grid_title {
+  color: white;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  /* position: relative; */
+  /* top: 209px; */
+  background-color: rgba(33,33,84,.8);
+  border-radius: 10px;
+  backdrop-filter: blur(5px);
+  padding: 2rem;
+  height: fit-content;
+  max-width: 30rem;
+  margin: 3rem auto;
+  font-size: clamp(1rem, 2.5vw, 1.3rem);
+}
+
+#homepage-top-grid_subpoints {
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  /* position: relative; */
+  /* top: 209px; */
+  background-color: rgba(33,33,84,.8);
+  border-radius: 10px;
+  backdrop-filter: blur(5px);
+  padding: 2rem;
+  height: fit-content;
+  max-width: 30rem;
+  margin: 3rem auto;
+  font-size: clamp(1rem, 2.5vw, 1.3rem);
+}
+
 header {
   position: fixed;
   display: flex;
@@ -20,12 +56,13 @@ header {
   align-items: center;
   top: .5rem;
   /* height: fit-content; */
-  height: 3rem;
+  height: 4rem;
   color: white;
   /* font-size: 2.5rem; */
   background-color: #212154;
   width: calc(100% - 1rem);
   margin-left: .5rem;
+  z-index: 1;
 }
 
 header p {
@@ -39,6 +76,7 @@ header p {
   width: 100%;
   height: .5rem;
   background-color: white;
+  z-index: 1;
 }
 
 #nav-login-form-page-div {
@@ -118,7 +156,7 @@ header nav ul li a {
 }
 
 /* @media all and (min-width: 48rem) {
-  #nav-login-form-page-div {
-    display: block;
+  #homepage-top-grid_title {
+    max-width: 30rem;
   }
 } */
