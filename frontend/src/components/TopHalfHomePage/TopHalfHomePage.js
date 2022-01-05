@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import LoginFormPage from '../LoginFormPage/index';
 import './TopHalfHomePage.css';
 
 function TopHalfHomePage() {
+  const dispatch = useDispatch();
+  const sessionUser = useSelector(state => state.session.user);
 
   const toggleMenu = (event) => {
     event.stopPropagation();
@@ -76,14 +79,14 @@ function TopHalfHomePage() {
       </header>
       <div className="root-div-spacer"></div>
       <div id="homepage-top-grid">
-        <div id="homepage-top-grid_title">
+        {!sessionUser && <div id="homepage-top-grid_title">
           Discover your next journey through time with family and friends on Medieval BNB.
-        </div>
-        <div id="homepage-top-grid_subpoints">
+        </div>}
+        {!sessionUser && <div id="homepage-top-grid_subpoints">
           <p>Book spots at amazing castles all over the United Kindom.</p>
           <p>Write reviews to let everyone know how awesome your stay was.</p>
           <p>Create fun, lasting memories for everyone to enjoy together.</p>
-        </div>
+        </div>}
       </div>
     </>
   );
