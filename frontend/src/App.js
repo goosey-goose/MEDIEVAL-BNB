@@ -29,6 +29,9 @@ function App() {
           <Route path="/signup">
             <SignupFormPage />
           </Route>
+          <Route path="/spots">
+
+          </Route>
           <Route>
             <p>YOU'VE LANDED ON AN UNMATCHED ROUTE</p>
           </Route>
