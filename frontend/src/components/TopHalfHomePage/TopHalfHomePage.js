@@ -28,6 +28,9 @@ function TopHalfHomePage() {
           <p>Write reviews to let everyone know how awesome your stay was.</p>
           <p>Create fun, lasting memories for everyone to enjoy together.</p>
         </div>}
+        <div id="homepage-top-grid_signup_form">
+          signup form
+        </div>
       </div>
     </>
   );

@@ -45,7 +45,7 @@
   padding: 2rem;
   height: fit-content;
   max-width: 30rem;
-  margin: 3rem auto;
+  margin: 0 auto;
   font-size: clamp(1rem, 2.5vw, 1.3rem);
 }
 
@@ -55,6 +55,17 @@
 
 #homepage-top-grid_subpoints p:last-child {
   padding-bottom: 0;
+}
+
+#homepage-top-grid_signup_form {
+  display: flex;
+  background-color: rgba(33,33,84,.8);
+  border-radius: 10px;
+  backdrop-filter: blur(5px);
+  padding: 2rem;
+  height: fit-content;
+  max-width: 30rem;
+  margin: 0 auto;
 }
 
 header {
