@@ -14,6 +14,23 @@
   border-radius: 0 0 10px 10px;
 }
 
+#tabs-div-container {
+  display: flex;
+  margin: 0 .5rem .5rem .5rem;
+  /* border-bottom: solid grey 1px; */
+}
+
+.tab {
+  border: solid grey 1px;
+  /* border-bottom: solid white; */
+  padding: .5rem;
+}
+
+.empty-tab {
+  border-bottom: solid grey 1px;
+  width: 100%;
+}
+
 #homepage-top-grid_title {
   color: white;
   display: flex;

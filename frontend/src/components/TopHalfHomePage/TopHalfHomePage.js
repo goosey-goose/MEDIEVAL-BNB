@@ -1,13 +1,26 @@
-import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import NavMenuLoggedOut from '../NavMenuLoggedOut/NavMenuLoggedOut.js';
 import SignupFormPage from '../SignupFormPage/index.js';
 import './TopHalfHomePage.css';
 
 function TopHalfHomePage() {
-  const dispatch = useDispatch();
   const sessionUser = useSelector(state => state.session.user);
 
+  const setActiveTab = (event) => {
+    console.log(event.currentTarget);
+    if (true) {
+
+    }
+  }
+
+
+  useEffect(() => {
+    let tabs = document.querySelectorAll(".tab");
+    tabs.forEach((tab) => {
+      tab.addEventListener("click", (event) => setActiveTab(event));
+    });
+  }, [])
 
 
   return (
@@ -31,6 +44,11 @@ function TopHalfHomePage() {
         {!sessionUser && <div id="homepage-top-grid_signup_form">
           <SignupFormPage />
         </div>}
+      </div>
+      <div id="tabs-div-container">
+        <div className="tab">Tiles</div>
+        <div className="tab">Map</div>
+        <div className="empty-tab"></div>
       </div>
     </>
   );
