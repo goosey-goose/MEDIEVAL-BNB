@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import NavMenuLoggedOut from '../NavMenuLoggedOut/NavMenuLoggedOut.js';
-// import LoginFormPage from '../LoginFormPage/index';
+import SignupFormPage from '../SignupFormPage/index.js';
 import './TopHalfHomePage.css';
 
 function TopHalfHomePage() {
@@ -29,7 +29,7 @@ function TopHalfHomePage() {
           <p>Create fun, lasting memories for everyone to enjoy together.</p>
         </div>}
         <div id="homepage-top-grid_signup_form">
-          signup form
+          <SignupFormPage />
         </div>
       </div>
     </>
