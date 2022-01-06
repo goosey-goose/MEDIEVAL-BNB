@@ -1,9 +1,14 @@
-form#signup-form {
-    /* display: grid; */
+#label-for-signup-form p {
+    color: white;
+    font-weight: 700;
+    font-size: 3rem;
+    padding-bottom: 2rem;
 }
 
-form#signup-form label {
+form#signup-form {
     color: white;
+    /* font-weight: normal; */
+    /* font-size: 1rem; */
 }
 
 form#signup-form input {

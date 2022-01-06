@@ -127,5 +127,6 @@ header nav ul li a {
 @media all and (max-width: 32rem) {
   #homepage-top-grid_title {
     max-width: clamp(17rem, 85vw, 20rem);
+    margin-bottom: 0;
   }
 }
