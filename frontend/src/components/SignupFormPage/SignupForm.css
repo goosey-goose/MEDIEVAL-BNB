@@ -1,4 +1,14 @@
+form#signup-form {
+    /* display: grid; */
+}
+
+form#signup-form label {
+    color: white;
+}
+
 form#signup-form input {
+    /* display: grid; */
+    display: block;
     /* margin-bottom: 1rem; */
     /* border: none; */
     /* border-radius: 5px; */

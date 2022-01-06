@@ -65,7 +65,7 @@
   padding: 2rem;
   height: fit-content;
   max-width: 30rem;
-  margin: 0 auto;
+  margin: 3rem auto;
 }
 
 header {
@@ -110,4 +110,22 @@ header nav ul li {
 header nav ul li a {
   text-decoration: none;
   color: white;
+}
+
+
+
+
+
+@media all and (max-width: 48rem) {
+  #homepage-top-grid_subpoints {
+    display: none;
+  }
+}
+
+
+
+@media all and (max-width: 32rem) {
+  #homepage-top-grid_title {
+    max-width: clamp(17rem, 85vw, 20rem);
+  }
 }
