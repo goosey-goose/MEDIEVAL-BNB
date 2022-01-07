@@ -20,13 +20,31 @@
   /* border-bottom: solid grey 1px; */
 }
 
-.tab {
-  border: solid grey 1px;
-  /* border-bottom: solid white; */
+.default-tab-style {
   padding: .5rem;
+  border: solid grey 1px;
+  cursor: pointer;
+  border-radius: 5px 5px 0 0;
+  width: 4rem;
+  text-align: center;
 }
 
-.empty-tab {
+.default-tab-style:hover {
+  background-color: #212154;
+  color: white;
+}
+
+.selected-tab {
+  border-bottom: none;
+  font-weight: bold;
+}
+
+.empty-tab-1 {
+  border-bottom: solid grey 1px;
+  width: 2rem;
+}
+
+.empty-tab-2 {
   border-bottom: solid grey 1px;
   width: 100%;
 }

@@ -8,15 +8,16 @@ function TopHalfHomePage() {
   const sessionUser = useSelector(state => state.session.user);
 
   const setActiveTab = (event) => {
-    console.log(event.currentTarget);
-    if (true) {
-
-    }
+    tabs.forEach((tab) => {
+      if (event.currentTarget === tab) {
+        tab.classList.add("selected-tab");
+      } else tab.classList.remove("selected-tab");
+    })
   }
 
-
+  let tabs;
   useEffect(() => {
-    let tabs = document.querySelectorAll(".tab");
+    tabs = document.querySelectorAll(".default-tab-style");
     tabs.forEach((tab) => {
       tab.addEventListener("click", (event) => setActiveTab(event));
     });
@@ -46,9 +47,10 @@ function TopHalfHomePage() {
         </div>}
       </div>
       <div id="tabs-div-container">
-        <div className="tab">Tiles</div>
-        <div className="tab">Map</div>
-        <div className="empty-tab"></div>
+        <div className="empty-tab-1"></div>
+        <div className="selected-tab default-tab-style">Tiles</div>
+        <div className="default-tab-style">Map</div>
+        <div className="empty-tab-2"></div>
       </div>
     </>
   );
