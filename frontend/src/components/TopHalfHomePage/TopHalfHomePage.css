@@ -124,6 +124,23 @@ header nav ul li a {
 }
 
 
+@media all and (max-height: 50rem) {
+  #homepage-top-grid_subpoints {
+    display: none;
+  }
+
+  #homepage-top-grid_signup_form {
+    /* margin: 0 auto; */
+    margin-bottom: 3rem;
+  }
+
+  #homepage-top-grid {
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+  }
+}
+
+
 
 @media all and (max-width: 32rem) {
   #homepage-top-grid_title {

@@ -17,6 +17,10 @@ function BottomHalfHomePage() {
         tab.classList.add("selected-tab");
       } else tab.classList.remove("selected-tab");
     });
+    // EBEN, REFACTOR THIS BLOCK IN A SEPARATE FUNCTION;
+    // ALSO, GRAB THE CURRENTLY SELECTED TAB AND STORE IT IN A VARIABLE
+    // IN ORDER TO REFERENCE IT INSTEAD OF THE CURRENT CONDITIONAL CHECKS
+    // USING event.currentTarget.innerText....
     if (event.currentTarget.innerText === "Map") {
       let outerMostMapContainerDiv = document.getElementById("outermost-map-container-div");
       outerMostMapContainerDiv.classList.remove("hide");
@@ -54,15 +58,17 @@ function BottomHalfHomePage() {
         <div className="default-tab-style">Map</div>
         <div className="empty-tab-2"></div>
       </div>
-      <div id="homepage-bottom-grid" className="show-tiles">
-        {allSpots && allSpots.map((spot, index) => {
-          return (<div className="test-div" key={index}>
-            <img alt="" src={spot.imageUrl}></img>
-          </div>)
-        })}
-      </div>
-      <div id="outermost-map-container-div" className="hide">
-        <MapContainer></MapContainer>
+      <div id="bottom-grid-and-map-container">
+        <div id="homepage-bottom-grid" className="show-tiles">
+          {allSpots && allSpots.map((spot, index) => {
+            return (<div className="test-div" key={index}>
+              <img alt="" src={spot.imageUrl}></img>
+            </div>)
+          })}
+        </div>
+        <div id="outermost-map-container-div" className="hide">
+          <MapContainer></MapContainer>
+        </div>
       </div>
     </>
   );
