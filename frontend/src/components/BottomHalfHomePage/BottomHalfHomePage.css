@@ -1,4 +1,4 @@
-#homepage-bottom-grid {
+.show-tiles {
   /* display: grid; */
   display: flex;
   flex-wrap: wrap;
@@ -7,6 +7,10 @@
   gap: .5rem;
   padding-bottom: .5rem;
   margin: 0 .5rem 0 .5rem;
+}
+
+.hide-tiles {
+  display: none;
 }
 
 #tabs-div-container {
@@ -54,3 +58,12 @@
   height: 100%;
   border-radius: 10px;
 }
+
+.hide {
+  display: none;
+}
+
+
+/* #outermost-map-container-div {
+  display: none;
+} */
