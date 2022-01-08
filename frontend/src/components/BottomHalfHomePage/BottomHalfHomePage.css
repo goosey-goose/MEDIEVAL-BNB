@@ -9,6 +9,41 @@
   margin: 0 .5rem 0 .5rem;
 }
 
+#tabs-div-container {
+  display: flex;
+  margin: 0 .5rem .5rem .5rem;
+  /* border-bottom: solid grey 1px; */
+}
+
+.default-tab-style {
+  padding: .5rem;
+  border: solid grey 1px;
+  cursor: pointer;
+  border-radius: 5px 5px 0 0;
+  width: 4rem;
+  text-align: center;
+}
+
+.default-tab-style:hover {
+  background-color: #212154;
+  color: white;
+}
+
+.selected-tab {
+  border-bottom: none;
+  font-weight: bold;
+}
+
+.empty-tab-1 {
+  border-bottom: solid grey 1px;
+  width: 2rem;
+}
+
+.empty-tab-2 {
+  border-bottom: solid grey 1px;
+  width: 100%;
+}
+
 .test-div {
   height: 10rem;
   width: 12rem;

@@ -7,21 +7,21 @@ import './TopHalfHomePage.css';
 function TopHalfHomePage() {
   const sessionUser = useSelector(state => state.session.user);
 
-  const setActiveTab = (event) => {
-    tabs.forEach((tab) => {
-      if (event.currentTarget === tab) {
-        tab.classList.add("selected-tab");
-      } else tab.classList.remove("selected-tab");
-    })
-  }
+  // const setActiveTab = (event) => {
+  //   tabs.forEach((tab) => {
+  //     if (event.currentTarget === tab) {
+  //       tab.classList.add("selected-tab");
+  //     } else tab.classList.remove("selected-tab");
+  //   })
+  // }
 
-  let tabs;
-  useEffect(() => {
-    tabs = document.querySelectorAll(".default-tab-style");
-    tabs.forEach((tab) => {
-      tab.addEventListener("click", (event) => setActiveTab(event));
-    });
-  }, [])
+  // let tabs;
+  // useEffect(() => {
+  //   tabs = document.querySelectorAll(".default-tab-style");
+  //   tabs.forEach((tab) => {
+  //     tab.addEventListener("click", (event) => setActiveTab(event));
+  //   });
+  // }, [])
 
 
   return (
@@ -46,12 +46,12 @@ function TopHalfHomePage() {
           <SignupFormPage />
         </div>}
       </div>
-      <div id="tabs-div-container">
+      {/* <div id="tabs-div-container">
         <div className="empty-tab-1"></div>
         <div className="selected-tab default-tab-style">Tiles</div>
         <div className="default-tab-style">Map</div>
         <div className="empty-tab-2"></div>
-      </div>
+      </div> */}
     </>
   );
 }
