@@ -8,8 +8,10 @@
   padding-bottom: .5rem;
   /* margin: 0 .5rem 0 .5rem; */
   margin: 0 auto;
-  height: 100%;
+  /* height: 100%; */
+  height: fit-content;
   width: 50%;
+  min-width: 66%;
 }
 
 #bottom-grid-and-map-container {
@@ -72,6 +74,12 @@
 
 .hide {
   display: none;
+}
+
+#outermost-map-container-div {
+  padding-bottom: .5rem;
+  margin-left: .5rem;
+  margin-right: .5rem;
 }
 
 
