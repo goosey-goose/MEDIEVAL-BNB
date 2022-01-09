@@ -9,8 +9,8 @@ const containerStyle = {
 };
 
 const center = {
-  lat: 53.58007771089779,
-  lng: -1.9821929670470553,
+  lat: 54.36773066801807,
+  lng: -2.2193425918966483,
 };
 
 const allCastleCoordinates = [
@@ -48,7 +48,7 @@ const Maps = ({ apiKey }) => {
         <GoogleMap
           mapContainerStyle={containerStyle}
           center={center}
-          zoom={8}
+          zoom={7}
         >
           {allCastleCoordinates.map((castle) => {
             return (
