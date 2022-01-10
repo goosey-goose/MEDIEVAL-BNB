@@ -155,7 +155,7 @@ header nav ul li a {
 
 
 
-@media all and (max-width: 47rem) and (max-height: 50rem) {
+@media all and (max-width: 60rem) and (max-height: 50rem) {
   #homepage-top-grid {
     grid-template-columns: none;
   }
