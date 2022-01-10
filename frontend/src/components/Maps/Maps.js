@@ -8,10 +8,10 @@ const containerStyle = {
   height: '82rem',
 };
 
-const center = {
-  lat: 54.36773066801807,
-  lng: -2.2193425918966483,
-};
+// const center = {
+//   lat: 54.36773066801807,
+//   lng: -2.2193425918966483,
+// };
 
 const allCastleCoordinates = [
   [57.27558511009566, -5.514336289406147, "Eilean Donan Castle"], // Eilean Donan Castle
@@ -37,7 +37,7 @@ const allCastleCoordinates = [
 ];
 
 
-const Maps = ({ apiKey, newZoom, setNewZoom }) => {
+const Maps = ({ apiKey, newZoom, setNewZoom, newCenter, setNewCenter }) => {
   const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',
     googleMapsApiKey: apiKey,
@@ -54,26 +54,25 @@ const options = {
       {isLoaded && (
         <GoogleMap
           mapContainerStyle={containerStyle}
-          center={center}
-          zoom={7}
-          options={options}
-          // onClick={() => console.log("you clicked me")}
+          center={newCenter}
+          zoom={newZoom}
+          options={options || 7}
+          onZoomChanged={() => {
+            // setNewZoom(7);
+          }}
         >
           {allCastleCoordinates.map((castle) => {
             return (
               <Marker
                 position={{lat: castle[0], lng: castle[1]}}
-                // icon={'https://live.staticflickr.com/65535/51812213330_7b07c2a17d_n.jpg'}
                 title={castle[2]}
-                onClick={(e) => {
-                  // options["zoom"] = 8;
-                  console.log(e);
+                onClick={() => {
+                  console.log("poi clicked");
+                  setNewCenter({lat: castle[0], lng: castle[1]});
+                  setNewZoom(14);
+                  setNewZoom(18);
                 }}
-                onMouseOver={(e) => {
-                  console.log(e);
-                }}
-                >
-
+              >
               </Marker>
             );
           })}

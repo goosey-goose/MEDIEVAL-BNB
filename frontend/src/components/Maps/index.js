@@ -9,7 +9,8 @@ const MapContainer = () => {
   const key = useSelector((state) => state.maps.key);
   const dispatch = useDispatch();
 
-  // const [newZoom, setNewZoom] = useState(7);
+  const [newZoom, setNewZoom] = useState(7);
+  const [newCenter, setNewCenter] = useState({lat: 54.36773066801807, lng: -2.2193425918966483});
 
   useEffect(() => {
     if (!key) {
@@ -22,7 +23,7 @@ const MapContainer = () => {
   }
 
   return (
-    <Maps apiKey={key} />
+    <Maps apiKey={key} newZoom={newZoom} setNewZoom={setNewZoom} newCenter={newCenter} setNewCenter={setNewCenter} />
   );
 };
 
