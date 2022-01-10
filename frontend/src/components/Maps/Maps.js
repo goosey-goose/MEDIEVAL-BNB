@@ -61,9 +61,10 @@ const options = {
             // setNewZoom(7);
           }}
         >
-          {allCastleCoordinates.map((castle) => {
+          {allCastleCoordinates.map((castle, index) => {
             return (
               <Marker
+                key={index}
                 position={{lat: castle[0], lng: castle[1]}}
                 title={castle[2]}
                 onClick={() => {
