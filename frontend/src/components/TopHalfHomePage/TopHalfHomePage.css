@@ -135,7 +135,8 @@ header nav ul li a {
   }
 
   #homepage-top-grid {
-    grid-template-columns: 1fr 1fr;
+    /* grid-template-columns: 1fr 1fr; */
+    grid-template-columns: auto auto;
     align-items: center;
   }
 }
@@ -146,5 +147,16 @@ header nav ul li a {
   #homepage-top-grid_title {
     max-width: clamp(17rem, 85vw, 20rem);
     margin-bottom: 0;
+  }
+}
+
+
+
+
+
+
+@media all and (max-width: 47rem) and (max-height: 50rem) {
+  #homepage-top-grid {
+    grid-template-columns: none;
   }
 }
