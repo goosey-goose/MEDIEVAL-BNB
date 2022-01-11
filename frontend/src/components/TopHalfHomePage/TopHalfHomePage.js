@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import NavMenuLoggedOut from '../NavMenuLoggedOut/NavMenuLoggedOut.js';
 import SignupFormPage from '../SignupFormPage/index.js';
@@ -7,27 +7,20 @@ import './TopHalfHomePage.css';
 function TopHalfHomePage() {
   const sessionUser = useSelector(state => state.session.user);
 
-  // const setActiveTab = (event) => {
-  //   tabs.forEach((tab) => {
-  //     if (event.currentTarget === tab) {
-  //       tab.classList.add("selected-tab");
-  //     } else tab.classList.remove("selected-tab");
-  //   })
-  // }
-
-  // let tabs;
   // useEffect(() => {
-  //   tabs = document.querySelectorAll(".default-tab-style");
-  //   tabs.forEach((tab) => {
-  //     tab.addEventListener("click", (event) => setActiveTab(event));
+  //   let headerParagraph = document.querySelector(".header-paragraph");
+  //   headerParagraph.addEventListener("click", () => {
+  //     console.log("home button clicked");
+
   //   });
   // }, [])
+
 
 
   return (
     <>
       <header>
-          <p>Medieval BNB</p>
+          <p className="header-paragraph">Medieval BNB</p>
           <nav>
             <NavMenuLoggedOut />
           </nav>
@@ -46,12 +39,6 @@ function TopHalfHomePage() {
           <SignupFormPage />
         </div>}
       </div>
-      {/* <div id="tabs-div-container">
-        <div className="empty-tab-1"></div>
-        <div className="selected-tab default-tab-style">Tiles</div>
-        <div className="default-tab-style">Map</div>
-        <div className="empty-tab-2"></div>
-      </div> */}
     </>
   );
 }

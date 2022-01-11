@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getKey } from '../../store/maps';
 import Maps from './Maps';
 
-const MapContainer = () => {
+const MapContainer = ({setActiveTab, switchBetweenTilesAndMap}) => {
   const key = useSelector((state) => state.maps.key);
   const dispatch = useDispatch();
 
@@ -23,7 +23,7 @@ const MapContainer = () => {
   }
 
   return (
-    <Maps apiKey={key} newZoom={newZoom} setNewZoom={setNewZoom} newCenter={newCenter} setNewCenter={setNewCenter} />
+    <Maps apiKey={key} newZoom={newZoom} setNewZoom={setNewZoom} newCenter={newCenter} setNewCenter={setNewCenter} setActiveTab={setActiveTab} switchBetweenTilesAndMap={switchBetweenTilesAndMap} />
   );
 };
 

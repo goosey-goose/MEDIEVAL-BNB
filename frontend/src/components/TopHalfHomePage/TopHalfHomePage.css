@@ -113,6 +113,10 @@ header nav ul li a {
   color: white;
 }
 
+.header-paragraph {
+  cursor: pointer;
+}
+
 
 
 

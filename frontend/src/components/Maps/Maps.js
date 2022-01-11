@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { GoogleMap, useJsApiLoader, Marker } from '@react-google-maps/api';
 
 const containerStyle = {
@@ -37,17 +37,38 @@ const allCastleCoordinates = [
 ];
 
 
-const Maps = ({ apiKey, newZoom, setNewZoom, newCenter, setNewCenter }) => {
+const Maps = ({ apiKey, newZoom, setNewZoom, newCenter, setNewCenter, setActiveTab, switchBetweenTilesAndMap }) => {
   const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',
     googleMapsApiKey: apiKey,
   });
 
-const options = {
-  // disableDefaultUI: true,
-  // zoom: 7,
-  gestureHandling: "greedy"
-}
+  const options = {
+    // disableDefaultUI: true,
+    // zoom: 7,
+    // gestureHandling: "greedy"
+  }
+
+  const scrollUpPage = () => {
+    window.scrollTo(
+      {
+        top: 0,
+        behavior: 'auto'
+      }
+    )
+  };
+
+  useEffect(() => {
+    let headerParagraph = document.querySelector(".header-paragraph");
+    headerParagraph.addEventListener("click", () => {
+      console.log("home button clicked");
+      scrollUpPage();
+      switchBetweenTilesAndMap("Tiles");
+      setActiveTab(null, "Tiles");
+      setNewZoom(7);
+      setNewCenter({lat: 54.36773066801807, lng: -2.2193425918966483});
+    });
+  }, [])
 
   return (
     <>
