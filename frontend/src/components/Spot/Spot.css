@@ -1,10 +1,38 @@
+#spot-outer-container-div {
+    display: flex;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+}
+
 #spot-outer-grid {
-    background: blue;
+    display: grid;
+    /* background: blue; */
     position: absolute;
     color: white;
     margin: 0 .5rem 0.5rem .5rem;
     padding-top: 4.5rem;
-    height: calc(100% - 1rem);
-    width: calc(100% - 1rem);
-    top: .5rem;
+    padding-bottom: 10rem;
+    height: calc(100% - .5rem);
+    /* width: calc(100% - 1rem); */
+    width: clamp(15rem, 57vw, 60rem);
+    /* top: .5rem; */
+    /* padding: 4.5rem 10rem 10rem 10rem; */
+    max-width: 121rem;
+}
+
+#spot-outer-grid_child_4 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    background-color: black;
+}
+
+#child_4-a {
+    display: grid;
+    background-color: grey;
+}
+
+#child_4-b {
+    display: grid;
+    background-color: yellow;
 }

@@ -31,8 +31,8 @@ function BottomHalfHomePage() {
   const setActiveTab = (event, divInnerText = null) => {
     if (event === null && divInnerText !== undefined) {
       // console.log(tabs[1]);
-      tabs[1].classList.remove("selected-tab");
-      tabs[0].classList.add("selected-tab");
+      tabs[1]?.classList.remove("selected-tab");
+      tabs[0]?.classList.add("selected-tab");
       return;
     }
     tabs.forEach((tab) => {
