@@ -13,6 +13,8 @@ const containerStyle = {
 //   lng: -2.2193425918966483,
 // };
 
+// EBEN, REFACTOR THIS CODE SO THAT YOUR APP PULLS THIS UPDATED INFO FROM YOUR DATABASE INSTEAD OF
+// THIS LOCAL 2D ARRAY
 const allCastleCoordinates = [
   [57.27558511009566, -5.514336289406147, "Eilean Donan Castle"], // Eilean Donan Castle
   [54.97562349263635, -3.523871326546733, "Caerlaverock Castle"], // Caerlaverock Castle
