@@ -7,32 +7,72 @@
 
 #spot-outer-grid {
     display: grid;
+    /* grid-template-rows: max-content; */
+    grid-template-rows: auto 1fr auto;
     /* background: blue; */
     position: absolute;
-    color: white;
+    /* color: white; */
     margin: 0 .5rem 0.5rem .5rem;
     padding-top: 4.5rem;
-    padding-bottom: 10rem;
-    height: calc(100% - .5rem);
+    padding-bottom: 1rem;
+    /* padding-bottom: 10rem; */
+    /* height: calc(100% - .5rem); */
+    /* height: clamp(35rem, 97vh, 50rem); */
+    /* max-height: 60rem; */
     /* width: calc(100% - 1rem); */
-    width: clamp(15rem, 57vw, 60rem);
+    width: clamp(55rem, 57vw, 60rem);
     /* top: .5rem; */
     /* padding: 4.5rem 10rem 10rem 10rem; */
     max-width: 121rem;
 }
 
-#spot-outer-grid_child_4 {
+#spot-info-1 {
+    /* background-color: red; */
+    height: fit-content;
+}
+
+#spot-info-1 div:first-child {
+    font-size: 2rem;
+    padding-bottom: .5rem;
+}
+
+#spot-info-2 {
+    /* display: flex; */
+    display: grid;
+    justify-content: center;
+    align-items: center;
+}
+
+#spot-info-2 div {
+    /* background-image: url("https://upload.wikimedia.org/wikipedia/commons/thumb/6/67/Eilean_Donan_Castle%2C_Scotland_-_Jan_2011.jpg/383px-Eilean_Donan_Castle%2C_Scotland_-_Jan_2011.jpg"); */
+    background-image: url("https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Rochester_Castle_Keep_and_Bailey_0038stcp.JPG/600px-Rochester_Castle_Keep_and_Bailey_0038stcp.JPG");
+    /* background-image: url("https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Kenilworth_Castle_gatehouse_landscape.jpg/450px-Kenilworth_Castle_gatehouse_landscape.jpg"); */
+    /* background-size: contain; */
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 5px;
+    /* width: 100%; */
+    /* height: 100%; */
+}
+
+#spot-info-2 img {
+    visibility: hidden;
+}
+
+#spot-info-3 {
     display: grid;
     grid-template-columns: 1fr 1fr;
     background-color: black;
+    /* EBEN, DELETE THE FONT SIZE BELOW; USED FOR TESTING PURPOSES */
+    font-size: 30rem;
 }
 
-#child_4-a {
+#spot-info-3_child_1 {
     display: grid;
     background-color: grey;
 }
 
-#child_4-b {
+#spot-info-3_child_2 {
     display: grid;
     background-color: yellow;
 }
